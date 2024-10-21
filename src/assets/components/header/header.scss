@@ -1,0 +1,87 @@
+header {
+    font-family: "Outfit", sans-serif;
+    font-size: 18px;
+
+    
+}
+
+
+
+
+.header-search-btn {
+    padding: 7px 28px;
+    background-color: #79FF6D;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-lg {
+    border: 2px solid rgb(138, 135, 134);
+    width: 77%;
+    margin: 0 auto;
+    padding-left: 15px;
+}
+.search-div-lg {
+    background-color: #79fe6d;
+    padding: 10px;
+
+    input {
+        padding: 15px 15px;
+        background-color: #79fe6d;
+        width: 100%;
+
+        &:focus-visible {
+            border: 0;
+            outline: 0;
+        }
+    }
+}
+
+.search-div-lg input:focus-visible .search-lg {
+    border: 1px solid brown;
+}
+
+
+.header-nav > ul > li {
+    transition: var(--transition);
+    position: relative;
+    padding: 13px 20px;
+    color: var(--blue);
+
+
+    &:hover {
+        transform: translateY(-8px);
+        color: var(--primary);
+        text-decoration: underline;
+    }
+}
+
+.header-underlist {
+    position: absolute;
+    background-color: white;
+    left: -20px;
+    top: 60px;
+    width: 180px;
+    opacity: 0;
+    transition: var(--transition);
+    transition: opacity 0s .3s;
+
+      li {
+      padding: 10px;
+      transition: var(--transition);
+      color: var(--blue);
+
+      &:hover {
+        background-color: var(--primary); 
+        color: white;
+        text-decoration: underline;
+      }
+    }
+}
+
+.header-nav > ul > li:hover .header-underlist {
+    opacity: 1;
+}
