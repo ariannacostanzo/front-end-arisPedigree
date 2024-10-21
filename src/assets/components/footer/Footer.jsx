@@ -7,7 +7,7 @@ import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <>
-      <footer>
+      <footer className="p-4 container mx-auto">
         {/* dog photos  */}
         <div className="flex flex-wrap gap-2 justify-center">
           {footerImages.map((img, i) => (
@@ -105,6 +105,25 @@ const Footer = () => {
             </div>
             <button className="my-4 w-full">Subscribe</button>
           </div>
+        </div>
+        <div className="social-footer">
+          <ul>
+            <li>
+              <a href="#">Instagram</a>
+            </li>
+            <li>
+              <a href="#">Instagram</a>
+            </li>
+            <li>
+              <a href="#">Instagram</a>
+            </li>
+            <li>
+              <a href="#">Instagram</a>
+            </li>
+            <li>
+              <a href="#">Instagram</a>
+            </li>
+          </ul>
         </div>
       </footer>
     </>

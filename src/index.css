@@ -5,6 +5,8 @@
 
 :root {
   --primary: #E89F41;
+  --transition: all .3s ease;
+  --blue: #1A3764;
 }
 
 body {

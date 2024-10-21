@@ -1,8 +1,10 @@
+import Jumbo from '../../assets/components/jumbo/Jumbo.jsx'
+
 const Home = () => {
      return (
-     <>
-       <div>Home</div>
-     </>
-     )
+       <>
+         <Jumbo></Jumbo>
+       </>
+     );
 }
 export default Home;
