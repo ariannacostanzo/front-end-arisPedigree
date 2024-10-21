@@ -1,8 +1,8 @@
 import footerImages from "../../../database/footer-img";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./footer.scss";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
@@ -107,21 +107,41 @@ const Footer = () => {
           </div>
         </div>
         <div className="social-footer">
-          <ul>
+          <ul className="flex gap-4 justify-center text-2xl">
             <li>
-              <a href="#">Instagram</a>
+              <a href="#" className="bg-[#0867ff]">
+                <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
+              </a>
             </li>
             <li>
-              <a href="#">Instagram</a>
+              <a href="#" className="bg-[#2298ef]">
+                <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
+              </a>
             </li>
             <li>
-              <a href="#">Instagram</a>
+              <a href="#" className="bg-[#0174b5]">
+                <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
+              </a>
             </li>
             <li>
-              <a href="#">Instagram</a>
+              <a href="#" className="bg-[#0eab04]">
+                <FontAwesomeIcon icon={faWhatsapp}></FontAwesomeIcon>
+              </a>
             </li>
             <li>
-              <a href="#">Instagram</a>
+              <a href="#" className="bg-[#567ca0]">
+                <FontAwesomeIcon icon={faVk}></FontAwesomeIcon>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="bg-[#794e93]">
+                <FontAwesomeIcon icon={faPhoneVolume}></FontAwesomeIcon>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="bg-[#898a8f]">
+                <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+              </a>
             </li>
           </ul>
         </div>
