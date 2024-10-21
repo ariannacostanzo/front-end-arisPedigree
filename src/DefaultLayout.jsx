@@ -5,7 +5,7 @@ import Footer from "./assets/components/footer/Footer";
 const DefaultLayout = () => {
      return (
      <>
-     <div className="p-4 my-container">
+     <div className="p-4 container mx-auto">
 
        <Header></Header>
        <main>

@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.my-container {
-  min-width: 80%;
-  margin: 0 auto;
+
+:root {
+  --primary: #E89F41;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  background-color: #ebeff2;
 }
