@@ -1,4 +1,4 @@
-import news from "../../../database/news";
+import news from "../../../../database/news";
 import "./newsAndDogs.scss";
 
 const NewsAndDogs = () => {
@@ -17,7 +17,9 @@ const NewsAndDogs = () => {
               <p className="date my-4">
                 {post.date} {post.comment}
               </p>
-              <p className="description my-4">{post.title}</p>
+              <p className="description my-4">
+                {post.description.slice(0, 200)}...
+              </p>
               <a className="readmore" href="">
                 Read More »
               </a>
