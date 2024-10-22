@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./footer.scss";
 import { faEnvelope, faPhone, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -43,22 +44,22 @@ const Footer = () => {
             <span className="h3-divisor"></span>
             <ul>
               <li>
-                <a href="#">
+                <Link to="/search-a-dog">
                   <span className="line"></span>
                   Online Pedigree
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/dogs-list">
                   <span className="line"></span>
                   Breeds List
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/countryFilter">
                   <span className="line"></span>
                   Breeds Localization
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
