@@ -7,7 +7,7 @@ const NewsAndDogs = () => {
     <>
       <section id="newsdogs">
         <h2>News & dogs</h2>
-        <div className="flex justify-center gap-8">
+        <div className="lg:flex justify-center gap-8">
           {news.map((post, i) => (
             <div key={`homeNews${i}`} className="newsCard-home">
               <Link to="newsDetail">

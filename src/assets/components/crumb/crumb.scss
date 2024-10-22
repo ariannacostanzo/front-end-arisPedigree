@@ -1,0 +1,22 @@
+.crumb {
+    font-size: 18px;
+    
+    .crumb-home {
+        
+        transition: var(--transition);
+
+        &:hover {
+            color: var(--primary);
+            text-decoration: overline;
+        }
+    }
+    
+    .crumb-icon {
+        color: rgba(128, 128, 128, 0.63);
+        font-size: 12px;
+    }
+
+    .crumb-name {
+        color: grey;
+    }
+}

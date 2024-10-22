@@ -57,6 +57,7 @@ header {
     position: relative;
     padding: 13px 20px;
     color: var(--blue);
+    cursor: pointer;
 
 
     &:hover {
@@ -91,4 +92,10 @@ header {
 
 .header-nav > ul > li:hover .header-underlist {
     opacity: 1;
+}
+
+.headerUserName {
+    position: absolute;
+    right: 5px;
+    top: 2px;
 }

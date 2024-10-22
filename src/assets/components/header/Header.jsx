@@ -2,10 +2,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
 import { faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink , useNavigate} from "react-router-dom";
+import { useAuth } from "../../../providers/authProvider";
 
 const Header = () => {
+
+  const navigate = useNavigate()
+  const {isLoggedIn, logout, userName} = useAuth();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const logOutAndHome = () => {
+    logout()
+    navigate('/')
+    window.location.reload();
+  }
   return (
     <>
       <header className="p-4 container mx-auto flex items-center justify-between">
@@ -19,24 +28,22 @@ const Header = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <a href="#">
-                Dogs
-                <FontAwesomeIcon
-                  icon={faCaretDown}
-                  className="ml-2"
-                ></FontAwesomeIcon>
-                <ul className="header-underlist">
-                  <li>
-                    <NavLink to="/add-new-dog">Add new Dog</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dogs-list">Dog&apos;s list</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/search-a-dog">Search for a dog</NavLink>
-                  </li>
-                </ul>
-              </a>
+              Dogs
+              <FontAwesomeIcon
+                icon={faCaretDown}
+                className="ml-2"
+              ></FontAwesomeIcon>
+              <ul className="header-underlist">
+                <li>
+                  <NavLink to="/add-new-dog">Add new Dog</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dogs-list">Dog&apos;s list</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/search-a-dog">Search for a dog</NavLink>
+                </li>
+              </ul>
             </li>
             <li>
               <NavLink to="/test-mating">Testmating</NavLink>
@@ -44,8 +51,22 @@ const Header = () => {
             <li>
               <NavLink to="/latest-news">News</NavLink>
             </li>
-            <li>
-              <a href="#">
+            {isLoggedIn ? (
+              <li>
+                My Account
+                <FontAwesomeIcon
+                  icon={faCaretDown}
+                  className="ml-2"
+                ></FontAwesomeIcon>
+                <ul className="header-underlist">
+                  <li onClick={logOutAndHome}>
+                    Logout
+                  </li>
+                 
+                </ul>
+              </li>
+            ) : (
+              <li>
                 Account
                 <FontAwesomeIcon
                   icon={faCaretDown}
@@ -59,8 +80,9 @@ const Header = () => {
                     <NavLink to="/register">Register</NavLink>
                   </li>
                 </ul>
-              </a>
-            </li>
+              </li>
+            )}
+            
             <li>
               <NavLink to="/contact-us">Contact Us</NavLink>
             </li>
@@ -72,6 +94,11 @@ const Header = () => {
             Search...
           </div>
         </div>
+
+        {/* nome utente se loggato  */}
+        {isLoggedIn && <div className="headerUserName">
+          Hi {userName}!
+          </div>}
       </header>
       {isSearchVisible && (
         <div className="search-div-lg">
