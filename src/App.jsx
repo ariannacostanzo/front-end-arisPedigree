@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DefaultLayout from "./DefaultLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import Testmating from "./pages/TestmatingPage/TestmatingPage";
@@ -14,36 +14,39 @@ import NewsDetailPage from "./pages/NewsDetailPage/NewsDetailPage";
 import BreedsDetailPage from "./pages/BreedsDetailPage/BreedsDetailPage";
 import CountryDetailPage from "./pages/CountryDetailPage/CountryDetailPage";
 import CountryFilterPage from "./pages/CountryFilterPage/CountryFilterPage";
+import { CountryProvider } from "./providers/countriesProvider";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<DefaultLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="test-mating" element={<Testmating />} />
-            <Route path="latest-news" element={<NewsPage />} />
-            <Route path="contact-us" element={<ContactusPage />} />
-            <Route path="register" element={<RegisterPage />} />
-            <Route path="search-a-dog" element={<SearchDogPage />} />
-            <Route path="dogs-list" element={<DogsListPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="add-new-dog" element={<AddDogPage />} />
-            <Route path="dogDetail" element={<DogDetailPage />} />
-            {/* da sistemare con l'id ^ */}
-            <Route path="newsDetail" element={<NewsDetailPage />} />
-            {/* da sistemare con l'id ^ */}
-            <Route path="breedsDetail" element={<BreedsDetailPage />} />
-            {/* da sistemare con l'id ^ */}
-            <Route path="countryDetail" element={<CountryDetailPage />} />
-            {/* da sistemare con l'id ^ */}
-            <Route path="countryFilter" element={<CountryFilterPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <CountryProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<DefaultLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="test-mating" element={<Testmating />} />
+              <Route path="latest-news" element={<NewsPage />} />
+              <Route path="contact-us" element={<ContactusPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="search-a-dog" element={<SearchDogPage />} />
+              <Route path="dogs-list" element={<DogsListPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="add-new-dog" element={<AddDogPage />} />
+              <Route path="dogDetail" element={<DogDetailPage />} />
+              {/* da sistemare con l'id ^ */}
+              <Route path="newsDetail" element={<NewsDetailPage />} />
+              {/* da sistemare con l'id ^ */}
+              <Route path="breedsDetail" element={<BreedsDetailPage />} />
+              {/* da sistemare con l'id ^ */}
+              <Route path="countryDetail" element={<CountryDetailPage />} />
+              {/* da sistemare con l'id ^ */}
+              <Route path="countryFilter" element={<CountryFilterPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CountryProvider>
     </>
   );
 }
 
-export default App
+export default App;
