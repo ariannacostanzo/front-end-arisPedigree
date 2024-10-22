@@ -1,0 +1,11 @@
+#breedsList {
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.breedItem {
+  flex: 0 0 30%;
+  padding: 10px;
+}
