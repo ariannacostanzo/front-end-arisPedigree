@@ -2,22 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
 import { faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Home from "../../../pages/HomePage/HomePage";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
-  const [isSearchVisible, setIsSearchVisible] = useState(false)
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   return (
     <>
       <header className="p-4 container mx-auto flex items-center justify-between">
-        <Link to={Home}>
+        <Link to="/">
           <img src="/logoaris.png" alt="logo" className="w-[300px]" />
         </Link>
 
         <div className="header-nav flex items-center">
           <ul className="flex flex-wrap items-center ">
             <li>
-              <Link to={Home}>Home</Link>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
               <a href="#">
@@ -27,17 +26,23 @@ const Header = () => {
                   className="ml-2"
                 ></FontAwesomeIcon>
                 <ul className="header-underlist">
-                  <li>Add new Dog</li>
-                  <li>Dog&apos;s list</li>
-                  <li>Search for a dog</li>
+                  <li>
+                    <NavLink to="/add-new-dog">Add new Dog</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dogs-list">Dog&apos;s list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/search-a-dog">Search for a dog</NavLink>
+                  </li>
                 </ul>
               </a>
             </li>
             <li>
-              <a href="#">Testmating</a>
+              <NavLink to="/test-mating">Testmating</NavLink>
             </li>
             <li>
-              <a href="#">News</a>
+              <NavLink to="/latest-news">News</NavLink>
             </li>
             <li>
               <a href="#">
@@ -47,13 +52,17 @@ const Header = () => {
                   className="ml-2"
                 ></FontAwesomeIcon>
                 <ul className="header-underlist">
-                  <li>Login</li>
-                  <li>Register</li>
+                  <li>
+                    <NavLink to="/login">Login</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/register">Register</NavLink>
+                  </li>
                 </ul>
               </a>
             </li>
             <li>
-              <a href="#">Contact Us</a>
+              <NavLink to="/contact-us">Contact Us</NavLink>
             </li>
           </ul>
           <div

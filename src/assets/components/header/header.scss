@@ -2,6 +2,13 @@ header {
     font-family: "Outfit", sans-serif;
     font-size: 18px;
 
+    .active {
+        color: var(--primary);
+    }
+
+    .header-underlist .active {
+        color: inherit; 
+    }
     
 }
 
