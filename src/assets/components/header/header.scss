@@ -26,7 +26,7 @@ header {
 }
 
 .search-lg {
-    border: 2px solid rgb(138, 135, 134);
+    
     width: 77%;
     margin: 0 auto;
     padding-left: 15px;
@@ -41,7 +41,7 @@ header {
         width: 100%;
 
         &:focus-visible {
-            border: 0;
+            border: 2px solid rgb(138, 135, 134);
             outline: 0;
         }
     }

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../providers/authProvider.jsx";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import Crumb from "../../assets/components/crumb/Crumb.jsx";
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
@@ -35,33 +35,36 @@ const LoginPage = () => {
 
   return (
     <>
-      <div>login</div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="emailOrUsername">User name or Email:</label>
-          <input
-            type="emailOrUsername"
-            name="emailOrUsername"
-            value={formData.emailOrUsername}
-            onChange={handleChange}
-            autoComplete="emailOrUsername"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            autoComplete="password"
-            required
-          />
-        </div>
+      <Crumb pageName="Login"></Crumb>
+      <div className="p-4 container mx-auto">
+        <div>login</div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="emailOrUsername">User name or Email:</label>
+            <input
+              type="emailOrUsername"
+              name="emailOrUsername"
+              value={formData.emailOrUsername}
+              onChange={handleChange}
+              autoComplete="emailOrUsername"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              autoComplete="password"
+              required
+            />
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </>
   );
 };
