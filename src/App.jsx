@@ -18,43 +18,59 @@ import { CountryProvider } from "./providers/countriesProvider";
 import { BreedProvider } from "./providers/breedsProvider";
 import { AuthProvider } from "./providers/authProvider";
 import UserPage from "./pages/UserPage/UserPage";
-import ProtectedRoute from '../src/assets/components/ProtectedRoute.jsx'
+import ProtectedRoute from "../src/assets/components/ProtectedRoute.jsx";
+import { DogsProvider } from "./providers/dogsProvider.jsx";
 
 function App() {
   return (
     <>
-      <BreedProvider>
-        <CountryProvider>
-          <AuthProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<DefaultLayout />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="test-mating" element={<Testmating />} />
-                  <Route path="latest-news" element={<NewsPage />} />
-                  <Route path="contact-us" element={<ContactusPage />} />
-                  <Route path="register" element={<RegisterPage />} />
-                  <Route path="search-a-dog" element={<SearchDogPage />} />
-                  <Route path="dogs-list" element={<DogsListPage />} />
-                  <Route path="login" element={<LoginPage />} />
-                  {/* rotta protetta  */}
-                  <Route path="add-new-dog" element={<AddDogPage />} />
-                  <Route path="userDetail" element={<ProtectedRoute><UserPage/></ProtectedRoute>}/>
-                  <Route path="dogDetail" element={<DogDetailPage />} />
-                  {/* da sistemare con l'id ^ */}
-                  <Route path="newsDetail" element={<NewsDetailPage />} />
-                  {/* da sistemare con l'id ^ */}
-                  <Route path="breedsDetail" element={<BreedsDetailPage />} />
-                  {/* da sistemare con l'id ^ */}
-                  <Route path="countryDetail" element={<CountryDetailPage />} />
-                  {/* da sistemare con l'id ^ */}
-                  <Route path="countryFilter" element={<CountryFilterPage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </AuthProvider>
-        </CountryProvider>
-      </BreedProvider>
+      <DogsProvider>
+        <BreedProvider>
+          <CountryProvider>
+            <AuthProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<DefaultLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="test-mating" element={<Testmating />} />
+                    <Route path="latest-news" element={<NewsPage />} />
+                    <Route path="contact-us" element={<ContactusPage />} />
+                    <Route path="register" element={<RegisterPage />} />
+                    <Route path="search-a-dog" element={<SearchDogPage />} />
+                    <Route path="dogs-list" element={<DogsListPage />} />
+                    <Route path="login" element={<LoginPage />} />
+                    {/* rotta protetta  */}
+                    <Route path="add-new-dog" element={<AddDogPage />} />
+                    <Route
+                      path="userDetail"
+                      element={
+                        <ProtectedRoute>
+                          <UserPage />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route path="dogDetail" element={<DogDetailPage />} />
+                    {/* da sistemare con l'id ^ */}
+                    <Route path="newsDetail" element={<NewsDetailPage />} />
+                    {/* da sistemare con l'id ^ */}
+                    <Route path="breedsDetail" element={<BreedsDetailPage />} />
+                    {/* da sistemare con l'id ^ */}
+                    <Route
+                      path="countryDetail"
+                      element={<CountryDetailPage />}
+                    />
+                    {/* da sistemare con l'id ^ */}
+                    <Route
+                      path="countryFilter"
+                      element={<CountryFilterPage />}
+                    />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </AuthProvider>
+          </CountryProvider>
+        </BreedProvider>
+      </DogsProvider>
     </>
   );
 }
