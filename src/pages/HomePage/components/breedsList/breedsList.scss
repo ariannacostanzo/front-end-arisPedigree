@@ -2,10 +2,35 @@
   display: flex;
   flex-wrap: wrap;
   height: 600px;
-  overflow-y: auto;
+  overflow: auto;
+  // columns: 200px;
+  font-size: 18px;
+
+  
+  
 }
 
 .breedItem {
-  flex: 0 0 30%;
-  padding: 10px;
+  // flex: 0 0 30%;
+  padding: 10px 20px;
+  border-left: 10px solid #26ade5;
+  transition: var(--transition);
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--primary);
+  }
+}
+
+.breedListContainer {
+
+  padding: 1rem 4rem;
+  border: 1px solid black;
+  box-shadow: 0 0 5px 0px black inset;
+  margin: 4rem auto;
+
+  h3 {
+    font-family: "Bowlby One SC", serif;
+    font-size: 20px;
+  }
 }

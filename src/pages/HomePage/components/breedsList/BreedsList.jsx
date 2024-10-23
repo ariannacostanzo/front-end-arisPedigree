@@ -7,15 +7,15 @@ const BreedsList = () => {
   return (
     <>
       <div className="breedListContainer">
-        <h3 className="text-2xl text-red-400">Breeds List</h3>
+        <h3 className="my-10">Breeds List</h3>
         <div id="breedsList">
           {breeds.length > 0 &&
             breeds.map((breed, i) => (
               <div
                 key={`breedlisthomepage${i}`}
-                className="basis-full lg:basis-1/3 p-2 "
+                className="basis-full md:basis-1/2 lg:basis-1/3 p-2 breedItem"
               >
-                <Link to="/breedsDetail">{breed.name} </Link>
+                <Link to="/breedsDetail">{breed.name} &#40;0&#41;</Link>
               </div>
             ))}
         </div>

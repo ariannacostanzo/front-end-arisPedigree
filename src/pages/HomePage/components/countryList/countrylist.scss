@@ -3,4 +3,36 @@
   flex-wrap: wrap;
   height: 600px;
   overflow-y: auto;
+  font-size: 18px;
+  padding: 1rem 0;
+}
+
+.countryItem {
+  padding: 0px 20px 0px 10px;
+  margin: 10px 0;
+  border-left: 1px solid black;
+  transition: var(--transition);
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--primary);
+  }
+}
+
+.countryListContainer {
+  background-color: white;
+  
+  h3, h5 {
+    font-family: "Bowlby One SC", serif;
+    
+  }
+
+  h3 {
+    font-size: 49px;
+  }
+
+  h5 {
+    font-size: 22px;
+    color:  rgb(45, 45, 45);
+  }
 }

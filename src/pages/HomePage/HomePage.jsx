@@ -18,9 +18,7 @@ const Home = () => {
       <div className="p-4 container mx-auto">
         <BreedsList></BreedsList>
       </div>
-      <div className="p-4 container mx-auto">
         <CountryList></CountryList>
-      </div>
       <div className="p-4 container mx-auto">
         <DogList></DogList>
       </div>
