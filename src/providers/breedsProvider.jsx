@@ -16,6 +16,8 @@ const BreedProvider = ({ children }) => {
       setBreeds(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

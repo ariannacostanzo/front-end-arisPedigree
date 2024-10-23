@@ -7,27 +7,40 @@ const DogsContext = createContext();
 
 const DogsProvider = ({ children }) => {
   const [dogs, setDogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const fetchDogs = async () => {
     setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/dogs");
-      setDogs(response.data);
+      setDogs(response.data.data);
+      setPage(response.data.page);
+      setTotalPages(response.data.totalPages);
+    //   console.log(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+        setLoading(false)
     }
   };
 
   useEffect(() => {
     fetchDogs();
-  }, []);
+  }, [page]);
 
   return (
     <DogsContext.Provider
       value={{
         dogs,
+        setDogs,
         loading,
+        page,
+        setPage,
+        totalPages,
+        setTotalPages,
+        fetchDogs
       }}
     >
       {children}

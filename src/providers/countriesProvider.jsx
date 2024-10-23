@@ -19,6 +19,8 @@ const fetchCountries = async () => {
         setCountries(response.data)
     } catch (error) {
         console.log(error)
+    } finally {
+      setLoading(false);
     }
 }
 
