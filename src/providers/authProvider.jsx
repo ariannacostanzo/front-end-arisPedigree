@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
     }
   };
   const logout = () => {
+    setUserName(null)
     setIsLoggedIn(false);
   };
 
@@ -31,7 +32,8 @@ const AuthProvider = ({ children }) => {
         setIsLoggedIn,
         login,
         logout,
-        userName
+        userName,
+        setUserName
       }}
     >
       {children}

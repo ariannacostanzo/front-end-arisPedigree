@@ -2,11 +2,11 @@ import { useState } from "react";
 import axios from "../../utils/axiosClient.js";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { useNavigate } from "react-router-dom";
-import Crumb from "../../assets/components/crumb/Crumb.jsx";
+import Heading from "../../assets/components/heading/Heading.jsx";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUserName } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -45,9 +45,8 @@ const RegisterPage = () => {
           },
         }
       );
-      console.log(response);
 
-      console.log("Registration successful!");
+      setUserName(response.data.name);
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {
@@ -56,7 +55,7 @@ const RegisterPage = () => {
   };
   return (
     <>
-      <Crumb pageName="Register"></Crumb>
+      <Heading heading="Register"></Heading>
       <div className="p-4 container mx-auto">
         <div>register page</div>
         <form onSubmit={handleSubmit}>

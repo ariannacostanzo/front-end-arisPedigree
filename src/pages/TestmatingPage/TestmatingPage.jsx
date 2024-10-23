@@ -1,9 +1,9 @@
-import Crumb from "../../assets/components/crumb/Crumb";
+import Heading from "../../assets/components/heading/Heading";
 
 const Testmating = () => {
      return (
        <>
-         <Crumb pageName="Testmating"></Crumb>
+         <Heading heading="Testmating"></Heading>
          <div className="p-4 container mx-auto">
            <div>Testmating</div>
          </div>

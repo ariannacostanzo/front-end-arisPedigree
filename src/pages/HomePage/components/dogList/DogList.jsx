@@ -3,51 +3,10 @@ import { useDogs } from "../../../../providers/dogsProvider.jsx";
 import alphabet from "../../../../database/alphabeth.js";
 import { Link } from "react-router-dom";
 import Loader from "../../../../assets/components/loader/Loader.jsx";
-// import axios from "axios";
-// import { useEffect, useState } from "react";
 
 const DogList = () => {
   const { dogs, loading } = useDogs();
-  // const { dogs, setDogs, setPage, setTotalPages } = useDogs();
-  // const { dogs, page, totalPages } = useDogs();
-
-  // const [bulletNumbers, setBulletNumbers] = useState([]);
-  // const [maxPages, setMaxPages] = useState(0);
-  // const [currentPage, setCurrentPage] = useState(page)
-
-  // const createBullets = () => {
-  //   setMaxPages(totalPages > 5 ? 5 : totalPages);
-  //   setBulletNumbers([]);
-
-  //   //se due pagine indietro non esistono torno 1
-  //   const startPage = Math.max(setCurrentPage(currentPage- 2, 1));
-  //   //se due pagine avanti non esistono torno il totale pagine
-  //   const endPage = Math.min(
-  //     setCurrentPage(currentPage + 2,
-  //     totalPages)
-  //   );
-
-  //   for (let i = startPage; i <= endPage; i++) {
-  //     bulletNumbers.push(i);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   createBullets()
-  // }, [])
-
-  // const fetchDogs = async () => {
-  //   console.log('funziona')
-  //   try {
-  //     const response = await axios.get("http://localhost:8000/dogs?page=2");
-  //     setDogs(response.data.data);
-  //     setPage(response.data.page);
-  //     setTotalPages(response.data.totalPages);
-  //     //   console.log(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  
 
 
   return (

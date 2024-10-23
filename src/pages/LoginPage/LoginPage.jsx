@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { useNavigate } from "react-router-dom";
-import Crumb from "../../assets/components/crumb/Crumb.jsx";
+import Heading from "../../assets/components/heading/Heading.jsx";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Crumb pageName="Login"></Crumb>
+      <Heading heading="Login"></Heading>
       <div className="p-4 container mx-auto">
         <div>login</div>
         <form onSubmit={handleSubmit}>
