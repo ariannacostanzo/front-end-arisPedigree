@@ -10,14 +10,21 @@ import { Link } from "react-router-dom";
 import axios from "../../utils/axiosClient.js";
 import { useNavigate } from "react-router-dom";
 
+// per sireId e damId devo fare una chiamata al database di tutti i cani e cercare un cane che 
+// abbia quel nome altrimenti bisogna lasciare il campo vuoto
+
 const AddDogPage = () => {
   // variabili per riempire il form
   const { breeds, loading } = useBreed();
   const { countries } = useCountry();
   const { isLoggedIn, userId, token } = useAuth();
+  
 
   // eslint-disable-next-line no-unused-vars
   const [updatedUserId, setUpdatedUserId] = useState(userId);
+
+  const [sires, setSires] = useState([]);
+  const [dams, setDams] = useState([]);
 
   const [errorBags, setErrorBags] = useState({
     name: "",
@@ -32,6 +39,8 @@ const AddDogPage = () => {
     name: "",
     titles: "",
     sireId: "",
+    sire: "",
+    dam: "",
     damId: "",
     sex: "true",
     size: "",
@@ -56,6 +65,37 @@ const AddDogPage = () => {
       [name]: value,
     });
   };
+
+  
+
+  const searchforFather = async(e) => {
+
+    
+    
+    const { value } = e.target;
+    handleChange(e);
+
+    if (formData.breedId) {
+      const url = `http://localhost:8000/dogs/findSire?breedId=${formData.breedId}&name=${value}`;
+      try {
+        const res = await axios.get(url);
+        setSires(res.data); 
+        console.log(res.data); 
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // console.log(e.target.value);
+
+    
+  } 
+
+  const searchForMother = async(e) => {
+
+    console.log(e.target.value);
+    handleChange(e);
+  }
 
   const slugify = (str) => {
     str = str.replace(/^\s+|\s+$/g, "");
@@ -219,6 +259,9 @@ const AddDogPage = () => {
                   {/* name  */}
                   <div className="form-col">
                     <FormLabel forName="add-name" label="Name" />
+                    {errorBags.name && (
+                      <p className="error-text">{errorBags.name}</p>
+                    )}
                     <input
                       type="text"
                       name="name"
@@ -226,9 +269,6 @@ const AddDogPage = () => {
                       onChange={handleChange}
                       value={formData.name}
                     />
-                    {errorBags.name && (
-                      <p className="error-text">{errorBags.name}</p>
-                    )}
                   </div>
                   {/* titles  */}
                   <div className="form-col">
@@ -246,24 +286,33 @@ const AddDogPage = () => {
                 <div className="form-row">
                   <div className="form-col">
                     {/* sire  */}
+
                     <FormLabel forName="add-sire" label="Sire" />
+                    {!formData.breedId && (
+                      <p className="tip">Insert a breed to choose a Sire</p>
+                    )}
                     <input
                       type="text"
                       name="sire"
                       id="add-sire"
-                      onChange={handleChange}
+                      onChange={searchforFather}
                       value={formData.sire}
+                      disabled={!formData.breedId}
                     />
                   </div>
                   {/* dam  */}
                   <div className="form-col">
                     <FormLabel forName="add-dam" label="Dam" />
+                    {!formData.breedId && (
+                      <p className="tip">Insert a breed to choose a Dam</p>
+                    )}
                     <input
                       type="text"
                       name="dam"
                       id="add-dam"
-                      onChange={handleChange}
+                      onChange={searchForMother}
                       value={formData.dam}
+                      disabled={!formData.breedId}
                     />
                   </div>
                 </div>
