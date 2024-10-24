@@ -2,7 +2,7 @@
   padding: 4rem 0;
   h3,
   h5 {
-    font-family: "Bowlby One SC", serif;
+    font-family: var(--headingFont);
   }
 
   h3 {
@@ -51,7 +51,7 @@
 
         .dogName {
             font-size: 20px;
-            font-family: "Bowlby One SC", serif;
+            font-family: var(--headingFont);
 
             &:hover {
                 text-decoration: underline;
@@ -59,7 +59,7 @@
         }
 
         .dogBreed {
-            font-family: "Open Sans", sans-serif;
+            font-family: var(--basicFont);
             letter-spacing: 1px;
             color: rgb(49, 80, 100);
             font-weight: 600;
@@ -75,7 +75,7 @@
 
         .dogCountry {
             font-size: 14px;
-            font-family: "Open Sans", sans-serif;
+            font-family: var(--basicFont);
             color:  rgb(121, 121, 121);
             font-weight: 600;
         }

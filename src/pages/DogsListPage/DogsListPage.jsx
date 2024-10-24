@@ -16,7 +16,8 @@ const DogsListPage = () => {
           {loading ? (
             <Loader></Loader>
           ) : (
-            <div className="p-4 container mx-auto flex flex-wrap">
+            <div className="p-4 container mx-auto flex flex-wrap justify-center">
+              {dogs.length === 0 && <div>No dogs found</div>}
               {dogs.length > 0 &&
                 dogs.map((dog, i) => (
                   <div
@@ -28,7 +29,12 @@ const DogsListPage = () => {
                         <img src={dog.image ? dog.image : placeholder} alt="" />
                       </figure>
                       <div className="dogName">
-                        <Link to="/dogDetail" className="dogNameLink">{dog.name}</Link>
+                        <Link to="/dogDetail" className="dogNameLink">
+                          {dog.name}
+                        </Link>
+                        {dog.titles && (
+                          <div className="dogTitle">{dog.titles}</div>
+                        )}
                       </div>
                     </div>
                   </div>

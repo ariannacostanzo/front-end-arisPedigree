@@ -59,10 +59,7 @@ const Header = () => {
                   className="ml-2"
                 ></FontAwesomeIcon>
                 <ul className="header-underlist">
-                  <li onClick={logOutAndHome}>
-                    Logout
-                  </li>
-                 
+                  <li onClick={logOutAndHome}>Logout</li>
                 </ul>
               </li>
             ) : (
@@ -82,7 +79,7 @@ const Header = () => {
                 </ul>
               </li>
             )}
-            
+
             <li>
               <NavLink to="/contact-us">Contact Us</NavLink>
             </li>
@@ -96,16 +93,14 @@ const Header = () => {
         </div>
 
         {/* nome utente se loggato  */}
-        {isLoggedIn && <div className="headerUserName">
-          Hi {userName}!
-          </div>}
+        {isLoggedIn && <div className="headerUserName">Hi {userName}!</div>}
       </header>
       {isSearchVisible && (
         <div className="search-div-lg">
-          <div className="flex justify-start items-center search-lg">
+          <div className="flex justify-start items-center search-lg ">
             <FontAwesomeIcon
               icon={faSearch}
-              className="text-[#368651]"
+              className="text-[#E89F41] pr-4"
             ></FontAwesomeIcon>
             <input type="text" placeholder="Search..." />
           </div>

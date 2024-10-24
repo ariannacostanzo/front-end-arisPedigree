@@ -9,6 +9,11 @@
   --blue: #1A3764;
   --text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
       1px 1px 0 #000;
+  --primaryFont: "Outfit", sans-serif;
+  --secondaryFont: "Noto Sans", sans-serif;
+  --headingFont: "Bowlby One SC", serif;
+  --basicFont:  "Open Sans", sans-serif;
+
 }
 
 body {

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer className="p-4 container mx-auto">
+      <footer className="px-4 py-16 container mx-auto">
         {/* dog photos  */}
         <div className="flex flex-wrap gap-2 justify-center">
           {footerImages.map((img, i) => (
@@ -16,7 +16,7 @@ const Footer = () => {
               <img
                 src={img.path}
                 alt={`dog${i}`}
-                className="w-[170px]  lg:w-[200px]"
+                className="w-[170px]  lg:w-[200px] rounded-md"
               />
             </a>
           ))}

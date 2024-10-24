@@ -1,5 +1,5 @@
 header {
-    font-family: "Outfit", sans-serif;
+    font-family: var(--primaryFont);
     font-size: 18px;
 
     .active {
@@ -32,17 +32,16 @@ header {
     padding-left: 15px;
 }
 .search-div-lg {
-    background-color: #79fe6d;
+    background-color: white;
     padding: 10px;
 
     input {
         padding: 15px 15px;
-        background-color: #79fe6d;
+        background-color: transparent;
         width: 100%;
 
         &:focus-visible {
-            border: 2px solid rgb(138, 135, 134);
-            outline: 0;
+            outline: 1px solid var(--primary);
         }
     }
 }
@@ -61,7 +60,7 @@ header {
 
 
     &:hover {
-        transform: translateY(-8px);
+        transform: translateY(-4px);
         color: var(--primary);
         text-decoration: underline;
     }

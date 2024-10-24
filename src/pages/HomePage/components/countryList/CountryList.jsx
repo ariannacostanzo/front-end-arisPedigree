@@ -15,9 +15,6 @@ const CountryList = () => {
             <h3 className="my-10">Breed countries</h3>
             <h5>Select Country</h5>
             <div id="countryList">
-              <div className="basis-1/2 lg:basis-1/4  countryItem ">
-                <Link to="/countryDetail">-UNSET- &#40;0&#41;</Link>
-              </div>
               {countries.length > 0 &&
                 countries.map((country, i) => (
                   <div

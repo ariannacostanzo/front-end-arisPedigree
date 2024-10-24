@@ -6,7 +6,7 @@ import Heading from "../../assets/components/heading/Heading.jsx";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserName } = useAuth();
+  const { setIsLoggedIn, setUserName, setToken } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -47,6 +47,7 @@ const RegisterPage = () => {
       );
 
       setUserName(response.data.name);
+      setToken(response.token)
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {
