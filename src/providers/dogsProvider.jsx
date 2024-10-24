@@ -10,6 +10,7 @@ const DogsProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [allDogs, setAllDogs] = useState(0);
 
   const fetchDogs = async () => {
     setLoading(true);
@@ -26,13 +27,27 @@ const DogsProvider = ({ children }) => {
     }
   };
 
+  const fetchAllDogs = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8000/dogs/allDogs");
+      setAllDogs(response.data)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     fetchDogs();
+    fetchAllDogs();
   }, [page]);
 
   return (
     <DogsContext.Provider
       value={{
+        allDogs,
         dogs,
         setDogs,
         loading,
