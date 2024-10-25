@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Heading from "../../assets/components/heading/Heading";
 import { useAuth } from "../../providers/authProvider";
 import "./addDogPage.scss";
@@ -9,8 +10,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../utils/axiosClient.js";
 import { useNavigate } from "react-router-dom";
+import placeholder from "../../../public/placehodler.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-// per sireId e damId devo fare una chiamata al database di tutti i cani e cercare un cane che 
+// per sireId e damId devo fare una chiamata al database di tutti i cani e cercare un cane che
 // abbia quel nome altrimenti bisogna lasciare il campo vuoto
 
 const AddDogPage = () => {
@@ -18,13 +22,22 @@ const AddDogPage = () => {
   const { breeds, loading } = useBreed();
   const { countries } = useCountry();
   const { isLoggedIn, userId, token } = useAuth();
-  
 
   // eslint-disable-next-line no-unused-vars
   const [updatedUserId, setUpdatedUserId] = useState(userId);
 
   const [sires, setSires] = useState([]);
   const [dams, setDams] = useState([]);
+
+  const [isTypingSire, setIsTypingSire] = useState(false);
+  const [isTypingDam, setIsTypingDam] = useState(false);
+
+  const [isSireSelected, setIsSireSelected] = useState(false);
+  const [isDamSelected, setIsDamSelected] = useState(false);
+
+  //devo fare tanti div quanti i risultati delle chiamate search per mostrare i cani e poi
+  //selezionare e salvare l'id di sire e dam in formData ed inviarlo
+  //fare l'upload immagini
 
   const [errorBags, setErrorBags] = useState({
     name: "",
@@ -60,42 +73,95 @@ const AddDogPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === "sire") {
+      setIsSireSelected(false)
+    } else if (name === "dam") {
+      setIsDamSelected(false)
+    }
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    
   };
 
-  
-
-  const searchforFather = async(e) => {
-
+  const choseSireId = (id, name) => {
+    setSires([]);
+    setFormData({ ...formData, sireId: id });
+    setFormData({ ...formData, sire: name });
+    console.log(id, name)
     
-    
-    const { value } = e.target;
-    handleChange(e);
+    setIsTypingSire(true);
+    setIsSireSelected(true)
+  };
+
+  const choseDamId = (id, name) => {
+    setFormData({ ...formData, damId: id });
+    setFormData({ ...formData, dam: name });
+    setDams([]);
+    setIsTypingDam(true);
+    setIsDamSelected(true);
+  };
+
+  const searchforFather = async () => {
+    setSires([]);
+    setIsTypingSire(true);
+    const { sire } = formData;
 
     if (formData.breedId) {
-      const url = `http://localhost:8000/dogs/findSire?breedId=${formData.breedId}&name=${value}`;
+      const url = `http://localhost:8000/dogs/findSire?breedId=${formData.breedId}&name=${sire}`;
       try {
         const res = await axios.get(url);
-        setSires(res.data); 
-        console.log(res.data); 
+        setSires(res.data);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsTypingSire(false);
       }
     }
+  };
 
-    // console.log(e.target.value);
+  const searchForMother = async () => {
+    setDams([]);
+    setIsTypingDam(true);
+    const { dam } = formData;
 
-    
-  } 
+    if (formData.breedId) {
+      const url = `http://localhost:8000/dogs/findDam?breedId=${formData.breedId}&name=${dam}`;
+      try {
+        const res = await axios.get(url);
+        setDams(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsTypingDam(false);
+      }
+    }
+  };
 
-  const searchForMother = async(e) => {
+  //per ritardare la chiamata dopo che si scrive
+  useEffect(() => {
+    if (!isSireSelected && formData.sire) {
+      setIsTypingSire(true);
+      const getData = setTimeout(() => {
+        searchforFather();
+      }, 2000);
 
-    console.log(e.target.value);
-    handleChange(e);
-  }
+      return () => clearTimeout(getData);
+    }
+  }, [formData.sire, isSireSelected]);
+
+  useEffect(() => {
+    if (!isDamSelected && formData.dam) {
+      setIsTypingDam(true);
+      const getData = setTimeout(() => {
+        searchForMother();
+      }, 2000);
+      return () => clearTimeout(getData);
+    }
+  }, [formData.dam, isDamSelected]);
 
   const slugify = (str) => {
     str = str.replace(/^\s+|\s+$/g, "");
@@ -113,6 +179,12 @@ const AddDogPage = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    setErrorBags({
+      name: "",
+      breed: "",
+      country: "",
+    });
+
     const {
       breedId,
       name,
@@ -284,10 +356,27 @@ const AddDogPage = () => {
                 </div>
 
                 <div className="form-row">
-                  <div className="form-col">
+                  <div className="form-col relative">
                     {/* sire  */}
 
-                    <FormLabel forName="add-sire" label="Sire" />
+                    <div className="flex items-baseline gap-3">
+                      <FormLabel forName="add-sire" label="Sire" />
+                      {isTypingSire && formData.sire && !isSireSelected && (
+                        <FontAwesomeIcon
+                          icon={faSpinner}
+                          spin
+                        ></FontAwesomeIcon>
+                      )}
+                    </div>
+                    {/* quello che appare dopo aver fatto la ricerca */}
+                    {!isTypingSire && formData.sire && sires.length === 0 && (
+                      <p className="tip">
+                        There is no male dog called &#34;
+                        <span>{formData.sire}</span>
+                        &#34; in our database
+                      </p>
+                    )}
+
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Sire</p>
                     )}
@@ -295,14 +384,50 @@ const AddDogPage = () => {
                       type="text"
                       name="sire"
                       id="add-sire"
-                      onChange={searchforFather}
+                      onChange={handleChange}
                       value={formData.sire}
                       disabled={!formData.breedId}
                     />
+                    {/* i risultati della ricerca  */}
+                    {sires.length > 0 && (
+                      <div className="dogResults">
+                        {sires.map((sire, i) => (
+                          <div
+                            className="dogResult"
+                            key={`research-sire${i}`}
+                            onClick={() => choseSireId(sire.id, sire.name)}
+                          >
+                            <img
+                              src={sire.image ? sire.image : placeholder}
+                              alt=""
+                            />
+                            <div>
+                              <h3>{sire.name}</h3>
+                              <p>{sire.titles ? sire.titles : ""}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   {/* dam  */}
-                  <div className="form-col">
-                    <FormLabel forName="add-dam" label="Dam" />
+                  <div className="form-col relative">
+                    <div className="flex items-baseline gap-3">
+                      <FormLabel forName="add-dam" label="Dam" />
+                      {isTypingDam && formData.dam && !isDamSelected && (
+                        <FontAwesomeIcon
+                          icon={faSpinner}
+                          spin
+                        ></FontAwesomeIcon>
+                      )}
+                    </div>
+                    {!isTypingDam && formData.dam && dams.length === 0 && (
+                      <p className="tip">
+                        There is no female dog called &#34;
+                        <span>{formData.dam}</span>
+                        &#34; in our database
+                      </p>
+                    )}
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Dam</p>
                     )}
@@ -310,10 +435,31 @@ const AddDogPage = () => {
                       type="text"
                       name="dam"
                       id="add-dam"
-                      onChange={searchForMother}
+                      onChange={handleChange}
                       value={formData.dam}
                       disabled={!formData.breedId}
                     />
+                    {/* i risultati della ricerca  */}
+                    {dams.length > 0 && (
+                      <div className="dogResults">
+                        {dams.map((dam, i) => (
+                          <div
+                            className="dogResult"
+                            key={`research-dam${i}`}
+                            onClick={() => choseDamId(dam.id, dam.name)}
+                          >
+                            <img
+                              src={dam.image ? dam.image : placeholder}
+                              alt=""
+                            />
+                            <div>
+                              <h3>{dam.name}</h3>
+                              <p>{dam.titles ? dam.titles : ""}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
