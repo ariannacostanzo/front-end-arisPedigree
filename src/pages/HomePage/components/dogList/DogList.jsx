@@ -33,7 +33,7 @@ const DogList = () => {
                     i % 2 === 0 ? "" : "grid-even"
                   }`}
                 >
-                  <Link to="/dogDetail" className="dogName">
+                  <Link to={`/dogDetail/${dog.id}`} className="dogName">
                     {dog.name}
                   </Link>
                   {dog.breed.name && (

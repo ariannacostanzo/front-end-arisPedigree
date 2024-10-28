@@ -14,8 +14,8 @@ import placeholder from "../../../public/placehodler.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-// per sireId e damId devo fare una chiamata al database di tutti i cani e cercare un cane che
-// abbia quel nome altrimenti bisogna lasciare il campo vuoto
+
+//fixare upload imagini
 
 const AddDogPage = () => {
   // variabili per riempire il form
@@ -47,6 +47,7 @@ const AddDogPage = () => {
   const navigate = useNavigate();
 
   //dati da inviare al backend
+
   const [formData, setFormData] = useState({
     breedId: "",
     name: "",
@@ -57,9 +58,9 @@ const AddDogPage = () => {
     damId: "",
     sex: "true",
     size: "",
-    sizeUnit: "",
+    sizeUnit: "cm",
     weight: "",
-    weightUnit: "",
+    weightUnit: "kg",
     dateOfBirth: "",
     dateOfDeath: "",
     color: "",
@@ -68,40 +69,58 @@ const AddDogPage = () => {
     kennel: "",
     owner: "",
     notes: "",
-    image: "",
+    image: null,
   });
 
+  useEffect(() => {
+    console.log(formData)
+  }, [formData])
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "sire") {
-      setIsSireSelected(false)
-    } else if (name === "dam") {
-      setIsDamSelected(false)
+    const { name, value, type, files } = e.target;
+
+    if (type === 'file') {
+      setFormData((prevData) => ({
+        ...prevData, [name]:files[0]
+      }))
     }
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    
+
+    if (name === "sire") {
+      setIsSireSelected(false);
+    } else if (name === "dam") {
+      setIsDamSelected(false);
+    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const choseSireId = (id, name) => {
+    setFormData({
+      ...formData,
+      sireId: id,
+      sire: name,
+    });
     setSires([]);
-    setFormData({ ...formData, sireId: id });
-    setFormData({ ...formData, sire: name });
-    console.log(id, name)
-    
+    console.log(id, name);
+
     setIsTypingSire(true);
-    setIsSireSelected(true)
+    setIsSireSelected(true);
   };
 
   const choseDamId = (id, name) => {
-    setFormData({ ...formData, damId: id });
-    setFormData({ ...formData, dam: name });
+    setFormData({
+      ...formData,
+      damId: id,
+      dam: name,
+    });
     setDams([]);
     setIsTypingDam(true);
     setIsDamSelected(true);
   };
+
+ 
 
   const searchforFather = async () => {
     setSires([]);
@@ -185,7 +204,7 @@ const AddDogPage = () => {
       country: "",
     });
 
-    const {
+    let {
       breedId,
       name,
       titles,
@@ -207,7 +226,6 @@ const AddDogPage = () => {
       image,
     } = formData;
 
-    console.log(formData);
     const dataToSend = {
       breedId: breedId ? parseInt(breedId) : null,
       name,
@@ -216,10 +234,16 @@ const AddDogPage = () => {
       sireId: sireId ? parseInt(sireId) : null,
       damId: damId ? parseInt(damId) : null,
       sex: sex === "true" ? true : false,
-      size: size + " " + sizeUnit,
-      weight: weight + " " + weightUnit,
-      dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-      dateOfDeath: dateOfDeath ? new Date(dateOfDeath) : null,
+      size:
+        size
+          ? size + (sizeUnit ? ` ${sizeUnit}` : "")
+          : null,
+      weight:
+        weight
+          ? weight + (weightUnit ? ` ${weightUnit}` : "")
+          : null,
+      dateOfBirth: dateOfBirth,
+      dateOfDeath: dateOfDeath,
       color,
       countryId: countryId ? parseInt(countryId) : null,
       breeder,
@@ -232,16 +256,55 @@ const AddDogPage = () => {
 
     console.log(dataToSend);
 
+    //appendo i dati modificati nel formData
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("breedId", dataToSend.breedId);
+    formDataToSend.append("name", dataToSend.name);
+    formDataToSend.append("slug", dataToSend.slug);
+    formDataToSend.append("titles", dataToSend.titles);
+    formDataToSend.append("sireId", dataToSend.sireId);
+    formDataToSend.append("damId", dataToSend.damId);
+    formDataToSend.append("sex", dataToSend.sex);
+    formDataToSend.append("size", dataToSend.size);
+    formDataToSend.append("weight", dataToSend.weight);
+    formDataToSend.append("dateOfBirth", dataToSend.dateOfBirth);
+    formDataToSend.append("dateOfDeath", dataToSend.dateOfDeath);
+    formDataToSend.append("color", dataToSend.color);
+    formDataToSend.append("countryId", dataToSend.countryId);
+    formDataToSend.append("breeder", dataToSend.breeder);
+    formDataToSend.append("kennel", dataToSend.kennel);
+    formDataToSend.append("owner", dataToSend.owner);
+    formDataToSend.append("notes", dataToSend.notes);
+    formDataToSend.append("userId", dataToSend.userId);
+
+    
+
+    
+    if (image) {
+      formDataToSend.append("image", dataToSend.image); 
+    }
+
+    formDataToSend.forEach((value, key) => {
+      console.log(`${key}: ${value}, Type: ${typeof value}`);
+
+      
+      if (value instanceof File) {
+        console.log(`File Name: ${value.name}, File Type: ${value.type}`);
+      }
+    });
+
     try {
-      const response = await axios.post("/dogs", dataToSend, {
+      const response = await axios.post("/dogs", formDataToSend, {
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
       console.log(response);
       setErrorBags({});
-      navigate("/dogDetail");
+      navigate(`/dogDetail/${response.data.id}`);
     } catch (error) {
       const errors = error.response.data.errors || [];
       console.log(error.response.data.errors);
@@ -301,6 +364,7 @@ const AddDogPage = () => {
             {isLoggedIn && !loading && (
               // form
               <form
+                encType="multipart/form-data"
                 className="add-dog-form-container"
                 onSubmit={(e) => submitForm(e)}
               >
@@ -662,8 +726,8 @@ const AddDogPage = () => {
                       type="file"
                       name="image"
                       id="add-image"
-                      // onChange={(e) => handleChange(e)}
-                      // value={formData.image}
+                      accept="image/*"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>

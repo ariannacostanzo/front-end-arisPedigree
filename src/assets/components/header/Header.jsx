@@ -15,6 +15,8 @@ const Header = () => {
     navigate('/')
     window.location.reload();
   }
+
+  // fare hamburger menu 
   return (
     <>
       <header className="p-4 container mx-auto flex items-center justify-between">

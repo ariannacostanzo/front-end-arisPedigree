@@ -49,7 +49,7 @@ function App() {
                         </ProtectedRoute>
                       }
                     />
-                    <Route path="dogDetail" element={<DogDetailPage />} />
+                    <Route path="dogDetail/:id" element={<DogDetailPage />} />
                     {/* da sistemare con l'id ^ */}
                     <Route path="newsDetail" element={<NewsDetailPage />} />
                     {/* da sistemare con l'id ^ */}
