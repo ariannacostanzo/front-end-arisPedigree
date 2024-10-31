@@ -35,6 +35,8 @@ const AddDogPage = () => {
   const [isSireSelected, setIsSireSelected] = useState(false);
   const [isDamSelected, setIsDamSelected] = useState(false);
 
+  const [isCreating, setIsCreating] = useState(false)
+
   //devo fare tanti div quanti i risultati delle chiamate search per mostrare i cani e poi
   //selezionare e salvare l'id di sire e dam in formData ed inviarlo
   //fare l'upload immagini
@@ -77,14 +79,7 @@ const AddDogPage = () => {
   }, [formData])
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-
-    if (type === 'file') {
-      setFormData((prevData) => ({
-        ...prevData, [name]:files[0]
-      }))
-    }
-
+    const { name, value } = e.target;
     if (name === "sire") {
       setIsSireSelected(false);
     } else if (name === "dam") {
@@ -277,13 +272,9 @@ const AddDogPage = () => {
     formDataToSend.append("owner", dataToSend.owner);
     formDataToSend.append("notes", dataToSend.notes);
     formDataToSend.append("userId", dataToSend.userId);
-
+    formDataToSend.append("image", dataToSend.image);
     
 
-    
-    if (image) {
-      formDataToSend.append("image", dataToSend.image); 
-    }
 
     formDataToSend.forEach((value, key) => {
       console.log(`${key}: ${value}, Type: ${typeof value}`);
@@ -295,13 +286,15 @@ const AddDogPage = () => {
     });
 
     try {
+      setIsCreating(true)
       const response = await axios.post("/dogs", formDataToSend, {
         headers: {
           // "Content-Type": "application/json",
-          "Content-Type": "multipart/form-data",
+          // "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
+      
       console.log(response);
       setErrorBags({});
       navigate(`/dogDetail/${response.data.id}`);
@@ -309,6 +302,8 @@ const AddDogPage = () => {
       const errors = error.response.data.errors || [];
       console.log(error.response.data.errors);
       validation(errors);
+    } finally {
+      setIsCreating(false)
     }
 
     //creare il cane, chiamata
@@ -358,7 +353,7 @@ const AddDogPage = () => {
             )}
 
             {/* se sta caricando  */}
-            {loading && <Loader></Loader>}
+            {loading || isCreating && <Loader></Loader>}
 
             {/* se è loggato e ho caricato i dati */}
             {isLoggedIn && !loading && (
@@ -727,7 +722,13 @@ const AddDogPage = () => {
                       name="image"
                       id="add-image"
                       accept="image/*"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        const file = e.target.files[0]; 
+                        setFormData((prev) => ({
+                          ...prev, 
+                          image: file, 
+                        }));
+                      }}
                     />
                   </div>
                 </div>
