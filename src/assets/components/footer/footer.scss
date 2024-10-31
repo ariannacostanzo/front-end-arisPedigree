@@ -1,5 +1,9 @@
 footer {
     font-family: var(--primaryFont);
+
+    img {
+      object-fit: cover;
+    }
 }
 .blue-button {
   background-color: #408bd1;

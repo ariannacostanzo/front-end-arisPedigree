@@ -12,11 +12,11 @@ const Footer = () => {
         {/* dog photos  */}
         <div className="flex flex-wrap gap-2 justify-center">
           {footerImages.map((img, i) => (
-            <a key={`footer-img${i}`} href={img.link}>
+            <a key={`footer-img${i}`} href={img.link} target="_blank">
               <img
                 src={img.path}
                 alt={`dog${i}`}
-                className="w-[170px]  lg:w-[200px] rounded-md"
+                className="w-[170px]  lg:w-[200px] h-[170px] lg:h-[200px] rounded-md"
               />
             </a>
           ))}

@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
     setUserName(null)
     setToken(null)
     setIsLoggedIn(false);
+    localStorage.clear()
   };
 
   useEffect(() => {
