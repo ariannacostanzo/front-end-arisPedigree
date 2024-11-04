@@ -50,8 +50,7 @@ function App() {
                       }
                     />
                     <Route path="dogDetail/:id" element={<DogDetailPage />} />
-                    {/* da sistemare con l'id ^ */}
-                    <Route path="newsDetail" element={<NewsDetailPage />} />
+                    <Route path="newsDetail/:id" element={<NewsDetailPage />} />
                     {/* da sistemare con l'id ^ */}
                     <Route path="breedsDetail" element={<BreedsDetailPage />} />
                     {/* da sistemare con l'id ^ */}

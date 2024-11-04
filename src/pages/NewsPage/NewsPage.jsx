@@ -15,7 +15,7 @@ const NewsPage = () => {
                 <img src={n.image_path} alt="" />
                 <div className="px-5 pt-10 pb-2 gap-10 flex flex-col justify-between h-[52%]">
                   <div className="flex-grow">
-                    <Link to="/newsDetail">
+                    <Link to={`/newsDetail/${i}`}>
                       <h3>{n.title}</h3>
                     </Link>
                     <p className="news-date">
@@ -25,7 +25,9 @@ const NewsPage = () => {
                       {n.description.slice(0, 150)}...
                     </p>
                   </div>
-                  <Link className="readmore">Read more »</Link>
+                  <Link to={`/newsDetail/${i}`} className="readmore">
+                    Read more »
+                  </Link>
                 </div>
               </div>
             ))}

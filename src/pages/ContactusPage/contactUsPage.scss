@@ -1,0 +1,50 @@
+.contact-us-container {
+    padding: 5rem 0;
+    text-align: center;
+
+    
+
+    h4 {
+        font-family: var(--headingFont);
+        font-size: 48px;
+    }
+    .form-container {
+        margin: 4rem auto;
+        width: 60%;
+        
+    }
+    input {
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 100%;
+        padding: 10px 40px 10px 40px;
+        margin-top: 3rem;
+    }
+
+    textarea {
+      border-radius: 82px 103px 36px / 15px 225px 15px 255px;
+      border: 2px solid black;
+      width: 100%;
+      margin: 2rem 0;
+      height: 120px;
+      padding: 1rem;
+
+      
+    }
+
+    button {
+        background-color: #2A75ED;
+        transition: var(--transition);
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-size: 18px;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        width: 100%;
+
+        &:hover {
+            background-color: var(--primary);
+        }
+    }
+}
