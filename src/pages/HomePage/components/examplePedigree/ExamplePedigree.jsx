@@ -8,7 +8,7 @@ const ExamplePedigree = () => {
         <h2>Example Pedigree</h2>
         <div className="lg:flex justify-center items-center example-container">
           <div className="pedigree-example-card">
-            <NavLink to="dogDetail">
+            <NavLink to="dogDetail/1">
             <img src="/examplePedigree/example-1.jpg" alt="pedigree-1" />
               <div className="example-pedigree-title">
                 <h5>Jackstaff Fasination</h5>
@@ -17,7 +17,7 @@ const ExamplePedigree = () => {
             </NavLink>
           </div>
           <div className="pedigree-example-card">
-            <NavLink to="dogDetail">
+            <NavLink to="dogDetail/2">
             <img src="/examplePedigree/example-2.jpg" alt="pedigree-2" />
               <div className="example-pedigree-title">
                 <h5>ESQUEL DEL CHUBUT</h5>
@@ -26,7 +26,7 @@ const ExamplePedigree = () => {
             </NavLink>
           </div>
           <div className="pedigree-example-card">
-            <NavLink to="dogDetail">
+            <NavLink to="dogDetail/3">
             <img src="/examplePedigree/example-3.jpg" alt="pedigree-3" />
               <div className="example-pedigree-title">
                 <h5>雅拉 &#40;Yala&#41;</h5>

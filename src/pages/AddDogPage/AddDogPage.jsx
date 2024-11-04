@@ -75,7 +75,7 @@ const AddDogPage = () => {
   });
 
   useEffect(() => {
-    console.log(formData)
+    // console.log(formData)
   }, [formData])
 
   const handleChange = (e) => {

@@ -21,7 +21,9 @@ const CountryList = () => {
                     key={`countrylisthomepage${i}`}
                     className="basis-1/2 lg:basis-1/4  countryItem "
                   >
-                    <Link to="/countryDetail">{country.name} &#40;0&#41;</Link>
+                    <Link to="/countryDetail">
+                      {country.name} &#40;{country._count.dogs}&#41;
+                    </Link>
                   </div>
                 ))}
             </div>

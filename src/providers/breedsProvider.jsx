@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";

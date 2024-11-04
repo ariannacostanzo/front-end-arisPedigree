@@ -1,0 +1,48 @@
+.pedigree-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.generation-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.dog-cell {
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+  width: 48%; 
+}
+
+.parent,
+.current-generation,
+.children {
+  width: 100%;
+}
+
+.bg-male {
+  background-color: #99ffff;
+}
+
+.bg-female {
+  background-color: #ffb6ac;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  width: 48%; // Placeholder takes half the width
+}
