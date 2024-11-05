@@ -7,7 +7,7 @@ const DogListComponent = ({dogs}) => {
      return (
        <>
          {dogs.length === 0 && <div>No dogs found</div>}
-         <div className="lg:flex flex-wrap">
+         <div className="lg:flex flex-wrap justify-center">
            {dogs.length > 0 &&
              dogs.map((dog, i) => (
                <div

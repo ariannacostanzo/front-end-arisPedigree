@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
-import { faBars, faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCaretDown, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, NavLink , useNavigate} from "react-router-dom";
 import { useAuth } from "../../../providers/authProvider";
@@ -151,8 +151,8 @@ const Header = () => {
               onClick={() => setIsHamburgerVisible(!isHamburgerVisible)}
             >
               <FontAwesomeIcon
-                icon={faBars}
-                className="text-3xl "
+                icon={isHamburgerVisible ? faXmark : faBars}
+                className="text-3xl hover:text-[#e89f41]"
               ></FontAwesomeIcon>
             </div>
             {/* hamburger menu  */}
@@ -165,7 +165,9 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li
-                    className={`fix-padding ${showDogUnderlist ? 'h-under-border' : ''}`}
+                    className={`fix-padding ${
+                      showDogUnderlist ? "h-under-border" : ""
+                    }`}
                     onClick={() => setShowDogUnderlist(!showDogUnderlist)}
                   >
                     Dogs
@@ -214,7 +216,9 @@ const Header = () => {
                   </li>
                   {isLoggedIn ? (
                     <li
-                      className={`fix-padding ${showAuthUnderlist ? 'h-under-border' : ''}`}
+                      className={`fix-padding ${
+                        showAuthUnderlist ? "h-under-border" : ""
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         setShowAuthUnderlist(!showAuthUnderlist);
@@ -233,7 +237,9 @@ const Header = () => {
                     </li>
                   ) : (
                     <li
-                      className={`fix-padding ${showAuthUnderlist ? 'h-under-border' : ''}`}
+                      className={`fix-padding ${
+                        showAuthUnderlist ? "h-under-border" : ""
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         setShowAuthUnderlist(!showAuthUnderlist);

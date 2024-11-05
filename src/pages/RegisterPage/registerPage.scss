@@ -1,0 +1,19 @@
+.register-page {
+    padding: 4rem 0;
+    text-align: center;
+
+    input {
+        border: 1px solid rgb(184, 184, 184);
+        border-radius: 35px;
+        padding: 5px 15px;
+        text-align: left;
+        
+    }
+
+    label {
+        font-size: 15px;
+        font-weight: 600;
+        color: rgb(85, 85, 85);
+        text-align: left;
+    }
+}

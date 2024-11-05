@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Heading from "../../assets/components/heading/Heading";
 import "./searchDogPage.scss";
 import DogListComponent from "../../assets/components/dogsListComponents/dogsListComponent";
