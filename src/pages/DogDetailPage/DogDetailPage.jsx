@@ -23,7 +23,6 @@ const DogDetailPage = () => {
     try {
       setIsLoading(true)
       const response = await axios.get(`http://localhost:8000/dogs/${id}`);
-      console.log(response.data);
 
       setDog(response.data);
     } catch (error) {

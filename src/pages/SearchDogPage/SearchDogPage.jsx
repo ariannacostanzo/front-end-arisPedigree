@@ -42,7 +42,6 @@ const SearchDogPage = () => {
 
     try {
       const response = await axios.get(query);
-      console.log(response);
       setFilteredDogs(response.data.data)
       setMaleCount(response.data.maleCount)
       setFemaleCount(response.data.femaleCount)
@@ -89,6 +88,7 @@ const SearchDogPage = () => {
               <label htmlFor="breeds">Breed:</label>
               <div>
                 <select
+                  value={filters.breed || "none"}
                   name="breeds"
                   onChange={(e) => handleBreedChange(e.target.value)}
                 >
@@ -124,6 +124,21 @@ const SearchDogPage = () => {
                   <label htmlFor="checkFemale">F ({femaleCount})</label>
                 </>
               </div>
+            </div>
+            <div>
+              {(filters.breed || filters.sex !== null) && (
+                <button
+                  className="custom-btn"
+                  onClick={() => {
+                    setFilters({
+                      sex: null,
+                      breed: null,
+                    });
+                  }}
+                >
+                  Remove Filters
+                </button>
+              )}
             </div>
           </div>
           {/* dogs  */}

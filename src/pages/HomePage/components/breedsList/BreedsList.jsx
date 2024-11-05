@@ -2,13 +2,10 @@ import { Link } from "react-router-dom";
 import { useBreed } from "../../../../providers/breedsProvider";
 import "./breedsList.scss";
 import Loader from "../../../../assets/components/loader/Loader";
-import { useEffect } from "react";
 const BreedsList = () => {
   const { breeds, loading } = useBreed();
 
-  useEffect(() => {
-    console.log(breeds)
-  })
+  
   return (
     <>
       {loading ? (

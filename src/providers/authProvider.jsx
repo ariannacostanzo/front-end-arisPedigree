@@ -15,11 +15,9 @@ const AuthProvider = ({ children }) => {
   const login = async (payload) => {
     try {
       const { data: response } = await axios.post("/auth/login", payload);
-      console.log(response)
       setUserName(response.data.name);
       setUserId(response.data.id)
       setToken(response.token)
-      console.log(response.data.id);
       setIsLoggedIn(true);
     } catch (error) {
       console.log(error)

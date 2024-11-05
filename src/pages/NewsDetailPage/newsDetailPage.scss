@@ -57,20 +57,7 @@
     }
 
 
-    button {
-        background-color: #2A75ED;
-        transition: var(--transition);
-        padding: 10px 15px;
-        border-radius: 25px;
-        font-size: 18px;
-        color: white;
-        font-weight: 600;
-        text-transform: uppercase;
-
-        &:hover {
-            background-color: var(--primary);
-        }
-    }
+    
   }
 
   .side-container {

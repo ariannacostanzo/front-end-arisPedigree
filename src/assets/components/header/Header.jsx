@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
-import { faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, NavLink , useNavigate} from "react-router-dom";
 import { useAuth } from "../../../providers/authProvider";
@@ -24,8 +24,9 @@ const Header = () => {
           <img src="/logoaris.png" alt="logo" className="w-[300px]" />
         </Link>
 
-        <div className="header-nav flex items-center">
-          <ul className="flex flex-wrap items-center ">
+        {/* navigazione in desktop */}
+        <div className="header-nav flex items-center gap-10">
+          <ul className="hidden lg:flex flex-wrap items-center ">
             <li>
               <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
                 Home
@@ -116,11 +117,16 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
+
           <div
             className="header-search-btn"
             onClick={() => setIsSearchVisible(!isSearchVisible)}
           >
             Search...
+          </div>
+
+          <div className="lg:hidden">
+            <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
           </div>
         </div>
 

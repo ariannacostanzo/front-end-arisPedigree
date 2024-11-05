@@ -43,7 +43,7 @@ const NewsDetailPage = () => {
                 <p className="text-[#525252]">Logged in as {userName}. </p>
               )}
               <textarea name="" id="" placeholder="Your comment"></textarea>
-              <button>Post comment</button>
+              <button className="custom-btn">Post comment</button>
             </div>
           </div>
           <div className="side-container">

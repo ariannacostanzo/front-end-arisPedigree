@@ -35,7 +35,7 @@ const DogList = () => {
                 >
                   <Link
                     to={`/dogDetail/${dog.id}`}
-                    className="dogName"
+                    className="dog-name"
                     onClick={() => window.scrollTo(0, 0)}
                   >
                     {dog.name}

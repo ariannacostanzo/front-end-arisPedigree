@@ -18,7 +18,7 @@ const ContactusPage = () => {
               <input type="text" placeholder="Email" />
             </div>
             <textarea name="" id="" placeholder="Message"></textarea>
-            <button>Send</button>
+            <button className="custom-btn">Send</button>
           </form>
         </div>
       </div>

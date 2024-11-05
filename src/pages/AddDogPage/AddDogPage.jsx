@@ -127,7 +127,6 @@ const AddDogPage = () => {
       try {
         const res = await axios.get(url);
         setSires(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -146,7 +145,6 @@ const AddDogPage = () => {
       try {
         const res = await axios.get(url);
         setDams(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -295,7 +293,6 @@ const AddDogPage = () => {
         },
       });
       
-      console.log(response);
       setErrorBags({});
       navigate(`/dogDetail/${response.data.id}`);
     } catch (error) {
