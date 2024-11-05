@@ -5,7 +5,7 @@ import Heading from "../../assets/components/heading/Heading.jsx";
 import DogListComponent from "../../assets/components/dogsListComponents/dogsListComponent.jsx";
 
 const DogsListPage = () => {
-  const { loading } = useDogs();
+  const { loading, dogs } = useDogs();
 
   return (
     <>
@@ -16,7 +16,7 @@ const DogsListPage = () => {
             <Loader></Loader>
           ) : (
             <div className="p-4 container mx-auto flex flex-wrap justify-center">
-              <DogListComponent></DogListComponent>
+              <DogListComponent dogs={dogs}></DogListComponent>
             </div>
           )}
         </div>

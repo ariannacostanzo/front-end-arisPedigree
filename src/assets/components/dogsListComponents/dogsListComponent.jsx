@@ -1,11 +1,9 @@
-import { useDogs } from "../../../providers/dogsProvider";
 import './dogsListComponent.scss';
 import placeholder from '../../../../public/placehodler.jpg';
 import { Link } from "react-router-dom";
 
-const DogListComponent = () => {
+const DogListComponent = ({dogs}) => {
 
-    const {dogs} = useDogs();
      return (
        <>
          {dogs.length === 0 && <div>No dogs found</div>}

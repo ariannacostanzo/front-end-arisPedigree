@@ -10,6 +10,8 @@ const DogsProvider = ({ children }) => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [allDogs, setAllDogs] = useState(0);
+  const [maleCount, setMaleCount] = useState(0);
+  const [femaleCount, setFemaleCount] = useState(0);
 
   const fetchDogs = async () => {
     setLoading(true);
@@ -18,11 +20,13 @@ const DogsProvider = ({ children }) => {
       setDogs(response.data.data);
       setPage(response.data.page);
       setTotalPages(response.data.totalPages);
-    //   console.log(response.data);
+      setMaleCount(response.data.maleCount);
+      setFemaleCount(response.data.femaleCount);
+      //   console.log(response.data);
     } catch (error) {
       console.log(error);
     } finally {
-        setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -30,13 +34,16 @@ const DogsProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/dogs/allDogs");
-      setAllDogs(response.data)
+      setAllDogs(response.data.dogs);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
-  }
+  }; //questa dovrei poterla eliminare
+
+  
+
 
   useEffect(() => {
     fetchDogs();
@@ -51,10 +58,15 @@ const DogsProvider = ({ children }) => {
         setDogs,
         loading,
         page,
+        setLoading,
         setPage,
         totalPages,
         setTotalPages,
-        fetchDogs
+        fetchDogs,
+        maleCount,
+        setMaleCount,
+        femaleCount,
+        setFemaleCount
       }}
     >
       {children}
