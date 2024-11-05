@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import Heading from "../../assets/components/heading/Heading.jsx";
+import "./loginPage.scss";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -36,34 +37,44 @@ const LoginPage = () => {
   return (
     <>
       <Heading heading="Login"></Heading>
-      <div className="p-4 container mx-auto">
-        <div>login</div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="emailOrUsername">User name or Email:</label>
-            <input
-              type="emailOrUsername"
-              name="emailOrUsername"
-              value={formData.emailOrUsername}
-              onChange={handleChange}
-              autoComplete="emailOrUsername"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="password"
-              required
-            />
-          </div>
-
-          <button type="submit">Login</button>
-        </form>
+      <div className="bg-white login-page">
+        <div className="p-4 container mx-auto">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div className="my-2">
+                <label htmlFor="emailOrUsername">User name or Email:</label>
+              </div>
+              <input
+                className="w-full md:w-[500px]"
+                type="emailOrUsername"
+                name="emailOrUsername"
+                value={formData.emailOrUsername}
+                onChange={handleChange}
+                autoComplete="emailOrUsername"
+                required
+              />
+            </div>
+            <div>
+              <div className="my-2">
+                <label htmlFor="password">Password:</label>
+              </div>
+              <input
+                className="w-full md:w-[500px]"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete="password"
+                required
+              />
+            </div>
+            {/* da fare pagina di reset password */}
+            <p>Forgot your password?</p>
+            <button className="custom-btn my-10 " type="submit">
+              Login
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
