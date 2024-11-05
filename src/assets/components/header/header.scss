@@ -1,103 +1,142 @@
 header {
-    font-family: var(--primaryFont);
-    font-size: 18px;
+  font-family: var(--primaryFont);
+  font-size: 18px;
 
-    .active {
-        color: var(--primary);
-    }
+  .active {
+    color: var(--primary);
+  }
 
-    .header-underlist .active {
-        color: inherit; 
-    }
-    
+  .header-underlist .active {
+    color: inherit;
+  }
 }
 
-
-
-
 .header-search-btn {
-    padding: 7px 28px;
-    // background-color: #79FF6D;
-    color: var(--blue);
-    border: 2px solid var(--blue);
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
+  padding: 7px 28px;
+  // background-color: #79FF6D;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .search-lg {
-    
-    width: 77%;
-    margin: 0 auto;
-    padding-left: 15px;
+  width: 77%;
+  margin: 0 auto;
+  padding-left: 15px;
 }
 .search-div-lg {
-    background-color: white;
-    padding: 10px;
+  background-color: white;
+  padding: 10px;
 
-    input {
-        padding: 15px 15px;
-        background-color: transparent;
-        width: 100%;
+  input {
+    padding: 15px 15px;
+    background-color: transparent;
+    width: 100%;
 
-        &:focus-visible {
-            outline: 1px solid var(--primary);
-        }
+    &:focus-visible {
+      outline: 1px solid var(--primary);
     }
+  }
 }
 
 .search-div-lg input:focus-visible .search-lg {
-    border: 1px solid brown;
+  border: 1px solid brown;
 }
 
+.header-nav > .desktop-nav > li {
+  transition: var(--transition);
+  position: relative;
+  padding: 13px 20px;
+  color: var(--blue);
+  cursor: pointer;
+  z-index: 1;
 
-.header-nav > ul > li {
-    transition: var(--transition);
-    position: relative;
-    padding: 13px 20px;
-    color: var(--blue);
-    cursor: pointer;
-    z-index: 1;
-    
-
-
-    &:hover {
-        transform: translateY(-4px);
-        color: var(--primary);
-        text-decoration: underline;
-    }
+  &:hover {
+    transform: translateY(-4px);
+    color: var(--primary);
+    text-decoration: underline;
+  }
 }
 
 .header-underlist {
-    position: absolute;
-    background-color: white;
-    left: -20px;
-    top: 60px;
-    width: 180px;
-    opacity: 0;
+  position: absolute;
+  background-color: white;
+  left: -20px;
+  top: 60px;
+  width: 180px;
+  opacity: 0;
+  transition: var(--transition);
+  transition: opacity 0s 0.3s;
+  z-index: 10;
+
+  li {
+    padding: 10px;
     transition: var(--transition);
-    transition: opacity 0s .3s;
-    z-index: 10;
+    color: var(--blue);
 
-      li {
-      padding: 10px;
-      transition: var(--transition);
-      color: var(--blue);
-
-      &:hover {
-        background-color: var(--primary); 
-        color: white;
-        text-decoration: underline;
-      }
+    &:hover {
+      background-color: var(--primary);
+      color: white;
+      text-decoration: underline;
     }
+  }
 }
 
-.header-nav > ul > li:hover .header-underlist {
-    opacity: 1;
+.header-nav > .desktop-nav > li:hover .header-underlist {
+  opacity: 1;
 }
 
 .headerUserName {
-    position: absolute;
-    right: 5px;
-    top: 2px;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+}
+
+.hamburger-menu {
+  position: absolute;
+  background-color: white;
+  top: 100px;
+  left: 0;
+  right: 0;
+  font-size: 18px;
+  z-index: 10;
+
+  .active {
+    background-color: var(--primary);
+    color: white;
+  }
+
+
+
+  .hamburger-list li {
+    transition: var(--transition);
+    border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      color: var(--primary);
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 1.5rem;
+    }
+  }
+}
+
+.fix-padding {
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.h-under-border {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
