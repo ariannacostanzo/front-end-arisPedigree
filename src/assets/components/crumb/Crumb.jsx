@@ -9,7 +9,11 @@ const Crumb = ({ pageName }) => {
     <>
       <div className="p-4 container mx-auto">
         <div className="crumb">
-          <Link to="/" className="crumb-home">
+          <Link
+            to="/"
+            className="crumb-home"
+            onClick={() => window.scrollTo(0, 0)}
+          >
             Homepage
           </Link>{" "}
           <FontAwesomeIcon

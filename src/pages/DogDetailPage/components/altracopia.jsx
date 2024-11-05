@@ -59,7 +59,12 @@ const PedigreeTree = ({ dog }) => {
         <div className="current-generation generation-row">
           <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
             <img src={dog.image ? dog.image : ""} alt="" />
-            <Link to={`/dogDetail/${dog.id}`}>{dog.name}</Link>
+            <Link
+              to={`/dogDetail/${dog.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              {dog.name}
+            </Link>
           </div>
           {filteredSiblings.map((sibling, i) => (
             <div
@@ -68,7 +73,10 @@ const PedigreeTree = ({ dog }) => {
                 sibling.sex ? "bg-male" : "bg-female"
               } sibling`}
             >
-              <Link to={`/dogDetail/${sibling.id}`}>
+              <Link
+                to={`/dogDetail/${sibling.id}`}
+                onClick={() => window.scrollTo(0, 0)}
+              >
                 {sibling.name} - {sibling.sex ? "fratello" : "sorella"}
               </Link>
             </div>

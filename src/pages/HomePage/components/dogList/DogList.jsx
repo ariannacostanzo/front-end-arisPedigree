@@ -33,7 +33,11 @@ const DogList = () => {
                     i % 2 === 0 ? "" : "grid-even"
                   }`}
                 >
-                  <Link to={`/dogDetail/${dog.id}`} className="dogName">
+                  <Link
+                    to={`/dogDetail/${dog.id}`}
+                    className="dogName"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     {dog.name}
                   </Link>
                   {dog.breed.name && (

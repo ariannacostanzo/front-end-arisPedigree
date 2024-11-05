@@ -342,10 +342,17 @@ const AddDogPage = () => {
                   You have to register or login to add a dog
                   <div>
                     <button>
-                      <Link to="/register">Register</Link>
+                      <Link
+                        to="/register"
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
+                        Register
+                      </Link>
                     </button>
                     <button>
-                      <Link to="/login">Login</Link>
+                      <Link to="/login" onClick={() => window.scrollTo(0, 0)}>
+                        Login
+                      </Link>
                     </button>
                   </div>
                 </div>
@@ -353,7 +360,7 @@ const AddDogPage = () => {
             )}
 
             {/* se sta caricando  */}
-            {loading || isCreating && <Loader></Loader>}
+            {loading || (isCreating && <Loader></Loader>)}
 
             {/* se è loggato e ho caricato i dati */}
             {isLoggedIn && !loading && (
@@ -723,10 +730,10 @@ const AddDogPage = () => {
                       id="add-image"
                       accept="image/*"
                       onChange={(e) => {
-                        const file = e.target.files[0]; 
+                        const file = e.target.files[0];
                         setFormData((prev) => ({
-                          ...prev, 
-                          image: file, 
+                          ...prev,
+                          image: file,
                         }));
                       }}
                     />

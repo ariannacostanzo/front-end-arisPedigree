@@ -15,7 +15,10 @@ const NewsPage = () => {
                 <img src={n.image_path} alt="" />
                 <div className="px-5 pt-10 pb-2 gap-10 flex flex-col justify-between h-[52%]">
                   <div className="flex-grow">
-                    <Link to={`/newsDetail/${i}`}>
+                    <Link
+                      to={`/newsDetail/${i}`}
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
                       <h3>{n.title}</h3>
                     </Link>
                     <p className="news-date">
@@ -25,7 +28,11 @@ const NewsPage = () => {
                       {n.description.slice(0, 150)}...
                     </p>
                   </div>
-                  <Link to={`/newsDetail/${i}`} className="readmore">
+                  <Link
+                    to={`/newsDetail/${i}`}
+                    className="readmore"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Read more »
                   </Link>
                 </div>

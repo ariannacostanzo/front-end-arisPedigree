@@ -102,7 +102,10 @@ const PedigreeTree = ({ dog }) => {
             key={`granparent${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${grandgrandparent.id}`}>
+            <Link
+              to={`/dogDetail/${grandgrandparent.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {grandgrandparent.name} -{" "}
               {grandgrandparent.sex ? "bisnonno" : "bisnonna"}
             </Link>
@@ -115,7 +118,10 @@ const PedigreeTree = ({ dog }) => {
             key={`granparent${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${grandparent.id}`}>
+            <Link
+              to={`/dogDetail/${grandparent.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {grandparent.name} - {grandparent.sex ? "nonno" : "nonna"}
             </Link>
           </div>
@@ -127,7 +133,10 @@ const PedigreeTree = ({ dog }) => {
             key={`parent${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${parent.id}`}>
+            <Link
+              to={`/dogDetail/${parent.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {parent.name} - {parent.sex ? "padre" : "madre"}
             </Link>
           </div>
@@ -137,7 +146,12 @@ const PedigreeTree = ({ dog }) => {
         <div
           className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
         >
-          <Link to={`/dogDetail/${dog.id}`}>{dog.name} - cane corrente</Link>
+          <Link
+            to={`/dogDetail/${dog.id}`}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            {dog.name} - cane corrente
+          </Link>
         </div>
 
         {/* fratelli  */}
@@ -146,7 +160,10 @@ const PedigreeTree = ({ dog }) => {
             key={`sibling${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${sibling.id}`}>
+            <Link
+              to={`/dogDetail/${sibling.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {sibling.name} - {sibling.sex ? "fratello" : "sorella"}
             </Link>
           </div>
@@ -159,7 +176,10 @@ const PedigreeTree = ({ dog }) => {
             key={`child${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${child.id}`}>
+            <Link
+              to={`/dogDetail/${child.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {child.name} - {child.sex ? "figlio" : "figlia"}
             </Link>
           </div>
@@ -171,7 +191,10 @@ const PedigreeTree = ({ dog }) => {
             key={`grandchild${i}`}
             className={`${dog.sex ? "bg-[#99ffff]" : "bg-[#ffb6ac]"} dog-cell`}
           >
-            <Link to={`/dogDetail/${grandchild.id}`}>
+            <Link
+              to={`/dogDetail/${grandchild.id}`}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {grandchild.name} -{" "}
               {grandchild.sex ? "nipote maschio" : "nipote femmina"}
             </Link>

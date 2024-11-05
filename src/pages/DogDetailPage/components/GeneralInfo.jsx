@@ -97,7 +97,11 @@ const renderDate = (date) => {
                   Sire:{" "}
                   <span>
                     {dog.sire ? (
-                      <Link to={`/dogDetail/${dog.sire.id}`} className="link">
+                      <Link
+                        to={`/dogDetail/${dog.sire.id}`}
+                        className="link"
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
                         {dog.sire.name}
                       </Link>
                     ) : (
@@ -109,7 +113,11 @@ const renderDate = (date) => {
                   Dam:{" "}
                   <span>
                     {dog.dam ? (
-                      <Link to={`/dogDetail/${dog.dam.id}`} className="link">
+                      <Link
+                        to={`/dogDetail/${dog.dam.id}`}
+                        className="link"
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
                         {dog.dam.name}
                       </Link>
                     ) : (

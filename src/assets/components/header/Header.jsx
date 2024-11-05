@@ -20,14 +20,16 @@ const Header = () => {
   return (
     <>
       <header className="p-4 container mx-auto flex items-center justify-between">
-        <Link to="/">
+        <Link to="/" onClick={() => window.scrollTo(0, 0)}>
           <img src="/logoaris.png" alt="logo" className="w-[300px]" />
         </Link>
 
         <div className="header-nav flex items-center">
           <ul className="flex flex-wrap items-center ">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
+                Home
+              </NavLink>
             </li>
             <li>
               Dogs
@@ -37,21 +39,40 @@ const Header = () => {
               ></FontAwesomeIcon>
               <ul className="header-underlist">
                 <li>
-                  <NavLink to="/add-new-dog">Add new Dog</NavLink>
+                  <NavLink
+                    to="/add-new-dog"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    Add new Dog
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dogs-list">Dog&apos;s list</NavLink>
+                  <NavLink
+                    to="/dogs-list"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    Dog&apos;s list
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/search-a-dog">Search for a dog</NavLink>
+                  <NavLink
+                    to="/search-a-dog"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    Search for a dog
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li>
-              <NavLink to="/test-mating">Testmating</NavLink>
+              <NavLink to="/test-mating" onClick={() => window.scrollTo(0, 0)}>
+                Testmating
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/latest-news">News</NavLink>
+              <NavLink to="/latest-news" onClick={() => window.scrollTo(0, 0)}>
+                News
+              </NavLink>
             </li>
             {isLoggedIn ? (
               <li>
@@ -73,17 +94,26 @@ const Header = () => {
                 ></FontAwesomeIcon>
                 <ul className="header-underlist">
                   <li>
-                    <NavLink to="/login">Login</NavLink>
+                    <NavLink to="/login" onClick={() => window.scrollTo(0, 0)}>
+                      Login
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/register">Register</NavLink>
+                    <NavLink
+                      to="/register"
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      Register
+                    </NavLink>
                   </li>
                 </ul>
               </li>
             )}
 
             <li>
-              <NavLink to="/contact-us">Contact Us</NavLink>
+              <NavLink to="/contact-us" onClick={() => window.scrollTo(0, 0)}>
+                Contact Us
+              </NavLink>
             </li>
           </ul>
           <div
