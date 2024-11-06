@@ -21,7 +21,7 @@ const BreedsList = () => {
                   className="basis-full md:basis-1/2 lg:basis-1/3 p-2 breedItem"
                 >
                   <Link
-                    to="/breedsDetail"
+                    to={`/breedsDetail/${breed.slug}`}
                     onClick={() => window.scrollTo(0, 0)}
                   >
                     {breed.name} &#40;{breed._count.dogs}&#41;

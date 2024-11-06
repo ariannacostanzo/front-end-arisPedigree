@@ -231,7 +231,14 @@ const Header = () => {
                       ></FontAwesomeIcon>
                       {showAuthUnderlist && (
                         <ul className="hamburger-underlist">
-                          <li onClick={logOutAndHome}>Logout</li>
+                          <li
+                            className={`fix-padding ${
+                              showAuthUnderlist ? "h-under-border" : ""
+                            }`}
+                            onClick={logOutAndHome}
+                          >
+                            Logout
+                          </li>
                         </ul>
                       )}
                     </li>

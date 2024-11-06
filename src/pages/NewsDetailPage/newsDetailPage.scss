@@ -60,32 +60,5 @@
     
   }
 
-  .side-container {
-    background-color: #f9f9f9;
-    flex-basis: 35%;
-    padding: 2rem;
-    border-radius: 155px 45px 225px 75px / 15px 125px 15px 155px;
-    border: 1px solid black;
-
-    h4 {
-      font-family: var(--headingFont);
-      font-size: 25px;
-      border-bottom: 1px solid rgb(204, 202, 202);
-      margin-top: 2rem;
-    }
-
-    .text-links {
-      font-weight: 500;
-      font-size: 18px;
-      transition: var(--transition);
-      color: rgb(83, 83, 83);
-      border-radius: 10px;
-
-      &:hover {
-        text-decoration: underline;
-        background-color: #675444;
-        color: white;
-      }
-    }
-  }
+  
 }

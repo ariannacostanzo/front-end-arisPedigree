@@ -48,7 +48,7 @@ const RegisterPage = () => {
       );
 
       setUserName(response.data.name);
-      setToken(response.token)
+      setToken(response.data.token)
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {

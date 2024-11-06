@@ -68,3 +68,16 @@ body {
     background-color: var(--primary);
   }
 }
+
+.readmore-btn {
+  background-color: #f8575d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-transform: uppercase;
+  transition: var(--transition);
+
+  &:hover {
+    background-color: var(--primary);
+  }
+}

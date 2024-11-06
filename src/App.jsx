@@ -52,8 +52,7 @@ function App() {
                     <Route path="dogDetail/:id" element={<DogDetailPage />} />
                     <Route path="newsDetail/:id" element={<NewsDetailPage />} />
                     {/* da sistemare con l'id ^ */}
-                    <Route path="breedsDetail" element={<BreedsDetailPage />} />
-                    {/* da sistemare con l'id ^ */}
+                    <Route path="breedsDetail/:breedSlug" element={<BreedsDetailPage />} />
                     <Route
                       path="countryDetail"
                       element={<CountryDetailPage />}

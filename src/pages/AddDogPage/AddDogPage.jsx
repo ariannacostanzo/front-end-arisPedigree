@@ -347,7 +347,7 @@ const AddDogPage = () => {
                       </Link>
                     </button>
                     <button>
-                      <Link to="/login" onClick={() => window.scrollTo(0, 0)}>
+                      <Link  to="/login" onClick={() => window.scrollTo(0, 0)}>
                         Login
                       </Link>
                     </button>
