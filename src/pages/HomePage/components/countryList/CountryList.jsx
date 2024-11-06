@@ -22,7 +22,7 @@ const CountryList = () => {
                     className="basis-1/2 lg:basis-1/4  countryItem "
                   >
                     <Link
-                      to="/countryDetail"
+                      to={`/countryDetail/${country.slug}`}
                       onClick={() => window.scrollTo(0, 0)}
                     >
                       {country.name} &#40;{country._count.dogs}&#41;

@@ -54,7 +54,7 @@ function App() {
                     {/* da sistemare con l'id ^ */}
                     <Route path="breedsDetail/:breedSlug" element={<BreedsDetailPage />} />
                     <Route
-                      path="countryDetail"
+                      path="countryDetail/:countrySlug"
                       element={<CountryDetailPage />}
                     />
                     {/* da sistemare con l'id ^ */}
