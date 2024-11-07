@@ -45,6 +45,7 @@ const SearchDogPage = () => {
 
     try {
       const response = await axios.get(query);
+      console.log(response)
       setFilteredDogs(response.data.data)
       setMaleCount(response.data.maleCount)
       setFemaleCount(response.data.femaleCount)

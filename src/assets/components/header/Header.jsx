@@ -13,11 +13,14 @@ const Header = () => {
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(false);
   const [showDogUnderlist, setShowDogUnderlist] = useState(false)
   const [showAuthUnderlist, setShowAuthUnderlist] = useState(false)
+
   const logOutAndHome = () => {
     logout()
     navigate('/')
     window.location.reload();
   }
+  
+  
 
   const relocateAndCloseMenu = () => {
      window.scrollTo(0, 0);
@@ -26,7 +29,9 @@ const Header = () => {
      setShowAuthUnderlist(false)
   }
 
-  // fare hamburger menu 
+  
+
+  
   return (
     <>
       <div className="relative">

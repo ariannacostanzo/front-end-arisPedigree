@@ -1,12 +1,15 @@
 import './dogsListComponent.scss';
 import placeholder from '../../../../public/placehodler.jpg';
 import { Link } from "react-router-dom";
+import Pagination from '../pagination/Pagination';
 
 const DogListComponent = ({dogs}) => {
 
      return (
        <>
          {dogs.length === 0 && <div>No dogs found</div>}
+         {dogs.length > 0 && <Pagination></Pagination>}
+
          <div className="lg:flex flex-wrap justify-center">
            {dogs.length > 0 &&
              dogs.map((dog, i) => (
@@ -38,6 +41,7 @@ const DogListComponent = ({dogs}) => {
                </div>
              ))}
          </div>
+         {dogs.length > 0 && <Pagination></Pagination>}
        </>
      );
 }

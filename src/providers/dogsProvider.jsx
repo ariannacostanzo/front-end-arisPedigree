@@ -22,7 +22,7 @@ const DogsProvider = ({ children }) => {
       setTotalPages(response.data.totalPages);
       setMaleCount(response.data.maleCount);
       setFemaleCount(response.data.femaleCount);
-      //   console.log(response.data);
+        console.log(response.data);
     } catch (error) {
       console.log(error);
     } finally {

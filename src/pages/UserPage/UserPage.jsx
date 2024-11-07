@@ -72,7 +72,7 @@ const UserPage = () => {
           </div>
           {isLoading ? (
             <Loader />
-          ) : !userDogs ? (
+          ) : !userDogs  || userDogs.length === 0 ? (
             <p className="text-center pt-4 text-gray-400">
               You have not created any dogs
             </p>

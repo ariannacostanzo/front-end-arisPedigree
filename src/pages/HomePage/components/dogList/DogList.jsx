@@ -3,10 +3,12 @@ import { useDogs } from "../../../../providers/dogsProvider.jsx";
 import alphabet from "../../../../database/alphabeth.js";
 import { Link } from "react-router-dom";
 import Loader from "../../../../assets/components/loader/Loader.jsx";
+import Pagination from "../../../../assets/components/pagination/Pagination.jsx";
 
 const DogList = () => {
   const { dogs, loading } = useDogs();
   
+
 
 
   return (
@@ -54,10 +56,7 @@ const DogList = () => {
 
             {dogs.length === 0 && <div>No dogs found</div>}
           </div>
-          <div className="bullet-container">
-            <span>1</span>
-            <span>2</span>
-          </div>
+          <Pagination></Pagination>
         </div>
       )}
     </>
