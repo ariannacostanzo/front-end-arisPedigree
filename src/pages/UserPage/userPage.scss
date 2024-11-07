@@ -1,0 +1,25 @@
+.userDetail-container {
+    padding: 4rem 0;
+
+    .userName-container {
+        font-size: 24px;
+        color: rgb(68, 68, 68);
+        padding: 2rem 4rem;
+        border-bottom: 1px solid rgb(185, 185, 185);
+
+    }
+
+    .user-photo {
+        background-color: rgb(180, 180, 180);
+        padding: 25px 60px;
+        border-radius: 50%;
+        font-size: 120px;
+        cursor: pointer;
+        position: relative;
+        color: white;
+    }
+
+    .userDogs-container {
+        //
+    }
+}

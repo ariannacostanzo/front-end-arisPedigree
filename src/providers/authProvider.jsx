@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
         userName,
         setUserName,
         userId,
+        setUserId,
         token,
         setToken
       }}
