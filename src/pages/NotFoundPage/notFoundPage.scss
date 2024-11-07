@@ -1,0 +1,24 @@
+.not-found-container {
+    width: 50%;
+    margin: 4rem auto;
+    border-radius: 155px 45px 225px 75px / 15px 125px 15px 155px;
+    border: 1px solid black;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    h2, h3 {
+        font-family: var(--headingFont);
+    }
+
+    h2 {
+        font-size: 61px;
+    }
+
+    h3 {
+        font-size: 30px;
+        margin-bottom: 2rem;
+    }
+}
