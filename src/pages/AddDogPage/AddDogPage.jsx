@@ -21,10 +21,10 @@ const AddDogPage = () => {
   // variabili per riempire il form
   const { breeds, loading } = useBreed();
   const { countries } = useCountry();
-  const { isLoggedIn, userId, token } = useAuth();
+  const { isLoggedIn, user, token } = useAuth();
 
   // eslint-disable-next-line no-unused-vars
-  const [updatedUserId, setUpdatedUserId] = useState(userId);
+  const [updatedUserId, setUpdatedUserId] = useState(user.id);
 
   const [sires, setSires] = useState([]);
   const [dams, setDams] = useState([]);
@@ -186,8 +186,8 @@ const AddDogPage = () => {
   };
 
   useEffect(() => {
-    setUpdatedUserId(userId);
-  }, [userId]);
+    setUpdatedUserId(user.id);
+  }, [user.id]);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -243,7 +243,7 @@ const AddDogPage = () => {
       kennel,
       owner,
       notes,
-      userId,
+      userId : user.id,
       image,
     };
 
@@ -295,6 +295,7 @@ const AddDogPage = () => {
       
       setErrorBags({});
       navigate(`/dogDetail/${response.data.id}`);
+       window.scrollTo(0, 0);
     } catch (error) {
       const errors = error.response.data.errors || [];
       console.log(error.response.data.errors);

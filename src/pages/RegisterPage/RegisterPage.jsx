@@ -7,7 +7,7 @@ import './registerPage.scss'
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserName, setToken, setUserId } = useAuth();
+  const { setIsLoggedIn, setToken, setUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -47,9 +47,8 @@ const RegisterPage = () => {
         }
       );
 
-      setUserName(response.data.name);
       setToken(response.data.token)
-      setUserId(response.data.id)
+      setUser(response.data)
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {

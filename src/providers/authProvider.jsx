@@ -8,31 +8,29 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   
   const [isLoggedIn, setIsLoggedIn] = useStorage(false, "isLoggedIn");
-  const [userName, setUserName] = useStorage('userName', 'userName')
-  const [userId, setUserId] = useStorage(null, 'userId')
   const [token, setToken] = useStorage(null, "token");
+  const [user, setUser] = useStorage(null, "user");
 
   const login = async (payload) => {
     try {
       const { data: response } = await axios.post("/auth/login", payload);
-      setUserName(response.data.name);
-      setUserId(response.data.id)
+      setUser(response.data)
       setToken(response.token)
       setIsLoggedIn(true);
     } catch (error) {
       console.log(error)
-    }
+    } 
   };
   const logout = () => {
-    setUserId(null)
-    setUserName(null)
+    setUser(null)
     setToken(null)
     setIsLoggedIn(false);
     localStorage.clear()
   };
 
   useEffect(() => {
-  }, [userId])
+    // console.log(user)
+  }, [user])
    
 
   return (
@@ -42,10 +40,8 @@ const AuthProvider = ({ children }) => {
         setIsLoggedIn,
         login,
         logout,
-        userName,
-        setUserName,
-        userId,
-        setUserId,
+        user,
+        setUser,
         token,
         setToken
       }}

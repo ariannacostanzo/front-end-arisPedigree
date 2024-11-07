@@ -8,7 +8,7 @@ import { useAuth } from "../../providers/authProvider";
 import Sidebar from "../../assets/components/sidebar/Sidebar";
 
 const NewsDetailPage = () => {
-  const {userName} = useAuth();
+  const {user} = useAuth();
   const { id } = useParams();
 
   return (
@@ -40,8 +40,8 @@ const NewsDetailPage = () => {
             </p>
             <div className="comment-container">
               <h5>Leave a Reply</h5>
-              {userName && (
-                <p className="text-[#525252]">Logged in as {userName}. </p>
+              {user.name && (
+                <p className="text-[#525252]">Logged in as {user.name}. </p>
               )}
               <textarea name="" id="" placeholder="Your comment"></textarea>
               <button className="custom-btn">Post comment</button>

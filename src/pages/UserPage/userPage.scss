@@ -1,25 +1,111 @@
 .userDetail-container {
-    padding: 4rem 0;
+  padding: 4rem 0;
 
-    .userName-container {
-        font-size: 24px;
-        color: rgb(68, 68, 68);
-        padding: 2rem 4rem;
-        border-bottom: 1px solid rgb(185, 185, 185);
+  .userName-container {
+    font-size: 24px;
+    color: rgb(68, 68, 68);
+    padding: 2rem 4rem;
+    border-bottom: 1px solid rgb(185, 185, 185);
+  }
 
+  .user-photo {
+    background-color: rgb(180, 180, 180);
+    padding: 25px 60px;
+    border-radius: 50%;
+    font-size: 120px;
+    cursor: pointer;
+    position: relative;
+    color: white;
+  }
+
+  .userDogs-container {
+    //
+  }
+
+  .userDog-card {
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      font-family: var(--headingFont);
+      font-size: 20px;
+      transition: var(--transition);
+
+      &:hover {
+        color: var(--primary);
+        text-decoration: underline;
+      }
     }
 
-    .user-photo {
-        background-color: rgb(180, 180, 180);
-        padding: 25px 60px;
+    img {
+      object-fit: cover;
+      object-position: top center;
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+    }
+
+    .managing-icons-container {
+      font-size: 25px;
+      display: flex;
+      gap: 15px;
+
+      .tooltip-container {
+        background-color: white;
+        padding: 5px 10px;
         border-radius: 50%;
-        font-size: 120px;
+        border: 2px solid var(--primary);
+        transition: var(--transition);
         cursor: pointer;
         position: relative;
-        color: white;
-    }
 
-    .userDogs-container {
-        //
+        &:hover {
+          color: white;
+          background-color: var(--primary);
+        }
+      }
+
+      .tooltip {
+        position: absolute;
+        top: -20px;
+        left: -9px;
+        opacity: 0;
+        background-color: var(--primary);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition-duration: 0.2s;
+        pointer-events: none;
+        font-size: 14px;
+
+        &::before {
+          position: absolute;
+          content: "";
+          width: 10px;
+          height: 10px;
+          background-color: var(--primary);
+          background-size: 1000%;
+          background-position: center;
+          transform: rotate(45deg);
+          bottom: -12%;
+          transition-duration: 0.3s;
+        }
+      }
+
+      .tooltip-container:hover .tooltip {
+        top: -40px;
+        opacity: 1;
+        transition-duration: 0.3s;
+      }
     }
+  }
 }
+

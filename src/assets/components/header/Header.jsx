@@ -8,7 +8,7 @@ import { useAuth } from "../../../providers/authProvider";
 const Header = () => {
 
   const navigate = useNavigate()
-  const {isLoggedIn, logout, userName} = useAuth();
+  const {isLoggedIn, logout, user} = useAuth();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(false);
   const [showDogUnderlist, setShowDogUnderlist] = useState(false)
@@ -290,7 +290,7 @@ const Header = () => {
           {/* nome utente se loggato  */}
           {isLoggedIn && (
             <div className="headerUserName">
-              Hi <Link to="/userDetail">{userName}</Link> !
+              Hi <Link to="/userDetail">{user.name}</Link> !
             </div>
           )}
         </header>
