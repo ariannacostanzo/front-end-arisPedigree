@@ -26,12 +26,12 @@ const handleScrollTo = (e, id) => {
           <p>
             ArisPedigree online’s database offers free pedigree reports for dogs
             of all breeds,
-            <br /> from all over the world.You can start exploring the website
+            <br /> from all over the world. You can start exploring the website
             checking our <Link to="dogs-list">dog’s list</Link>
             <br /> and browsing through all dogs available in the database or
             using our <Link to="search-a-dog">search page</Link>
-            <br /> to find dogs fulfilling your criteria. <br />
-            Otherwise you can select a breed in the list below
+            <br /> to find dogs fulfilling your criteria. 
+            Otherwise you can select a breed in the list below.
           </p>
         </div>
         <div className="flex gap-6 mt-6">
