@@ -48,7 +48,7 @@ const RegisterPage = () => {
       );
 
       setToken(response.data.token)
-      setUser(response.data)
+      setUser(response.data.data)
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {

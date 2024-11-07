@@ -69,7 +69,7 @@ const LoginPage = () => {
               />
             </div>
             {/* da fare pagina di reset password */}
-            <p>Forgot your password?</p>
+            {/* <p>Forgot your password?</p> */}
             <button className="custom-btn my-10 " type="submit">
               Login
             </button>
@@ -80,3 +80,5 @@ const LoginPage = () => {
   );
 };
 export default LoginPage;
+
+//immagini non troppo grande

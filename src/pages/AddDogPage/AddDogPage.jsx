@@ -296,6 +296,7 @@ const AddDogPage = () => {
       setErrorBags({});
       navigate(`/dogDetail/${response.data.id}`);
        window.scrollTo(0, 0);
+       window.location.reload();
     } catch (error) {
       const errors = error.response.data.errors || [];
       console.log(error.response.data.errors);

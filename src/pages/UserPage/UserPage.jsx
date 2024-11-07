@@ -7,6 +7,7 @@ import axios from "../../utils/axiosClient.js";
 import { useEffect, useState } from "react";
 import Loader from "../../assets/components/loader/Loader.jsx";
 import { Link } from "react-router-dom";
+import ManagingIcon from "../../assets/components/deleteIcon/ManagingIcon.jsx";
 
 const UserPage = () => {
   const { user } = useAuth();
@@ -38,22 +39,18 @@ const UserPage = () => {
       console.log(error);
     } finally {
       setIsDeleting(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000)
+      
     }
   };
 
   useEffect(() => {
     fetchUser();
+    console.log(userDogs)
   }, []);
 
-  useEffect(() => {
-    if (deleteMessage) {
-      const timeout = setTimeout(() => {
-        setDeleteMessage(null);
-      }, 7000);
-
-      return () => clearTimeout(timeout); 
-    }
-  }, [deleteMessage]); 
 
   return (
     <>
@@ -98,19 +95,8 @@ const UserPage = () => {
                     {dog.image && <img src={dog.image} alt="" />}
                   </div>
                   <div className="managing-icons-container">
-                    <span className="tooltip-container">
-                      <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
-                      <span className="tooltip">Modify</span>
-                    </span>
-                    <span
-                      className="tooltip-container"
-                      onClick={() => {
-                        deleteDog(dog.id);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
-                      <span className="tooltip">Delete</span>
-                    </span>
+                    <ManagingIcon message="Modify" icon={faPen}></ManagingIcon>
+                    <ManagingIcon message="Delete" icon={faTrashCan} manager={() => deleteDog(dog.id)}></ManagingIcon>
                   </div>
                 </div>
               ))}

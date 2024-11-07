@@ -1,17 +1,42 @@
 import placeholder from "/placehodler.jpg";
-import './generalInfo.scss';
+import "./generalInfo.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { faMars, faPen, faSpinner, faTrashCan, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import Loader from '../../../assets/components/loader/Loader.jsx'
+import Loader from "../../../assets/components/loader/Loader.jsx";
+import { useAuth } from "../../../providers/authProvider.jsx";
+import ManagingIcon from "../../../assets/components/deleteIcon/ManagingIcon.jsx";
+import axios from '../../../utils/axiosClient.js'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const GeneralInfo = ({dog, isLoading}) => {
+const GeneralInfo = ({ dog, isLoading }) => {
 
-const renderDate = (date) => {
-  const newDate = new Date(date);
-  const formattedDate = new Intl.DateTimeFormat("en-GB").format(newDate);
-  return formattedDate;
-};
+  const {user} = useAuth();
+  const navigate = useNavigate();
+
+  const renderDate = (date) => {
+    const newDate = new Date(date);
+    const formattedDate = new Intl.DateTimeFormat("en-GB").format(newDate);
+    return formattedDate;
+  };
+
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const deleteDog = async (id) => {
+    try {
+      setIsDeleting(true);
+      const res = await axios.delete(`dogs/${id}`);
+      console.log(res);
+      navigate("/dogs-list");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsDeleting(false);
+      
+    }
+  };
 
   return (
     <>
@@ -163,6 +188,17 @@ const renderDate = (date) => {
               </div>
             </div>
           </div>
+          {isDeleting && <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>}
+          {user.isAdmin && (
+            <div className="text-end managing-icons-container justify-end">
+              <ManagingIcon message="Modify" icon={faPen}></ManagingIcon>
+              <ManagingIcon
+                message="Delete"
+                icon={faTrashCan}
+                manager={() => deleteDog(dog.id)}
+              ></ManagingIcon>
+            </div>
+          )}
         </>
       )}
     </>
