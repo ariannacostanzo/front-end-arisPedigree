@@ -92,6 +92,15 @@ header {
   position: absolute;
   right: 5px;
   top: 2px;
+
+  a {
+    color: var(--lightBlue);
+    transition: var(--transition);
+    
+    &:hover {
+      color: var(--primary);
+    }
+  }
 }
 
 .hamburger-menu {

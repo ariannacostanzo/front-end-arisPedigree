@@ -738,7 +738,7 @@ const AddDogPage = () => {
                 </div>
 
                 <div className="form-row">
-                  <button type="submit">Add dog</button>
+                  <button  type="submit">Add dog</button>
                 </div>
               </form>
             )}

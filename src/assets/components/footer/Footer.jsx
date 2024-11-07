@@ -44,21 +44,21 @@ const Footer = () => {
             <span className="h3-divisor"></span>
             <ul>
               <li>
-                <Link to="/search-a-dog" onClick={() => window.scrollTo(0, 0)}>
+                <Link to="/dogs-list" onClick={() => window.scrollTo(0, 0)}>
                   <span className="line"></span>
                   Online Pedigree
                 </Link>
               </li>
               <li>
-                <Link to="/dogs-list" onClick={() => window.scrollTo(0, 0)}>
+                <Link to="/search-a-dog" onClick={() => window.scrollTo(0, 0)}>
                   <span className="line"></span>
-                  Breeds List
+                  Dogs Filter
                 </Link>
               </li>
               <li>
-                <Link to="/countryFilter" onClick={() => window.scrollTo(0, 0)}>
+                <Link to="/add-new-dog" onClick={() => window.scrollTo(0, 0)}>
                   <span className="line"></span>
-                  Breeds Localization
+                  Dogs Creation
                 </Link>
               </li>
             </ul>

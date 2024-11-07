@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import Loader from "../../assets/components/loader/Loader.jsx";
 import axios from "axios";
 
+//da aggiungere una select con il filtro per paese
+
 const SearchDogPage = () => {
   const { breeds } = useBreed();
   const { maleCount, setMaleCount, femaleCount, setFemaleCount, dogs, loading, setLoading } = useDogs();

@@ -288,7 +288,11 @@ const Header = () => {
           </div>
 
           {/* nome utente se loggato  */}
-          {isLoggedIn && <div className="headerUserName">Hi {userName}!</div>}
+          {isLoggedIn && (
+            <div className="headerUserName">
+              Hi <Link to="/userDetail">{userName}</Link> !
+            </div>
+          )}
         </header>
       </div>
       {isSearchVisible && (

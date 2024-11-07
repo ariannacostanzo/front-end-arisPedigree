@@ -13,13 +13,13 @@ import DogDetailPage from "./pages/DogDetailPage/DogDetailPage";
 import NewsDetailPage from "./pages/NewsDetailPage/NewsDetailPage";
 import BreedsDetailPage from "./pages/BreedsDetailPage/BreedsDetailPage";
 import CountryDetailPage from "./pages/CountryDetailPage/CountryDetailPage";
-import CountryFilterPage from "./pages/CountryFilterPage/CountryFilterPage";
 import { CountryProvider } from "./providers/countriesProvider";
 import { BreedProvider } from "./providers/breedsProvider";
 import { AuthProvider } from "./providers/authProvider";
 import UserPage from "./pages/UserPage/UserPage";
 import ProtectedRoute from "../src/assets/components/ProtectedRoute.jsx";
 import { DogsProvider } from "./providers/dogsProvider.jsx";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 
 function App() {
   return (
@@ -52,16 +52,17 @@ function App() {
                     <Route path="dogDetail/:id" element={<DogDetailPage />} />
                     <Route path="newsDetail/:id" element={<NewsDetailPage />} />
                     {/* da sistemare con l'id ^ */}
-                    <Route path="breedsDetail/:breedSlug" element={<BreedsDetailPage />} />
+                    <Route
+                      path="breedsDetail/:breedSlug"
+                      element={<BreedsDetailPage />}
+                    />
                     <Route
                       path="countryDetail/:countrySlug"
                       element={<CountryDetailPage />}
                     />
-                    {/* da sistemare con l'id ^ */}
-                    <Route
-                      path="countryFilter"
-                      element={<CountryFilterPage />}
-                    />
+                    
+                    {/* Not Found Route */}
+                    <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>
               </BrowserRouter>
