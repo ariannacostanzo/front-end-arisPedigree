@@ -8,7 +8,7 @@ import GeneralInfo from "./components/generalInfo.jsx";
 import PedigreeTree from "./components/PedigreeTree.jsx";
 import Offspring from "./components/Offspring.jsx";
 import Siblings from "./components/Siblings.jsx";
-import Videos from "./components/Videos.jsx";
+// import Videos from "./components/Videos.jsx";
 
 const DogDetailPage = () => {
   let { id } = useParams();
@@ -80,22 +80,24 @@ const DogDetailPage = () => {
             >
               Siblings
             </li>
-            <li
+            {/* <li
               className={`${showCard.shown === 4 ? "active" : ""}`}
               onClick={() => {
                 displayCard(4);
               }}
             >
               Videos
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="dogPedigreeCard">
-          {showCard.shown === 0 && <GeneralInfo dog={dog} isLoading={isLoading}></GeneralInfo>}
+          {showCard.shown === 0 && (
+            <GeneralInfo dog={dog} isLoading={isLoading}></GeneralInfo>
+          )}
           {showCard.shown === 1 && <PedigreeTree dog={dog}></PedigreeTree>}
-          {showCard.shown === 2 && <Offspring></Offspring>}
-          {showCard.shown === 3 && <Siblings></Siblings>}
-          {showCard.shown === 4 && <Videos></Videos>}
+          {showCard.shown === 2 && <Offspring dog={dog}></Offspring>}
+          {showCard.shown === 3 && <Siblings dog={dog}></Siblings>}
+          {/* {showCard.shown === 4 && <Videos></Videos>} */}
         </div>
       </div>
     </>

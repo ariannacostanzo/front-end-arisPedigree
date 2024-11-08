@@ -41,7 +41,7 @@ const DogListComponent = ({dogs}) => {
                </div>
              ))}
          </div>
-         {dogs.length > 0 && <Pagination></Pagination>}
+         {dogs.length > 0 && <Pagination ></Pagination>}
        </>
      );
 }

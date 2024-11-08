@@ -83,7 +83,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="footer-nav my-10 lg:my-0">
+          {/* <div className="footer-nav my-10 lg:my-0">
             <h3>Newsletter</h3>
             <span className="h3-divisor"></span>
             <div className="w-full">
@@ -105,7 +105,7 @@ const Footer = () => {
               </label>
             </div>
             <button className="my-4 w-full">Subscribe</button>
-          </div>
+          </div> */}
         </div>
         <div className="social-footer">
           <ul className="flex gap-4 justify-center text-2xl">

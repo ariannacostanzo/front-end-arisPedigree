@@ -1,6 +1,6 @@
 import BreedsList from "./components/breedsList/BreedsList.jsx";
 import CountryList from "./components/countryList/CountryList.jsx";
-import DogList from "./components/dogList/DogList.jsx";
+// import DogList from "./components/dogList/DogList.jsx";
 import ExamplePedigree from "./components/examplePedigree/ExamplePedigree.jsx";
 import Jumbo from "./components/jumbo/Jumbo.jsx";
 import NewsAndDogs from "./components/newsAndDogs/NewsAndDogs.jsx";
@@ -20,7 +20,7 @@ const Home = () => {
       </div>
         <CountryList></CountryList>
       <div className="p-4 container mx-auto">
-        <DogList></DogList>
+        {/* <DogList></DogList> */}
       </div>
     </>
   );

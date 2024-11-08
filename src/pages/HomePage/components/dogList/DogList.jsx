@@ -1,6 +1,6 @@
 import "./doglist.scss";
 import { useDogs } from "../../../../providers/dogsProvider.jsx";
-import alphabet from "../../../../database/alphabeth.js";
+// import alphabet from "../../../../database/alphabeth.js";
 import { Link } from "react-router-dom";
 import Loader from "../../../../assets/components/loader/Loader.jsx";
 import Pagination from "../../../../assets/components/pagination/Pagination.jsx";
@@ -19,13 +19,13 @@ const DogList = () => {
         <div className="dogsListContainer">
           <h3>Breeds & dogs</h3>
           <h5>In our database</h5>
-          <div className="alp-container">
+          {/* <div className="alp-container">
             {alphabet.map((letter, i) => (
               <div key={`alphabet-letter${i}`} className="letter-container">
                 {letter.letter}
               </div>
             ))}
-          </div>
+          </div> */}
           <div id="dogsList">
             {dogs.length > 0 &&
               dogs.map((dog, i) => (

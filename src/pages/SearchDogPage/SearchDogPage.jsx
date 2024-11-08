@@ -12,7 +12,7 @@ import axios from "axios";
 
 const SearchDogPage = () => {
   const { breeds } = useBreed();
-  const { maleCount, setMaleCount, femaleCount, setFemaleCount, dogs, loading, setLoading } = useDogs();
+  const { maleCount, setMaleCount, femaleCount, setFemaleCount, dogs, loading, setLoading, setPage, setTotalPages, setFilterQuery } = useDogs();
   const [filteredDogs, setFilteredDogs] = useState(dogs);
   const [filters, setFilters] = useState({
     sex: null,
@@ -20,6 +20,7 @@ const SearchDogPage = () => {
   })
 
   const filterDogs = async (breed = null, sex = null) => {
+    setFilterQuery(null)
     setLoading(true);
     let query = "http://localhost:8000/dogs";
 
@@ -43,12 +44,15 @@ const SearchDogPage = () => {
       query += `sex=${sex}`;
     }
 
+    setFilterQuery(query.replace("http://localhost:8000/dogs", ""));
+
     try {
       const response = await axios.get(query);
-      console.log(response)
       setFilteredDogs(response.data.data)
       setMaleCount(response.data.maleCount)
       setFemaleCount(response.data.femaleCount)
+      setPage(response.data.page);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.log(error);
     } finally {
@@ -79,6 +83,8 @@ const SearchDogPage = () => {
    useEffect(() => {
     filterDogs(filters.breed, filters.sex)
    },  [filters.breed, filters.sex])
+
+  
 
   return (
     <>
@@ -150,7 +156,7 @@ const SearchDogPage = () => {
             {loading ? (
               <Loader></Loader>
             ) : (
-              <DogListComponent dogs={filteredDogs}></DogListComponent>
+              <DogListComponent  dogs={filteredDogs}></DogListComponent>
             )}
           </div>
         </div>

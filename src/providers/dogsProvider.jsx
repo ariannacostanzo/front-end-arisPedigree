@@ -12,6 +12,7 @@ const DogsProvider = ({ children }) => {
   const [allDogs, setAllDogs] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
+  const [filterQuery, setFilterQuery] = useState(null);
 
   const fetchDogs = async () => {
     setLoading(true);
@@ -22,7 +23,6 @@ const DogsProvider = ({ children }) => {
       setTotalPages(response.data.totalPages);
       setMaleCount(response.data.maleCount);
       setFemaleCount(response.data.femaleCount);
-        console.log(response.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -43,7 +43,9 @@ const DogsProvider = ({ children }) => {
   }; //questa dovrei poterla eliminare
 
   
-
+  useEffect(() => {
+    console.log(filterQuery)
+  })
 
   useEffect(() => {
     fetchDogs();
@@ -66,7 +68,9 @@ const DogsProvider = ({ children }) => {
         maleCount,
         setMaleCount,
         femaleCount,
-        setFemaleCount
+        setFemaleCount,
+        filterQuery,
+        setFilterQuery
       }}
     >
       {children}
