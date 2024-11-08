@@ -1,0 +1,35 @@
+.list-of-relative-card {
+    border: 1px solid rgb(153, 152, 152);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f1f1f1;
+
+    h3 {
+        font-family: var(--headingFont);
+        transition: var(--transition);
+
+        &:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+    }
+
+    .dog-title-relative p {
+        padding: 0;
+    }
+
+    .colored-circle {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    .relative-country {
+        font-size: 14px;
+        color: grey;
+    }
+}
