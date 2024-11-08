@@ -7,17 +7,7 @@ const PedigreeTree = ({ dog }) => {
 
     processedIds.add(dog.id);
 
-    // Raccolgo i fratelli
-    const siblings = [];
-    if (dog.sire) {
-      siblings.push(...(dog.sire.childrenAsSire || []));
-    }
-    if (dog.dam) {
-      siblings.push(...(dog.dam.childrenAsDam || []));
-    }
-    const filteredSiblings = siblings.filter(
-      (sibling) => sibling.id !== dog.id
-    ); // escludo il cane corrente
+    
 
     // Raccolgo i genitori
     const parents = [];

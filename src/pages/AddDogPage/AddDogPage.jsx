@@ -349,7 +349,7 @@ const AddDogPage = () => {
                       </Link>
                     </button>
                     <button>
-                      <Link  to="/login" onClick={() => window.scrollTo(0, 0)}>
+                      <Link to="/login" onClick={() => window.scrollTo(0, 0)}>
                         Login
                       </Link>
                     </button>
@@ -468,7 +468,9 @@ const AddDogPage = () => {
                             />
                             <div>
                               <h3>{sire.name}</h3>
-                              <p>{sire.titles ? sire.titles : ""}</p>
+                              <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
+                                {sire.titles ? sire.titles : ""}
+                              </p>
                             </div>
                           </div>
                         ))}
@@ -519,7 +521,9 @@ const AddDogPage = () => {
                             />
                             <div>
                               <h3>{dam.name}</h3>
-                              <p>{dam.titles ? dam.titles : ""}</p>
+                              <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
+                                {dam.titles ? dam.titles : ""}
+                              </p>
                             </div>
                           </div>
                         ))}
@@ -740,7 +744,7 @@ const AddDogPage = () => {
                 </div>
 
                 <div className="form-row">
-                  <button  type="submit">Add dog</button>
+                  <button type="submit">Add dog</button>
                 </div>
               </form>
             )}
