@@ -16,13 +16,12 @@ const Offspring = ({ dog }) => {
       children.push(...dog.childrenAsDam);
     }
 
-    console.log(children);
 
     return (
       <div className="">
         {/* Children */}
         {children.length === 0 ? (
-          <div>{dog.name} has no descendents</div>
+          <div className="p-4">{dog.name} has no descendents</div>
         ) : (
           <div> Descendents of {dog.name}: </div>
         )}

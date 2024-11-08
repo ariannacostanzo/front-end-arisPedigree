@@ -25,3 +25,23 @@
   }
 }
 
+
+.dogPedigreeCard {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  
+
+}
+
+// media query 
+@media screen and (min-width: 1100px) {
+  .dogPedigreeCard h2  {
+        font-size: 61px;
+        
+    }
+
+    .dogPedigreeCard {
+      padding: 3rem;
+    }
+}

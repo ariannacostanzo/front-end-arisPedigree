@@ -33,9 +33,9 @@ const Siblings = ({ dog }) => {
       <div className="">
         {/* Current Dog and Siblings */}
         {filteredSiblings.length === 0 ? (
-          <div>{dog.name} has no siblings</div>
+          <div className="p-4">{dog.name} has no siblings</div>
         ) : (
-          <div> Siblings of {dog.name}: </div>
+          <div > Siblings of {dog.name}: </div>
         )}
         {filteredSiblings.map((sibling, i) => (
           <div key={`sibling${i}`} className={`list-of-relative-card`}>
@@ -84,9 +84,5 @@ export default Siblings;
 
 
 //farlo sia in verticale che in orizzontale
-//fare apparire la tabella per tutti quelli che non hanno genitori
 //in caso fare una tabella che puo fare overflow x
-//per ogni cane ci deve essere la casella vuota se non c'è la madre, tutto deve essere diviso ad albero
-//i cani dobbiati ci devono essere e devono avere un pallino
-//l'albero genealogico si deve fermare ad 8
 //si deve scegliere se farne vedere piàù di 4
