@@ -39,7 +39,8 @@ const handleScrollTo = (e, id) => {
             className="bg-[#2975ed]"
             onClick={(e) => handleScrollTo(e, "dogsList")}
           >
-            Dog List
+            Country List 
+            {/* da cambiare  */}
             <FontAwesomeIcon icon={faDog} className="ml-2"></FontAwesomeIcon>
           </button>
           <button

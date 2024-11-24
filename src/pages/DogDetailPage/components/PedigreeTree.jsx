@@ -4,7 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 const PedigreeTree = ({ dog }) => {
-  const createTable = (dog, processedIds = new Set()) => {
+
+
+  const shortName = (name) => {
+    if (name.length > 5) return name.slice(0,5) + '...'
+    return name
+  }
+
+  const longName = (name) => {
+    if (name.length > 20) return name.slice(0, 20) + "...";
+    return name;
+  }
+
+  const createTable = (dog, processedIds = new Set(), depth = 0) => {
     const repeteadDogs = [];
 
     if (!dog || processedIds.has(dog.id)) {
@@ -27,7 +39,9 @@ const PedigreeTree = ({ dog }) => {
         <div className="current-generation generation-row">
           <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
             {/* se il cane è ripetuto  */}
-            {repeteadDogs.includes(dog.id) && <div className="repeated-circle"></div>}
+            {repeteadDogs.includes(dog.id) && (
+              <div className="repeated-circle"></div>
+            )}
             {dog.image && (
               <Link to={`/dogDetail/${dog.id}`}>
                 <img src={dog.image} alt="" />
@@ -38,7 +52,8 @@ const PedigreeTree = ({ dog }) => {
                 to={`/dogDetail/${dog.id}`}
                 onClick={() => window.scrollTo(0, 0)}
               >
-                {dog.name}
+                {depth < 4 && longName(dog.name)}
+                {depth > 4 && shortName(dog.name)}
               </Link>
             </h3>
             <div>
@@ -49,11 +64,12 @@ const PedigreeTree = ({ dog }) => {
               )}
             </div>
             <div className="relative-country flex items-center gap-2">
-              <img
-                src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
-                alt=""
-              />
-              {dog.country.name}
+              {depth < 4 && (
+                <img
+                  src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
+                  alt=""
+                />
+              )}
             </div>
           </div>
         </div>
@@ -63,7 +79,7 @@ const PedigreeTree = ({ dog }) => {
           {/* Sire */}
           <div className="dog-cell parent">
             {sire ? (
-              createTable(sire, processedIds)
+              createTable(sire, processedIds, depth + 1)
             ) : (
               <div className="placeholder">
                 <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
@@ -74,7 +90,7 @@ const PedigreeTree = ({ dog }) => {
           {/* Dam */}
           <div className="dog-cell parent">
             {dam ? (
-              createTable(dam, processedIds)
+              createTable(dam, processedIds, depth + 1)
             ) : (
               <div className="placeholder">
                 <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
@@ -92,3 +108,4 @@ const PedigreeTree = ({ dog }) => {
 export default PedigreeTree;
 
 //da completare
+//non funziona

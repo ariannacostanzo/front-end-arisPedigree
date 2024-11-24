@@ -24,7 +24,7 @@ const AddDogPage = () => {
   const { isLoggedIn, user, token } = useAuth();
 
   // eslint-disable-next-line no-unused-vars
-  const [updatedUserId, setUpdatedUserId] = useState(user.id);
+  const [updatedUserId, setUpdatedUserId] = useState(user?.id || null);
 
   const [sires, setSires] = useState([]);
   const [dams, setDams] = useState([]);
@@ -186,8 +186,8 @@ const AddDogPage = () => {
   };
 
   useEffect(() => {
-    setUpdatedUserId(user.id);
-  }, [user.id]);
+    setUpdatedUserId(user?.id);
+  }, [user?.id]);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -347,6 +347,7 @@ const AddDogPage = () => {
                       >
                         Register
                       </Link>
+                      {/* da sistemare  */}
                     </button>
                     <button>
                       <Link to="/login" onClick={() => window.scrollTo(0, 0)}>

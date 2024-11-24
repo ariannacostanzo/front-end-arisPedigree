@@ -12,14 +12,16 @@
     height: 40px;
     object-fit: cover;
     border-radius: 10px;
+    display: none;
   }
   .relative-country {
     font-size: 11px;
     color: grey;
 
     img {
-      width: 10px;
-      height: 10px;
+      width: 15px;
+      height: 15px;
+      display: block;
     }
   }
   h3 {
@@ -109,6 +111,9 @@
         height: 30px;
       }
     }
+    img {
+        display: block;
+      }
 
   }
 }

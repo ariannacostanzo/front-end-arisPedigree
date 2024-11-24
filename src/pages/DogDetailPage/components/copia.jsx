@@ -216,9 +216,3 @@ const PedigreeTree = ({ dog }) => {
 };
 export default PedigreeTree;
 
-// 25.000 in 13 mensilità , più o meno 1400
-// contratto di 3 anni di apprendistato
-// livello d2
-// incluso
-//il 12 novembre
-//da sistemare

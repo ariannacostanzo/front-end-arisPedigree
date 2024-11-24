@@ -104,3 +104,4 @@ const DogDetailPage = () => {
   );
 };
 export default DogDetailPage;
+

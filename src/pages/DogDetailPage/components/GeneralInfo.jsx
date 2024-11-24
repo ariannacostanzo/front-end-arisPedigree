@@ -192,7 +192,7 @@ const GeneralInfo = ({ dog, isLoading }) => {
               </div>
             </div>
             {isDeleting && <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>}
-            {user.isAdmin && (
+            {user?.isAdmin && (
               <div className="text-end managing-icons-container justify-end">
                 <ManagingIcon message="Modify" icon={faPen}></ManagingIcon>
                 <ManagingIcon

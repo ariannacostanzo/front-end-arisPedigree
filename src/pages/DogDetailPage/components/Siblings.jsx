@@ -86,3 +86,5 @@ export default Siblings;
 //farlo sia in verticale che in orizzontale
 //in caso fare una tabella che puo fare overflow x
 //si deve scegliere se farne vedere piàù di 4
+
+//non funziona
