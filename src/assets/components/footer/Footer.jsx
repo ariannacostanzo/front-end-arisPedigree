@@ -1,8 +1,8 @@
 import footerImages from "../../../database/footer-img";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faThreads, faTiktok, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faThreads, faPinterest, faTiktok, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./footer.scss";
-import { faEnvelope, faPhone, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -157,6 +157,14 @@ const Footer = () => {
                 target="_blank"
                 className=" bg-[#000]">
                 <FontAwesomeIcon icon={faThreads}></FontAwesomeIcon>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://it.pinterest.com/workingdogsintheworld/"
+                target="_blank"
+                className="bg-[#ce3226]">
+                <FontAwesomeIcon icon={faPinterest}></FontAwesomeIcon>
               </a>
             </li>
             <li>
