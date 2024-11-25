@@ -3,7 +3,7 @@ import "./contactUsPage.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp, faPinterest, faTiktok, faThreads } from "@fortawesome/free-brands-svg-icons";
 
 const ContactusPage = () => {
   return (
@@ -33,15 +33,39 @@ const ContactusPage = () => {
           <h4>Find us on:</h4>
           <ul className="socials-list mt-2 flex flex-col gap-5 justify-center text-2xl">
             <li>
-              <a href="#" className="bg-[#0867ff]">
+              <a
+                href="https://www.facebook.com/workingdogsintheworld/"
+                target="_blank"
+                className="bg-[#0867ff]">
                 <FontAwesomeIcon className="mr-2" icon={faFacebook}></FontAwesomeIcon>
                 Facebook
               </a>
             </li>
             <li>
-              <a href="#" className="bg-[#2298ef]">
+              <a
+                href="https://x.com/WDogsInTheWorld?t=vRaMbQo-DK7EZ0_8S3vGZg&s=09"
+                target="_blank"
+                className="bg-[#2298ef]">
                 <FontAwesomeIcon className="mr-2" icon={faTwitter}></FontAwesomeIcon>
                 Twitter
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.tiktok.com/@dogsintheworld?_t=8rgxLHJGBZW&_r=1"
+                target="_blank"
+                className="tiktok bg-[#000]">
+                <FontAwesomeIcon className="mr-2" icon={faTiktok}></FontAwesomeIcon>
+                TikTok
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.threads.net/@working_dogs_in_the_world"
+                target="_blank"
+                className=" bg-[#000]">
+                <FontAwesomeIcon className="mr-2" icon={faThreads}></FontAwesomeIcon>
+                Threads
               </a>
             </li>
             <li>
@@ -51,15 +75,39 @@ const ContactusPage = () => {
               </a>
             </li>
             <li>
-              <a href="https://wa.me/393713030412" target="_blank" className="bg-[#0eab04]">
+              <a
+                href="https://wa.me/393713030412"
+                target="_blank"
+                className="bg-[#0eab04]">
                 <FontAwesomeIcon className="mr-2" icon={faWhatsapp}></FontAwesomeIcon>
                 WhatsApp
               </a>
             </li>
             <li>
-              <a href="#" className="bg-[#e1395f]">
+              <a
+                href="https://www.instagram.com/working_dogs_in_the_world/"
+                target="_blank"
+                className="bg-[#C13584]">
                 <FontAwesomeIcon className="mr-2" icon={faInstagram}></FontAwesomeIcon>
                 Instagram
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://it.pinterest.com/workingdogsintheworld/"
+                target="_blank"
+                className="bg-[#ce3226]">
+                <FontAwesomeIcon className="mr-2" icon={faPinterest}></FontAwesomeIcon>
+                Pinterest
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://vk.com/id536674510"
+                target="_blank"
+                className="bg-[#567ca0]">
+                <FontAwesomeIcon className="mr-2" icon={faVk}></FontAwesomeIcon>
+                VK
               </a>
             </li>
           </ul>
