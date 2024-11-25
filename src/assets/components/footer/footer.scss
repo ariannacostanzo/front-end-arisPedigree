@@ -1,10 +1,11 @@
 footer {
-    font-family: var(--primaryFont);
+  font-family: var(--primaryFont);
 
-    img {
-      object-fit: cover;
-    }
+  img {
+    object-fit: cover;
+  }
 }
+
 .blue-button {
   background-color: #408bd1;
   padding: 7px 14px;
@@ -32,6 +33,7 @@ footer {
     font-weight: 600;
     position: relative;
   }
+
   .h3-divisor {
     background-color: #f77d6b;
     display: inline-block;
@@ -43,7 +45,7 @@ footer {
   li {
     padding: 4px 0;
   }
-  
+
   .line {
     display: inline-block;
     width: 12px;
@@ -62,49 +64,53 @@ footer {
     transition: .2s ease;
 
     &:hover {
-        color: white;
-        background-color: var(--primary);
+      color: white;
+      background-color: var(--primary);
     }
   }
 }
 
 .footer-nav a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: .3s ease;
-    font-family: var(--secondaryFont);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: .3s ease;
+  font-family: var(--secondaryFont);
 
-    &:hover {
-        color: var(--primary);
-        text-decoration: underline;
-    }
+  &:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
 }
 
 .footer-nav a:hover .line {
-    background-color: var(--primary);
+  background-color: var(--primary);
 }
 
 .footer-nav.contacts {
-    font-family: var(--primaryFont);
-    font-size: 18px;
+  font-family: var(--primaryFont);
+  font-size: 18px;
 }
 
 .footer-nav input[type=email] {
-    
-    border: 2px solid black;
-    padding: 10px 40px;
-    border-radius: 100px;
-    font-size: 14px;
+
+  border: 2px solid black;
+  padding: 10px 40px;
+  border-radius: 100px;
+  font-size: 14px;
 
 }
 
 .social-footer a {
-    padding: 3px 7px;
-    border-radius: 5px;
-    color: white;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: white;
 
-    &:hover {
-        opacity: .8;
-    }
+  &:hover {
+    opacity: .8;
+  }
+
+  &.tiktok {
+    box-shadow: -1px -1px 0px rgb(127 239 236), 1px 1px 0px rgb(224 63 84);
+  }
 }
