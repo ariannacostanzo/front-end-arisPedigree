@@ -2,7 +2,7 @@ import Heading from "../../assets/components/heading/Heading";
 import "./contactUsPage.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 const ContactusPage = () => {
@@ -30,40 +30,36 @@ const ContactusPage = () => {
           </h4>
 
           {/* Social */}
-          <ul className="socials-list flex gap-4 justify-center text-2xl">
+          <h4>Find us on:</h4>
+          <ul className="socials-list mt-2 flex flex-col gap-5 justify-center text-2xl">
             <li>
               <a href="#" className="bg-[#0867ff]">
-                <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
+                <FontAwesomeIcon className="mr-2" icon={faFacebook}></FontAwesomeIcon>
+                Facebook
               </a>
             </li>
             <li>
               <a href="#" className="bg-[#2298ef]">
-                <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
+                <FontAwesomeIcon className="mr-2" icon={faTwitter}></FontAwesomeIcon>
+                Twitter
               </a>
             </li>
             <li>
               <a href="#" className="bg-[#0174b5]">
-                <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
+                <FontAwesomeIcon className="mr-2" icon={faLinkedin}></FontAwesomeIcon>
+                LinkedIn
               </a>
             </li>
             <li>
-              <a href="#" className="bg-[#0eab04]">
-                <FontAwesomeIcon icon={faWhatsapp}></FontAwesomeIcon>
+              <a href="https://wa.me/393713030412" target="_blank" className="bg-[#0eab04]">
+                <FontAwesomeIcon className="mr-2" icon={faWhatsapp}></FontAwesomeIcon>
+                WhatsApp
               </a>
             </li>
             <li>
-              <a href="#" className="bg-[#567ca0]">
-                <FontAwesomeIcon icon={faVk}></FontAwesomeIcon>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="bg-[#794e93]">
-                <FontAwesomeIcon icon={faPhoneVolume}></FontAwesomeIcon>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="bg-[#898a8f]">
-                <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+              <a href="#" className="bg-[#e1395f]">
+                <FontAwesomeIcon className="mr-2" icon={faInstagram}></FontAwesomeIcon>
+                Instagram
               </a>
             </li>
           </ul>
