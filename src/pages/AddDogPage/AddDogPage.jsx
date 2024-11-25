@@ -115,7 +115,7 @@ const AddDogPage = () => {
     setIsDamSelected(true);
   };
 
- 
+
 
   const searchforFather = async () => {
     setSires([]);
@@ -243,7 +243,7 @@ const AddDogPage = () => {
       kennel,
       owner,
       notes,
-      userId : user.id,
+      userId: user.id,
       image,
     };
 
@@ -271,13 +271,13 @@ const AddDogPage = () => {
     formDataToSend.append("notes", dataToSend.notes);
     formDataToSend.append("userId", dataToSend.userId);
     formDataToSend.append("image", dataToSend.image);
-    
+
 
 
     formDataToSend.forEach((value, key) => {
       console.log(`${key}: ${value}, Type: ${typeof value}`);
 
-      
+
       if (value instanceof File) {
         console.log(`File Name: ${value.name}, File Type: ${value.type}`);
       }
@@ -292,11 +292,11 @@ const AddDogPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       setErrorBags({});
       navigate(`/dogDetail/${response.data.id}`);
-       window.scrollTo(0, 0);
-       window.location.reload();
+      window.scrollTo(0, 0);
+      window.location.reload();
     } catch (error) {
       const errors = error.response.data.errors || [];
       console.log(error.response.data.errors);
@@ -373,7 +373,7 @@ const AddDogPage = () => {
                 <div className="form-row">
                   {/* breed  */}
                   <div className="form-col">
-                    <FormLabel forName="add-breed" label="Breed" />
+                    <FormLabel forName="add-breed" label="Breed" isMandatory={true} />
                     <select
                       name="breedId"
                       id="add-breed"
@@ -396,7 +396,7 @@ const AddDogPage = () => {
                 <div className="form-row">
                   {/* name  */}
                   <div className="form-col">
-                    <FormLabel forName="add-name" label="Name" />
+                    <FormLabel forName="add-name" label="Name" isMandatory={true} />
                     {errorBags.name && (
                       <p className="error-text">{errorBags.name}</p>
                     )}
@@ -649,6 +649,7 @@ const AddDogPage = () => {
                     <FormLabel
                       forName="add-land-of-standing"
                       label="Land of standing"
+                      isMandatory={true}
                     />
                     <select
                       name="countryId"
@@ -744,8 +745,9 @@ const AddDogPage = () => {
                   </div>
                 </div>
 
-                <div className="form-row">
-                  <button type="submit">Add dog</button>
+                <div className="form-row flex-col ">
+                  <address className=" self-start">Fields marked with <span className="text-red-400">*</span> are mandatory</address>
+                  <button className="self-start" type="submit">Add dog</button>
                 </div>
               </form>
             )}
