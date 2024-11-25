@@ -11,10 +11,8 @@
         .email-sender {
             padding: 2px 10px;
             border-radius: 20px;
-            animation: fade-bg 1.5s linear infinite alternate;
 
             &:hover {
-                animation: none;
                 background-color: rgb(226, 226, 226);
             }
         }
@@ -29,19 +27,4 @@
             opacity: .8;
         }
     }
-}
-
-@keyframes fade-bg {
-    0% {
-        background-color: transparent;
-    }
-
-    50% {
-        background-color: rgb(226, 226, 226);
-    }
-
-    0% {
-        background-color: transparent;
-    }
-
 }
