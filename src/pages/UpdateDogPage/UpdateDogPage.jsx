@@ -7,7 +7,7 @@ import { useBreed } from "../../providers/breedsProvider.jsx";
 import { useCountry } from "../../providers/countriesProvider.jsx";
 import Loader from "../../assets/components/loader/Loader.jsx";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "../../utils/axiosClient.js";
 import { useNavigate } from "react-router-dom";
 import placeholder from "../../../public/placehodler.jpg";
@@ -18,6 +18,11 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 //fixare upload imagini
 
 const AddDogPage = () => {
+
+
+
+
+
     // variabili per riempire il form
     const { breeds, loading } = useBreed();
     const { countries } = useCountry();
@@ -77,6 +82,51 @@ const AddDogPage = () => {
     useEffect(() => {
         // console.log(formData)
     }, [formData])
+
+
+    // Dati del cane
+    let { id } = useParams();
+    id = parseInt(id);
+    const [isLoading, setIsLoading] = useState(false)
+
+    const fetchDog = async () => {
+        try {
+            setIsLoading(true)
+            const { data: dog } = await axios.get(`http://localhost:8000/dogs/${id}`);
+
+            setFormData({
+                breedId: dog.breedId,
+                name: dog.name,
+                titles: dog.titles || "",
+                sireId: dog.sireId || "",
+                sire: dog.sire.name || "",
+                dam: dog.dam.name || "",
+                damId: dog.damId || "",
+                sex: dog.sex,
+                size: dog.size || "",
+                weight: dog.weight || "",
+                dateOfBirth: dog.dateOfBirth || "",
+                dateOfDeath: dog.dateOfDeath || "",
+                color: dog.color || "",
+                countryId: dog.countryId,
+                breeder: dog.breeder || "",
+                kennel: dog.kennel || "",
+                owner: dog.owner || "",
+                notes: dog.notes || "",
+                image: dog.image || null,
+
+            });
+            console.log(dog);
+        } catch (error) {
+            console.error("Errore nel recupero dei dati del cane:", error);
+        } finally {
+            setIsLoading(false)
+        }
+    };
+
+    useEffect(() => {
+        fetchDog();
+    }, [id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -331,7 +381,7 @@ const AddDogPage = () => {
     return (
         <>
             <div className="addDogPage">
-                <Heading heading="Add new dog"></Heading>
+                <Heading heading="Update dog"></Heading>
                 <div className=" bg-white text-black py-10">
                     <div className="p-4 container mx-auto">
                         {/* se non è loggato  */}
@@ -363,7 +413,7 @@ const AddDogPage = () => {
                         {loading || (isCreating && <Loader></Loader>)}
 
                         {/* se è loggato e ho caricato i dati */}
-                        {isLoggedIn && !loading && (
+                        {isLoggedIn && !isLoading && !loading && (
                             // form
                             <form
                                 encType="multipart/form-data"
