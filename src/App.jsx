@@ -9,6 +9,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SearchDogPage from "./pages/SearchDogPage/SearchDogPage";
 import DogsListPage from "./pages/DogsListPage/DogsListPage";
 import AddDogPage from "./pages/AddDogPage/AddDogPage";
+import UpdateDogPage from "./pages/UpdateDogPage/UpdateDogPage.jsx";
 import DogDetailPage from "./pages/DogDetailPage/DogDetailPage";
 import NewsDetailPage from "./pages/NewsDetailPage/NewsDetailPage";
 import BreedsDetailPage from "./pages/BreedsDetailPage/BreedsDetailPage";
@@ -41,6 +42,7 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     {/* rotta protetta  */}
                     <Route path="add-new-dog" element={<AddDogPage />} />
+                    <Route path=":slug/update-dog" element={<UpdateDogPage />} />
                     <Route
                       path="userDetail"
                       element={
@@ -60,7 +62,7 @@ function App() {
                       path="countryDetail/:countrySlug"
                       element={<CountryDetailPage />}
                     />
-                    
+
                     {/* Not Found Route */}
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
