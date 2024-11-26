@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import "./pedigreeTree.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const PedigreeTree = ({ dog }) => {
+
+  const [generationsLength, setGenerationsLength] = useState(4);
 
 
   const shortName = (name) => {
@@ -61,43 +64,46 @@ const PedigreeTree = ({ dog }) => {
     return (
       <div className="generation">
         {/* Current Dog */}
-        <div className="current-generation generation-row">
-          <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
-            {/* se il cane è ripetuto  */}
-            {isRepeated && (
-              <div className="repeated-circle"></div>
-            )}
-            {dog.image && (
-              <Link to={`/dogDetail/${dog.id}`}>
-                <img src={dog.image} alt="" />
-              </Link>
-            )}
-            <h3>
-              <Link
-                to={`/dogDetail/${dog.id}`}
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                {depth < 4 && longName(dog.name)}
-                {depth > 4 && shortName(dog.name)}
-              </Link>
-            </h3>
-            <div>
-              {dog.titles && (
-                <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
-                  {dog.titles}
-                </p>
+        {depth > 0 && depth <= generationsLength &&
+          <div className="current-generation generation-row">
+            <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
+              {/* se il cane è ripetuto  */}
+              {isRepeated && (
+                <div className="repeated-circle"></div>
               )}
-            </div>
-            <div className="relative-country flex items-center gap-2">
-              {depth < 4 && (
-                <img
-                  src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
-                  alt=""
-                />
+              {dog.image && (
+                <Link to={`/dogDetail/${dog.id}`}>
+                  <img src={dog.image} alt="" />
+                </Link>
               )}
+              <h3>
+                <Link
+                  to={`/dogDetail/${dog.id}`}
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  {depth < 4 && longName(dog.name)}
+                  {depth > 4 && shortName(dog.name)}
+                </Link>
+              </h3>
+              <div>
+                {dog.titles && (
+                  <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
+                    {dog.titles}
+                  </p>
+                )}
+              </div>
+              <div className="relative-country flex items-center gap-2">
+                {depth < 4 && (
+                  <img
+                    src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
+                    alt=""
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        }
+
 
         {/* Parents */}
         <div className="parents generation-row">
@@ -123,11 +129,30 @@ const PedigreeTree = ({ dog }) => {
             )}
           </div>
         </div>
-      </div>
+      </div >
     );
   };
 
-  return <div className="pedigree-tree">Ancestor tree: {createTable(dog)}</div>;
+  return <div className="pedigree-tree">
+    <label >Generations in pedigree:
+
+      <select
+        value={generationsLength}
+        onChange={e => setGenerationsLength(e.target.value)}
+      >
+        {
+          [4, 5, 6, 7, 8].map(el => <option
+            key={`option-${el}`}
+            value={el}
+          >
+            {el}
+          </option>)
+        }
+      </select>
+    </label>
+    Ancestor tree:
+    {createTable(dog)}
+  </div>;
 };
 
 export default PedigreeTree;
