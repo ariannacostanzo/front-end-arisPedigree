@@ -38,7 +38,7 @@ const PedigreeTree = ({ dog }) => {
   // Conta le occorrenze di ogni cane prima di generare l'albero genealogico
   countDogs(dog);
 
-  const createTable = (dog, processedIds = new Set(), depth = 0, repeteadDogs = []) => {
+  const createTable = (dog, depth = 0) => {
 
     if (!dog) {
       return null; // Nessun cane, interrompi la ricorsione.
@@ -47,15 +47,6 @@ const PedigreeTree = ({ dog }) => {
     // Controlla se il cane è tra i ripetuti
     const isRepeated = dogFrequency.get(dog.id) > 1;
 
-    if (isRepeated) {
-      // Aggiungi il cane a `repeteadDogs` se non è già presente
-      if (!repeteadDogs.includes(dog.id)) {
-        repeteadDogs.push(dog.id);
-      }
-    } else {
-      // Aggiungi il cane ai processati
-      processedIds.add(dog.id);
-    }
 
     // Separate sire and dam
     const sire = dog.sire;
@@ -110,7 +101,7 @@ const PedigreeTree = ({ dog }) => {
           {/* Sire */}
           <div className="dog-cell parent">
             {sire ? (
-              createTable(sire, processedIds, depth + 1)
+              createTable(sire, depth + 1)
             ) : (
               <div className="placeholder">
                 <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
@@ -121,7 +112,7 @@ const PedigreeTree = ({ dog }) => {
           {/* Dam */}
           <div className="dog-cell parent">
             {dam ? (
-              createTable(dam, processedIds, depth + 1)
+              createTable(dam, depth + 1)
             ) : (
               <div className="placeholder">
                 <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
@@ -150,7 +141,9 @@ const PedigreeTree = ({ dog }) => {
         }
       </select>
     </label>
-    {createTable(dog)}
+    <div className="table-wrapper">
+      {createTable(dog)}
+    </div>
   </div>;
 };
 
