@@ -7,7 +7,7 @@ const PedigreeTree = ({ dog }) => {
 
 
   const shortName = (name) => {
-    if (name.length > 5) return name.slice(0,5) + '...'
+    if (name.length > 5) return name.slice(0, 5) + '...'
     return name
   }
 
@@ -16,22 +16,47 @@ const PedigreeTree = ({ dog }) => {
     return name;
   }
 
-  const createTable = (dog, processedIds = new Set(), depth = 0) => {
-    const repeteadDogs = [];
+  // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
+  const dogFrequency = new Map();
 
-    if (!dog || processedIds.has(dog.id)) {
-      repeteadDogs.push(dog.id)
+  const countDogs = (dog) => {
+    if (!dog) return;
+
+    dogFrequency.set(
+      dog.id, // chiave
+      (dogFrequency.get(dog.id) || 0) + 1 // valore= precedenti occorrenze di dog.id se presenti oppure 0 e poi lo incremento
+    )
+
+    // Chiamata ricorsiva sui genitori
+    countDogs(dog.sire); // Conta il padre
+    countDogs(dog.dam);  // Conta la madre
+  }
+
+  // Conta le occorrenze di ogni cane prima di generare l'albero genealogico
+  countDogs(dog);
+
+  const createTable = (dog, processedIds = new Set(), depth = 0, repeteadDogs = []) => {
+
+    if (!dog) {
+      return null; // Nessun cane, interrompi la ricorsione.
     }
-      
 
-    processedIds.add(dog.id);
+    // Controlla se il cane è tra i ripetuti
+    const isRepeated = dogFrequency.get(dog.id) > 1;
+
+    if (isRepeated) {
+      // Aggiungi il cane a `repeteadDogs` se non è già presente
+      if (!repeteadDogs.includes(dog.id)) {
+        repeteadDogs.push(dog.id);
+      }
+    } else {
+      // Aggiungi il cane ai processati
+      processedIds.add(dog.id);
+    }
 
     // Separate sire and dam
     const sire = dog.sire;
     const dam = dog.dam;
-
-    console.log(sire)
-    console.log(dam)
 
     return (
       <div className="generation">
@@ -39,7 +64,7 @@ const PedigreeTree = ({ dog }) => {
         <div className="current-generation generation-row">
           <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
             {/* se il cane è ripetuto  */}
-            {repeteadDogs.includes(dog.id) && (
+            {isRepeated && (
               <div className="repeated-circle"></div>
             )}
             {dog.image && (
