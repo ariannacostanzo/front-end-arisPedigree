@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const GeneralInfo = ({ dog, isLoading }) => {
 
-  const {user} = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const renderDate = (date) => {
@@ -34,7 +34,7 @@ const GeneralInfo = ({ dog, isLoading }) => {
       console.log(error);
     } finally {
       setIsDeleting(false);
-      
+
     }
   };
 
@@ -44,7 +44,10 @@ const GeneralInfo = ({ dog, isLoading }) => {
         {isLoading && <Loader></Loader>}
         {!isLoading && (
           <>
-            <h2>{dog.name}</h2>
+            <div>
+              <h2>{dog.name}</h2>
+              <Link to={`/${dog.id}/update-dog`}>Update</Link>
+            </div>
             <div className="md:flex gap-4">
               <div className="left-content basis-1/3">
                 <img src={dog.image ? dog.image : placeholder} alt="" />
@@ -66,9 +69,8 @@ const GeneralInfo = ({ dog, isLoading }) => {
                   <p>
                     Title:{" "}
                     <span
-                      className={`${
-                        dog.titles ? "bg-[#73e567] p-1 text-[#095b00]" : ""
-                      }`}
+                      className={`${dog.titles ? "bg-[#73e567] p-1 text-[#095b00]" : ""
+                        }`}
                     >
                       {dog.titles ? dog.titles : "//"}
                     </span>
