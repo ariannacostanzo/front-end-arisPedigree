@@ -46,8 +46,11 @@ const GeneralInfo = ({ dog, isLoading }) => {
           <>
             <div>
               <h2>{dog.name}</h2>
+
+              {/* Da stilizzare */}
               <Link to={`/${dog.id}/update-dog`}>Update</Link>
             </div>
+
             <div className="md:flex gap-4">
               <div className="left-content basis-1/3">
                 <img src={dog.image ? dog.image : placeholder} alt="" />
