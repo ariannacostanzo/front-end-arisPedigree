@@ -134,7 +134,7 @@ const PedigreeTree = ({ dog }) => {
   };
 
   return <div className="pedigree-tree">
-    <label >Generations in pedigree:
+    <label className="mb-3">Generations in pedigree:
 
       <select
         value={generationsLength}
@@ -150,7 +150,6 @@ const PedigreeTree = ({ dog }) => {
         }
       </select>
     </label>
-    Ancestor tree:
     {createTable(dog)}
   </div>;
 };
