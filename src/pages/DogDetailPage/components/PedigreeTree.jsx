@@ -82,7 +82,7 @@ const PedigreeTree = ({ dog }) => {
                   onClick={() => window.scrollTo(0, 0)}
                 >
                   {depth < 4 && longName(dog.name)}
-                  {depth > 4 && shortName(dog.name)}
+                  {depth >= 4 && shortName(dog.name)}
                 </Link>
               </h3>
               <div>
