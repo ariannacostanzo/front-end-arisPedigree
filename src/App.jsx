@@ -42,7 +42,7 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     {/* rotta protetta  */}
                     <Route path="add-new-dog" element={<AddDogPage />} />
-                    <Route path=":slug/update-dog" element={<UpdateDogPage />} />
+                    <Route path=":id/update-dog" element={<UpdateDogPage />} />
                     <Route
                       path="userDetail"
                       element={
