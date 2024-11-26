@@ -2,7 +2,7 @@ import Heading from "../../assets/components/heading/Heading";
 import "./contactUsPage.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faLinkedin, faTwitter, faVk, faWhatsapp, faPinterest, faTiktok, faThreads } from "@fortawesome/free-brands-svg-icons";
 
 const ContactusPage = () => {
@@ -108,6 +108,15 @@ const ContactusPage = () => {
                 className="bg-[#567ca0]">
                 <FontAwesomeIcon className="mr-2" icon={faVk}></FontAwesomeIcon>
                 VK
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://ok.ru/group/54439009386639"
+                target="_blank"
+                className="bg-[#e98019]">
+                <FontAwesomeIcon className="mr-2" icon={faPaw}></FontAwesomeIcon>
+                OK
               </a>
             </li>
           </ul>

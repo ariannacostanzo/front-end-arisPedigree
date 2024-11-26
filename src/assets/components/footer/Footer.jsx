@@ -2,7 +2,7 @@ import footerImages from "../../../database/footer-img";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faThreads, faPinterest, faTiktok, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./footer.scss";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -173,6 +173,14 @@ const Footer = () => {
                 target="_blank"
                 className="bg-[#567ca0]">
                 <FontAwesomeIcon icon={faVk}></FontAwesomeIcon>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://ok.ru/group/54439009386639"
+                target="_blank"
+                className="bg-[#e98019]">
+                <FontAwesomeIcon icon={faPaw}></FontAwesomeIcon>
               </a>
             </li>
 
