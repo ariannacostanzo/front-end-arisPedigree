@@ -1,0 +1,18 @@
+.male {
+    background-color: #e7feff;
+}
+
+.female {
+    background-color: #f6e9e6;
+}
+
+.tree-label {
+    border-radius: 8px;
+    padding: 5px 10px;
+    text-align: center;
+    box-sizing: border-box;
+
+    * {
+        margin: 0 auto;
+    }
+}
