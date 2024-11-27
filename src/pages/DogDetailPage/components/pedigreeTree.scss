@@ -7,6 +7,12 @@
   flex-direction: column;
   overflow-x: auto;
 
+  select {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+
   p {
     padding: 0 5px;
   }
