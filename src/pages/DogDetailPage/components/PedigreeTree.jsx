@@ -3,21 +3,13 @@ import "./pedigreeTree.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Tree from 'react-d3-tree';
+import NodeTreeLabel from "./NodeTreeLabel";
+import { useCenteredTree } from "../utils/helpers";
 
-const PedigreeTree = ({ dog }) => {
+const PedigreeTree = ({ dog, resetCard }) => {
 
   const [generationsLength, setGenerationsLength] = useState(4);
-
-
-  const shortName = (name) => {
-    if (name.length > 5) return name.slice(0, 5) + '...'
-    return name
-  }
-
-  const longName = (name) => {
-    if (name.length > 20) return name.slice(0, 20) + "...";
-    return name;
-  }
 
   // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
   const dogFrequency = new Map();
@@ -38,98 +30,51 @@ const PedigreeTree = ({ dog }) => {
   // Conta le occorrenze di ogni cane prima di generare l'albero genealogico
   countDogs(dog);
 
-  const createTable = (dog, depth = 0) => {
 
-    if (!dog) {
-      return null; // Nessun cane, interrompi la ricorsione.
-    }
+  const convertToTreeData = (dog) => {
+    if (!dog) return {
+      name: null
+    };
 
     // Controlla se il cane è tra i ripetuti
     const isRepeated = dogFrequency.get(dog.id) > 1;
 
-
-    // Separate sire and dam
-    const sire = dog.sire;
-    const dam = dog.dam;
-
-    return (
-      <div className="generation">
-        {/* Current Dog */}
-        {depth > 0 && depth <= generationsLength &&
-          <div className="current-generation generation-row">
-            <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
-              {/* se il cane è ripetuto  */}
-              {isRepeated && (
-                <div className="repeated-circle"></div>
-              )}
-              {dog.image && (
-                <Link to={`/dogDetail/${dog.id}`}>
-                  <img src={dog.image} alt="" />
-                </Link>
-              )}
-              <h3>
-                <Link
-                  to={`/dogDetail/${dog.id}`}
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  {depth < 4 && longName(dog.name)}
-                  {depth >= 4 && shortName(dog.name)}
-                </Link>
-              </h3>
-              <div>
-                {dog.titles && (
-                  <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
-                    {dog.titles}
-                  </p>
-                )}
-              </div>
-              <div className="relative-country flex items-center gap-2">
-                {depth < 4 && (
-                  <img
-                    src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
-                    alt=""
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        }
-
-
-        {/* Parents */}
-        <div className="parents generation-row">
-          {/* Sire */}
-          <div className="dog-cell parent">
-            {sire ? (
-              createTable(sire, depth + 1)
-            ) : (
-              <div className="placeholder">
-                <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
-              </div>
-            )}
-          </div>
-
-          {/* Dam */}
-          <div className="dog-cell parent">
-            {dam ? (
-              createTable(dam, depth + 1)
-            ) : (
-              <div className="placeholder">
-                <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
-              </div>
-            )}
-          </div>
-        </div>
-      </div >
-    );
+    return {
+      name: dog.name,
+      attributes: {
+        id: dog.id,
+        isRepeated,
+        image: dog.image,
+        name: dog.name,
+        titles: dog.titles,
+        country: dog.country.code,
+        sex: dog.sex
+      },
+      children: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
+    }
   };
 
-  return <div className="pedigree-tree">
-    <label className="mb-3">Generations in pedigree:
+  const createTree = (dog) => {
+    if (!dog) return null;
 
+    // Parte direttamente dai genitori
+    return {
+      name: "Parents",
+      children: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
+    }
+  }
+
+  const treeData = createTree(dog);
+
+  const [translate, containerRef] = useCenteredTree();
+
+  return <div className="pedigree-tree">
+
+    {/* Select per scegliere il numero di generazioni da visualizzare */}
+    <label className="mb-3">Generations in pedigree:
       <select
         value={generationsLength}
-        onChange={e => setGenerationsLength(e.target.value)}
+        onChange={e => setGenerationsLength(Number(e.target.value))}
       >
         {
           [4, 5, 6, 7, 8].map(el => <option
@@ -141,9 +86,30 @@ const PedigreeTree = ({ dog }) => {
         }
       </select>
     </label>
-    <div className="table-wrapper">
-      {createTable(dog)}
+
+    {/* Tree dog */}
+    <div
+      style={{ width: "100%", height: "600px" }}
+      ref={containerRef}
+    >
+      <Tree
+        data={treeData} // dati albero
+        orientation="horizontal" // orientamento albero
+        pathFunc="step" // stile delle linee
+        nodeSize={{ x: 250, y: 45 }} // distanza nodi
+        zoomable={true} //abilitazione zoom
+        draggable={true} // abilitazione trascinamento
+        separation={{ siblings: 2, nonSiblings: 3 }}
+        translate={translate}
+        renderCustomNodeElement={(rd3tProps) =>
+          <NodeTreeLabel
+            dog={rd3tProps.nodeDatum}
+            resetCard={resetCard}
+          />
+        }
+      />
     </div>
+
   </div>;
 };
 
