@@ -88,7 +88,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
 
     {/* Tree dog */}
     <div
-      style={{ width: "100%", height: "1000px", position: "relative", overflowX: "auto" }}
+      style={{ width: "100%", height: "1000px", position: "relative" }}
       ref={containerRef}
     >
       <Tree
