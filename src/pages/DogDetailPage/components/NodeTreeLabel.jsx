@@ -3,20 +3,28 @@ import { Link } from "react-router-dom";
 import "./nodeTreeLabel.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import React, { useRef, useState, useEffect } from "react";
 
 const NodeTreeLabel = ({ dog, resetCard }) => {
 
     const nodeSize = { x: 200, y: 200 };
 
     const foreignObjectProps = {
-        width: nodeSize.x,
-        height: nodeSize.y,
-        x: -nodeSize.x / 2,
-        y: "-25"
+        width: nodeSize.x, // Larghezza cella
+        height: nodeSize.y, // Altezza cella
+        x: -nodeSize.x / 2, // Posizione asse x
+        y: "-25"    // Posizione asse y
     };
 
-    console.log(dog)
+    /**
+     * Funzione che abbrevia una stringa alla lunghezza indicata
+     * @param {String} word stringa da abbreviare
+     * @param {Number} length lunghezza desiderata
+     * @returns {String} la stringa abbreviata
+     */
+    const reduceStr = (word, length) => {
+        return word.length > length ? word.substring(0, length) + "..." : word;
+    }
+
     return (
         <g
 
@@ -44,13 +52,16 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
 
                         {/* Nome cane */}
                         <button onClick={resetCard}>
-                            <h3 style={{ textAlign: "center" }}>
+                            <h3
+                                className="text-center text-[14px]"
+                            >
                                 <Link
                                     to={`/dogDetail/${dog.attributes?.id}`}
                                     onClick={() => window.scrollTo(0, 0)}
                                 >
                                     {dog.name}
                                 </Link>
+                                {dog.attributes?.depth}
                             </h3>
                         </button>
 
@@ -70,7 +81,11 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                                             <Link
                                                 to={`/dogDetail/${dog.attributes?.id}`}
                                             >
-                                                <img src={dog.attributes?.image} alt={dog.name}></img>
+                                                <img
+                                                    className="dog-img"
+                                                    src={dog.attributes?.image}
+                                                    alt={dog.name}
+                                                />
                                             </Link>
                                         </button>
                                     </li>
@@ -79,8 +94,8 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                                 {/* Titles */}
                                 {dog.attributes?.titles && (
                                     <li>
-                                        <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
-                                            {dog.attributes?.titles}
+                                        <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded">
+                                            {reduceStr(dog.attributes?.titles, 17)}
                                         </p>
                                     </li>
                                 )}
@@ -89,6 +104,7 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                                 {dog.attributes?.country && (
                                     <li>
                                         <img
+                                            className="flag-img"
                                             src={`https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
                                             alt=""
                                         />
