@@ -18,8 +18,6 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
         y: "-25"    // Posizione asse y
     };
 
-    const circleClass = `bg-[${dog.attributes?.circleColor || 'red'}]`
-
     /**
      * Funzione che abbrevia una stringa alla lunghezza indicata
      * @param {String} word stringa da abbreviare
