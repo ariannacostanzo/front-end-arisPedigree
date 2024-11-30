@@ -1,109 +1,142 @@
-.tree-container {
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: visible;
-    box-sizing: border-box;
-    height: 100vh;
-    display: flex;
-
-    >.tree-col {
-        padding: 0 10px;
-        display: flex;
-        flex-basis: 25%;
-        flex-direction: column;
-        flex-shrink: 0;
-        justify-content: space-evenly;
-
-        >.dog-card {
-            width: 100%;
-            // min-height: 40px;
-            background-color: chocolate;
-            position: relative;
-            flex-shrink: 0;
-
-
-
-            &:nth-child(odd)::before {
-                content: "";
-                background-color: black;
-                height: 200%;
-                width: 2px;
-                position: absolute;
-                right: 100%;
-                top: 0;
-            }
-
-            &:nth-child(even)::before {
-                content: "";
-                background-color: black;
-                height: 200%;
-                width: 2px;
-                position: absolute;
-                right: 100%;
-                bottom: 0;
-            }
-
-        }
-    }
-
-    >.tree-col:not(:last-child)>.dog-card::after {
-        content: "";
-        background-color: black;
-        height: 2px;
-        width: 20px;
-        position: absolute;
-        top: 50%;
-        left: 100%;
-
-    }
-
+.table-wrapper {
+  width: 80vw;
 }
 
-.tree-col:nth-child(1) {
-    >.dog-card {
-        flex-basis: calc(100vh / 5);
+.pedigree-tree {
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+  // overflow-x: auto;
+
+
+  .rd3t-tree-container {
+    // width: 2300px;
+    // height: 5000px;
+  }
+
+  select {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+
+  p {
+    padding: 0 5px;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none;
+  }
+
+  .relative-country {
+    font-size: 11px;
+    color: grey;
+
+    img {
+      width: 15px;
+      height: 15px;
+      display: block;
     }
+  }
+
+  h3 {
+    font-family: var(--originalFont);
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: var(--transition);
+    text-shadow: 1px 1px 10px white;
+
+    &:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+  }
 }
 
-.tree-col:nth-child(2) {
-    >.dog-card {
-        flex-basis: calc(100vh / 9);
-    }
+.generation {
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.tree-col:nth-child(3) {
-    >.dog-card {
-        flex-basis: calc(100vh / 17);
-    }
+.generation-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
 }
 
-.tree-col:nth-child(4) {
-    >.dog-card {
-        flex-basis: calc(100vh / 33);
-    }
+.dog-cell {
+  padding: 0 0;
+  border: 1px solid rgb(153, 153, 153);
+  text-align: center;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-.tree-col:nth-child(5) {
-    >.dog-card {
-        flex-basis: calc(100vh / 65);
-    }
+.parent,
+.current-generation,
+.children {
+  width: 100%;
 }
 
-.tree-col:nth-child(6) {
-    >.dog-card {
-        flex-basis: calc(100vh / 129);
-    }
+.bg-male {
+  background-color: #e0ffff;
 }
 
-.tree-col:nth-child(7) {
-    >.dog-card {
-        flex-basis: calc(100vh / 257);
-    }
+.bg-female {
+  background-color: #fae8e6;
 }
 
-.tree-col:nth-child(8) {
-    >.dog-card {
-        flex-basis: calc(100vh / 513);
+.placeholder {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  width: 100%;
+  border-radius: 8px;
+}
+
+
+
+// media query
+@media screen and (min-width: 800px) {
+  .dog-cell {
+    font-size: 16px;
+  }
+
+  .pedigree-tree {
+    .relative-country {
+      font-size: 14px;
+      color: grey;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
     }
+
+    img {
+      display: block;
+    }
+
+  }
+}
+
+// media query
+@media screen and (min-width: 1100px) {
+  .dog-cell {
+    font-size: 16px;
+    padding: 5px;
+  }
 }
