@@ -1,0 +1,150 @@
+.table-wrapper {
+  width: 80vw;
+}
+
+.pedigree-tree {
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+  // overflow-x: auto;
+
+
+  .rd3t-tree-container {
+    // width: 2300px;
+    // height: 5000px;
+  }
+
+  select {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+
+  p {
+    padding: 0 5px;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none;
+  }
+
+  .relative-country {
+    font-size: 11px;
+    color: grey;
+
+    img {
+      width: 15px;
+      height: 15px;
+      display: block;
+    }
+  }
+
+  h3 {
+    font-family: var(--originalFont);
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: var(--transition);
+    text-shadow: 1px 1px 10px white;
+
+    &:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+  }
+}
+
+.generation {
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.generation-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.dog-cell {
+  padding: 0 0;
+  border: 1px solid rgb(153, 153, 153);
+  text-align: center;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.parent,
+.current-generation,
+.children {
+  width: 100%;
+}
+
+.bg-male {
+  background-color: #e0ffff;
+}
+
+.bg-female {
+  background-color: #fae8e6;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.repeated-circle {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: rgb(255, 81, 0);
+  border-radius: 50%;
+}
+
+// media query
+@media screen and (min-width: 800px) {
+  .dog-cell {
+    font-size: 16px;
+  }
+
+  .pedigree-tree {
+    .relative-country {
+      font-size: 14px;
+      color: grey;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    img {
+      display: block;
+    }
+
+  }
+}
+
+// media query
+@media screen and (min-width: 1100px) {
+  .dog-cell {
+    font-size: 16px;
+    padding: 5px;
+  }
+}

@@ -1,14 +1,10 @@
-import "./pedigreeTree.scss";
 import { useState } from "react";
-import Tree from 'react-d3-tree';
-import NodeTreeLabel from "./NodeTreeLabel";
-import { useCenteredTree } from "../utils/helpers";
+import "./pedigreeTree.scss";
 
 const PedigreeTree = ({ dog, resetCard }) => {
 
   const [generationsLength, setGenerationsLength] = useState(4);
 
-  const [translate, containerRef] = useCenteredTree();
 
   // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
   const dogFrequency = new Map();
@@ -40,17 +36,15 @@ const PedigreeTree = ({ dog, resetCard }) => {
 
     return {
       name: dog.name,
-      attributes: {
-        id: dog.id,
-        isRepeated,
-        image: dog.image,
-        name: dog.name,
-        titles: dog.titles,
-        country: dog.country.code,
-        sex: dog.sex,
-        depth
-      },
-      children: [convertToTreeData(dog.dam, depth), convertToTreeData(dog.sire, depth)]
+      id: dog.id,
+      isRepeated,
+      image: dog.image,
+      name: dog.name,
+      titles: dog.titles,
+      country: dog.country.code,
+      sex: dog.sex,
+      depth,
+      parents: [convertToTreeData(dog.dam, depth), convertToTreeData(dog.sire, depth)]
     }
   };
 
@@ -60,59 +54,600 @@ const PedigreeTree = ({ dog, resetCard }) => {
     // Parte direttamente dai genitori
     return {
       name: "Parents",
-      children: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
+      parents: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
     }
   }
 
   const treeData = createTree(dog);
 
+  const renderNode = (parents, position = "") => {
+
+    return (
+      <ul className={`children ${position}`}>
+        <li className="mb-4">
+          <h4>{parents[0].name || "..."}</h4>
+          {parents[0]?.parents?.length > 0 && renderNode(parents[0].parents, "top-child")}
+        </li>
+        <li>
+          <h4>{parents[1].name || "..."}</h4>
+          {parents[1]?.parents?.length > 0 && renderNode(parents[1].parents, "bottom-child")}
+        </li>
+      </ul>
+    )
+  }
+
+  const renderTree = (treeData) => {
+
+    return (
+      <div className="parents">
+        <h4>{treeData.name}</h4>
+        {renderNode(treeData.parents)}
+      </div>
+    )
+  }
+
 
   return <div className="pedigree-tree">
 
-    {/* Select per scegliere il numero di generazioni da visualizzare */}
-    <label className="mb-3">Generations in pedigree:
-      <select
-        value={generationsLength}
-        onChange={e => setGenerationsLength(Number(e.target.value))}
-      >
-        {
-          [4, 5, 6, 7, 8].map(el => <option
-            key={`option-${el}`}
-            value={el}
-          >
-            {el}
-          </option>)
-        }
-      </select>
-    </label>
+    <div className="tree-container">
 
-    {/* Tree dog */}
-    <div
-      style={{ width: "100%", height: "1000px", position: "relative" }}
-      ref={containerRef}
-    >
-      <Tree
-        data={treeData} // dati albero
-        orientation="horizontal" // orientamento albero
-        pathFunc="step" // stile delle linee
-        nodeSize={{ x: 250, y: 45 }} // distanza nodi
-        zoomable={true} //abilitazione zoom
-        draggable={true} // abilitazione trascinamento
-        separation={{ siblings: 4, nonSiblings: 3 }}
-        translate={translate}
-        renderCustomNodeElement={(rd3tProps) =>
-          <NodeTreeLabel
-            dog={rd3tProps.nodeDatum}
-            resetCard={resetCard}
-          />
-        }
-      />
+      {/* Gen 1 */}
+      <div className="tree-col">
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+      </div>
+
+      {/* Gen 2 */}
+      <div className="tree-col">
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+      </div>
+
+      {/* Gen 3 */}
+      <div className="tree-col">
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+      </div>
+
+      {/* Gen 4 */}
+      <div className="tree-col">
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+        <div className="dog-card"></div>
+      </div>
+
+      {/* Gen 5 */}
+      {generationsLength >= 5 &&
+        <div className="tree-col">
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+        </div>
+      }
+
+
+      {/* Gen 6 */}
+      {generationsLength >= 6 &&
+        <div className="tree-col">
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+        </div>
+      }
+
+      {/* Gen 7 */}
+      {generationsLength >= 7 &&
+        <div className="tree-col">
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+        </div>
+      }
+
+      {/* Gen 8 */}
+      {generationsLength >= 7 &&
+        <div className="tree-col">
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+          <div className="dog-card"></div>
+        </div>
+      }
+
     </div>
+
+
+
 
   </div>;
 };
 
 export default PedigreeTree;
 
-//da completare
-//non funziona
