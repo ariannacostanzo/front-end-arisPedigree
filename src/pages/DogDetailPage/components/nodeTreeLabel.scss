@@ -7,8 +7,8 @@
 }
 
 .repeated-circle {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     position: absolute;
     right: 2px;
     top: 2px;
@@ -28,25 +28,26 @@
 
 .tree-label {
     border-radius: 8px;
-    padding: 5px 10px;
-    text-align: center;
+    padding: 4px 10px;
     box-sizing: border-box;
 
-    * {
-        margin: 0 auto;
-    }
+
 
     .flag-img {
         height: 30px;
         width: 30px;
+
     }
 
-    .dog-img {
+    figure {
+        height: 60px;
         width: 60px;
-    }
-}
 
-.cell-l {
-    width: 110px;
-    height: 80px;
+        .dog-img {
+            height: 60px;
+            width: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+    }
 }
