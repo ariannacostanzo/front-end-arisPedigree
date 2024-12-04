@@ -94,7 +94,7 @@ const DogDetailPage = () => {
           {showCard.shown === 0 && (
             <GeneralInfo dog={dog} isLoading={isLoading}></GeneralInfo>
           )}
-          {showCard.shown === 1 && <PedigreeTree dog={dog}></PedigreeTree>}
+          {showCard.shown === 1 && <PedigreeTree dog={dog} resetCard={() => setShowCard({ shown: 0 })}></PedigreeTree>}
           {showCard.shown === 2 && <Offspring dog={dog}></Offspring>}
           {showCard.shown === 3 && <Siblings dog={dog}></Siblings>}
           {/* {showCard.shown === 4 && <Videos></Videos>} */}
