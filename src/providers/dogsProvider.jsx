@@ -13,6 +13,7 @@ const DogsProvider = ({ children }) => {
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [filterQuery, setFilterQuery] = useState(null);
+  const [currId, setCurrId] = useState(0);
 
   const fetchDogs = async () => {
     setLoading(true);
@@ -68,7 +69,9 @@ const DogsProvider = ({ children }) => {
         femaleCount,
         setFemaleCount,
         filterQuery,
-        setFilterQuery
+        setFilterQuery,
+        currId,
+        setCurrId
       }}
     >
       {children}

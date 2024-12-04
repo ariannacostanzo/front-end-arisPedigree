@@ -2,10 +2,13 @@
 import { Link } from "react-router-dom";
 import "./nodeTreeLabel.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBriefcaseClock, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
+import { useDogs } from "../../../providers/dogsProvider";
 
 const NodeTreeLabel = ({ dog, resetCard }) => {
+
+    const { currId, setCurrId } = useDogs();
 
     const nodeSize = {
         x: dog.attributes?.depth <= 2 ? 200 : 200,
@@ -74,7 +77,9 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                     </div>
                     :
                     <div
-                        className={`${dog.attributes?.depth <= 2 ? "flex-col justify-between" : "  gap-1"} flex items-center ${dog.attributes?.sex ? 'male' : 'female'} tree-label`}
+                        onMouseEnter={() => setCurrId(dog.attributes?.id)}
+                        onMouseLeave={() => setCurrId(0)}
+                        className={`${currId === dog.attributes?.id ? "marked-label" : ""} ${dog.attributes?.depth <= 2 ? "flex-col justify-between" : "  gap-1"} flex items-center ${dog.attributes?.sex ? 'male' : 'female'} tree-label`}
                         style={{
                             height: treeLabelHeight,
                             border: "1px solid black",

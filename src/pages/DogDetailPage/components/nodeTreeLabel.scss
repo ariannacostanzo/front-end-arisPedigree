@@ -31,7 +31,9 @@
     padding: 4px 10px;
     box-sizing: border-box;
 
-
+    &.marked-label {
+        filter: brightness(80%);
+    }
 
     .flag-img {
         height: 30px;
