@@ -5,10 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
 import { useDogs } from "../../../providers/dogsProvider";
+import { useUtils } from "../../../providers/utilsProvider";
 
 const NodeTreeLabel = ({ dog, resetCard }) => {
 
     const { currId, setCurrId } = useDogs();
+
+    const { reduceStr } = useUtils();
 
     const nodeSize = {
         x: dog.attributes?.depth <= 2 ? 200 : 200,
@@ -50,16 +53,6 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                 treeLabelHeight = "50px"
         }
 
-    }
-
-    /**
-     * Funzione che abbrevia una stringa alla lunghezza indicata
-     * @param {String} word stringa da abbreviare
-     * @param {Number} length lunghezza desiderata
-     * @returns {String} la stringa abbreviata
-     */
-    const reduceStr = (word, length) => {
-        return word.length > length ? word.substring(0, length) + "..." : word;
     }
 
     return (
