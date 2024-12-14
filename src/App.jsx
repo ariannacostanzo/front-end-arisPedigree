@@ -21,15 +21,16 @@ import UserPage from "./pages/UserPage/UserPage";
 import ProtectedRoute from "../src/assets/components/ProtectedRoute.jsx";
 import { DogsProvider } from "./providers/dogsProvider.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
+import UserAuth from "./middlewares/UserAuth.jsx";
 
 function App() {
   return (
     <>
-      <DogsProvider>
-        <BreedProvider>
-          <CountryProvider>
-            <AuthProvider>
-              <BrowserRouter>
+      <BrowserRouter>
+        <DogsProvider>
+          <BreedProvider>
+            <CountryProvider>
+              <AuthProvider>
                 <Routes>
                   <Route path="/" element={<DefaultLayout />}>
                     <Route index element={<HomePage />} />
@@ -41,8 +42,10 @@ function App() {
                     <Route path="dogs-list" element={<DogsListPage />} />
                     <Route path="login" element={<LoginPage />} />
                     {/* rotta protetta  */}
-                    <Route path="add-new-dog" element={<AddDogPage />} />
-                    <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                    <Route element={<UserAuth />}>
+                      <Route path="add-new-dog" element={<AddDogPage />} />
+                      <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                    </Route>
                     <Route
                       path="userDetail"
                       element={
@@ -67,11 +70,11 @@ function App() {
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>
-              </BrowserRouter>
-            </AuthProvider>
-          </CountryProvider>
-        </BreedProvider>
-      </DogsProvider>
+              </AuthProvider>
+            </CountryProvider>
+          </BreedProvider>
+        </DogsProvider>
+      </BrowserRouter>
     </>
   );
 }
