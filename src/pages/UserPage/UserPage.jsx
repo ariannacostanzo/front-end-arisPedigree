@@ -2,19 +2,21 @@ import Heading from "../../assets/components/heading/Heading";
 import "./userPage.scss";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear,  faPen,  faSpinner,  faTrashCan, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faPen, faSpinner, faTrashCan, faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "../../utils/axiosClient.js";
 import { useEffect, useState } from "react";
 import Loader from "../../assets/components/loader/Loader.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ManagingIcon from "../../assets/components/deleteIcon/ManagingIcon.jsx";
 
 const UserPage = () => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [userDogs, setUserDogs] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const fetchUser = async () => {
     try {
@@ -31,7 +33,11 @@ const UserPage = () => {
   const deleteDog = async (id) => {
     try {
       setIsDeleting(true);
-      const res = await axios.delete(`dogs/${id}`);
+      const res = await axios.delete(`dogs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log(res);
       setDeleteMessage(res.data[1]);
       fetchUser();
@@ -39,10 +45,6 @@ const UserPage = () => {
       console.log(error);
     } finally {
       setIsDeleting(false);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000)
-      
     }
   };
 
@@ -72,7 +74,7 @@ const UserPage = () => {
           </div>
           {isLoading ? (
             <Loader />
-          ) : !userDogs  || userDogs.length === 0 ? (
+          ) : !userDogs || userDogs.length === 0 ? (
             <p className="text-center pt-4 text-gray-400">
               You have not created any dogs
             </p>
@@ -95,7 +97,7 @@ const UserPage = () => {
                     {dog.image && <img src={dog.image} alt="" />}
                   </div>
                   <div className="managing-icons-container">
-                    <ManagingIcon message="Modify" icon={faPen}></ManagingIcon>
+                    <ManagingIcon message="Modify" icon={faPen} manager={() => navigate(`/${dog.id}/update-dog`)}></ManagingIcon>
                     <ManagingIcon message="Delete" icon={faTrashCan} manager={() => deleteDog(dog.id)}></ManagingIcon>
                   </div>
                 </div>
