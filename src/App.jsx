@@ -22,58 +22,99 @@ import ProtectedRoute from "../src/assets/components/ProtectedRoute.jsx";
 import { DogsProvider } from "./providers/dogsProvider.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 import UserAuth from "./middlewares/UserAuth.jsx";
+import { UtilsProvider } from "./providers/utilsProvider.jsx";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <DogsProvider>
-          <BreedProvider>
-            <CountryProvider>
-              <AuthProvider>
-                <Routes>
-                  <Route path="/" element={<DefaultLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="test-mating" element={<Testmating />} />
-                    <Route path="latest-news" element={<NewsPage />} />
-                    <Route path="contact-us" element={<ContactusPage />} />
-                    <Route path="register" element={<RegisterPage />} />
-                    <Route path="search-a-dog" element={<SearchDogPage />} />
-                    <Route path="dogs-list" element={<DogsListPage />} />
-                    <Route path="login" element={<LoginPage />} />
-                    {/* rotta protetta  */}
-                    <Route element={<UserAuth />}>
-                      <Route path="add-new-dog" element={<AddDogPage />} />
-                      <Route path=":id/update-dog" element={<UpdateDogPage />} />
-                    </Route>
-                    <Route
-                      path="userDetail"
-                      element={
-                        <ProtectedRoute>
-                          <UserPage />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route path="dogDetail/:id" element={<DogDetailPage />} />
-                    <Route path="newsDetail/:id" element={<NewsDetailPage />} />
-                    {/* da sistemare con l'id ^ */}
-                    <Route
-                      path="breedsDetail/:breedSlug"
-                      element={<BreedsDetailPage />}
-                    />
-                    <Route
-                      path="countryDetail/:countrySlug"
-                      element={<CountryDetailPage />}
-                    />
+        <UtilsProvider>
+          <DogsProvider>
+            <BreedProvider>
+              <CountryProvider>
+                <AuthProvider>
+                  <Routes>
+                    <Route path="/" element={<DefaultLayout />}>
+                      <Route index element={<HomePage />} />
+                      <Route path="test-mating" element={<Testmating />} />
+                      <Route path="latest-news" element={<NewsPage />} />
+                      <Route path="contact-us" element={<ContactusPage />} />
+                      <Route path="register" element={<RegisterPage />} />
+                      <Route path="search-a-dog" element={<SearchDogPage />} />
+                      <Route path="dogs-list" element={<DogsListPage />} />
+                      <Route path="login" element={<LoginPage />} />
+                      {/* rotta protetta  */}
+                      <Route element={<UserAuth />}>
+                        <Route path="add-new-dog" element={<AddDogPage />} />
+                        <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                      </Route>
+                      <Route
+                        path="userDetail"
+                        element={
+                          <ProtectedRoute>
+                            <UserPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route path="dogDetail/:id" element={<DogDetailPage />} />
+                      <Route path="newsDetail/:id" element={<NewsDetailPage />} />
+                      {/* da sistemare con l'id ^ */}
+                      <Route
+                        path="breedsDetail/:breedSlug"
+                        element={<BreedsDetailPage />}
+                      />
+                      <Route
+                        path="countryDetail/:countrySlug"
+                        element={<CountryDetailPage />}
+                      />
 
-                    {/* Not Found Route */}
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Route>
-                </Routes>
-              </AuthProvider>
-            </CountryProvider>
-          </BreedProvider>
-        </DogsProvider>
+                      {/* Not Found Route */}
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                  </Routes>
+                  <BrowserRouter>
+                    <Routes>
+                      <Route path="/" element={<DefaultLayout />}>
+                        <Route index element={<HomePage />} />
+                        <Route path="test-mating" element={<Testmating />} />
+                        <Route path="latest-news" element={<NewsPage />} />
+                        <Route path="contact-us" element={<ContactusPage />} />
+                        <Route path="register" element={<RegisterPage />} />
+                        <Route path="search-a-dog" element={<SearchDogPage />} />
+                        <Route path="dogs-list" element={<DogsListPage />} />
+                        <Route path="login" element={<LoginPage />} />
+                        {/* rotta protetta  */}
+                        <Route path="add-new-dog" element={<AddDogPage />} />
+                        <Route
+                          path="userDetail"
+                          element={
+                            <ProtectedRoute>
+                              <UserPage />
+                            </ProtectedRoute>
+                          }
+                        />
+                        <Route path="dogDetail/:id" element={<DogDetailPage />} />
+                        <Route path="newsDetail/:id" element={<NewsDetailPage />} />
+                        {/* da sistemare con l'id ^ */}
+                        <Route
+                          path="breedsDetail/:breedSlug"
+                          element={<BreedsDetailPage />}
+                        />
+                        <Route
+                          path="countryDetail/:countrySlug"
+                          element={<CountryDetailPage />}
+                        />
+
+                        {/* Not Found Route */}
+                        <Route path="*" element={<NotFoundPage />} />
+                      </Route>
+                    </Routes>
+                  </BrowserRouter>
+                </AuthProvider>
+              </CountryProvider>
+            </BreedProvider>
+          </DogsProvider>
+        </UtilsProvider>
       </BrowserRouter>
     </>
   );

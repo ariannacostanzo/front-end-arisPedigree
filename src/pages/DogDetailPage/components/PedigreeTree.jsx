@@ -1,111 +1,161 @@
-import { Link } from "react-router-dom";
-import "./pedigreeTree.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import Tree from 'react-d3-tree';
+import NodeTreeLabel from "./NodeTreeLabel";
+import { useCenteredTree } from "../utils/helpers";
 
-const PedigreeTree = ({ dog }) => {
+const PedigreeTree = ({ dog, resetCard }) => {
 
+    const [generationsLength, setGenerationsLength] = useState(4);
 
-  const shortName = (name) => {
-    if (name.length > 5) return name.slice(0,5) + '...'
-    return name
-  }
+    const [translate, containerRef] = useCenteredTree();
 
-  const longName = (name) => {
-    if (name.length > 20) return name.slice(0, 20) + "...";
-    return name;
-  }
+    // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
+    const dogFrequency = new Map();
 
-  const createTable = (dog, processedIds = new Set(), depth = 0) => {
-    const repeteadDogs = [];
-
-    if (!dog || processedIds.has(dog.id)) {
-      repeteadDogs.push(dog.id)
+    /**
+     * Funzione che restituisce un colore esadecimale non presente in un array passato a parametro
+     * @param {Array} prevColors L'array di colori precedenti 
+     * @returns {String} L'esadecimale di un nuovo colore
+     */
+    const generateHexColor = (prevColors) => {
+        let newColor;
+        do {
+            newColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`
+        } while (prevColors.includes(newColor))
+        return newColor;
     }
-      
 
-    processedIds.add(dog.id);
 
-    // Separate sire and dam
-    const sire = dog.sire;
-    const dam = dog.dam;
+    /**
+     * Funzione che conta le occorrenze di ogni cane e gli assegna un colore
+     * @param {Object} dog Il cane corrente 
+     * @param {Array} colors Array di colori
+     * @returns 
+     */
+    const countDogs = (dog, colors = []) => {
+        if (!dog) return;
 
-    console.log(sire)
-    console.log(dam)
+        // Recupero il precedente valore del cane se presente
+        const prevValue = dogFrequency.get(dog.id) || {};
 
-    return (
-      <div className="generation">
-        {/* Current Dog */}
-        <div className="current-generation generation-row">
-          <div className={`dog-cell ${dog.sex ? "bg-male" : "bg-female"}`}>
-            {/* se il cane è ripetuto  */}
-            {repeteadDogs.includes(dog.id) && (
-              <div className="repeated-circle"></div>
-            )}
-            {dog.image && (
-              <Link to={`/dogDetail/${dog.id}`}>
-                <img src={dog.image} alt="" />
-              </Link>
-            )}
-            <h3>
-              <Link
-                to={`/dogDetail/${dog.id}`}
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                {depth < 4 && longName(dog.name)}
-                {depth > 4 && shortName(dog.name)}
-              </Link>
-            </h3>
-            <div>
-              {dog.titles && (
-                <p className="bg-[#73e567] text-[#095b00] font-bold inline-block">
-                  {dog.titles}
-                </p>
-              )}
-            </div>
-            <div className="relative-country flex items-center gap-2">
-              {depth < 4 && (
-                <img
-                  src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
-                  alt=""
-                />
-              )}
-            </div>
-          </div>
+        const newValue = {
+            count: (prevValue.count || 0) + 1, // valore= precedenti occorrenze di dog.id se presenti oppure 0 e poi lo incremento
+            color: prevValue.color || generateHexColor(colors) // valore= precedente valore di color oppure nuovo colore
+        }
+
+
+        if (!colors.includes(newValue.color)) colors.push(newValue.color);
+
+        dogFrequency.set(
+            dog.id, // chiave
+            newValue // valore
+        )
+
+        // Chiamata ricorsiva sui genitori
+        countDogs(dog.sire, colors); // Conta il padre
+        countDogs(dog.dam, colors);  // Conta la madre
+    }
+
+    // Conta le occorrenze di ogni cane prima di generare l'albero genealogico
+    countDogs(dog);
+
+
+    /**
+     * Funzione che a partire da un cane genera un set di dati per generare l'albero genealogico
+     * @param {Object} dog Cane corrente
+     * @param {Number} depth La generazione del cane corrente 
+     * @returns {Object} Oggetto contenente i dati in formato adatto per il componente Tree
+     */
+    const convertToTreeData = (dog, depth = 0) => {
+        if (!dog || ++depth > generationsLength) return {
+            name: null
+        };
+
+        // Controlla se il cane è tra i ripetuti
+        const isRepeated = dogFrequency.get(dog.id).count > 1;
+
+        return {
+            name: dog.name,
+            attributes: {
+                id: dog.id,
+                isRepeated,
+                image: dog.image,
+                name: dog.name,
+                titles: dog.titles,
+                country: dog.country.code,
+                sex: dog.sex,
+                depth,
+                circleColor: dogFrequency.get(dog.id).color
+            },
+            children: [convertToTreeData(dog.dam, depth), convertToTreeData(dog.sire, depth)]
+        }
+    };
+
+    /**
+     * Funzione che crea i dati per l'albero e rimuove il nodo 0
+     * @param {Object} dog Cane corrente
+     * @returns {Object} Oggetto in formato adatto per il componente Tree
+     */
+    const createTree = (dog) => {
+        if (!dog) return null;
+
+        // Parte direttamente dai genitori
+        return {
+            name: "Parents",
+            children: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
+        }
+    }
+
+    // Creo i dati per l'albero
+    const treeData = createTree(dog);
+
+
+    return <div className="pedigree-tree">
+
+        {/* Select per scegliere il numero di generazioni da visualizzare */}
+        <label className="mb-3">Generations in pedigree:
+            <select
+                value={generationsLength}
+                onChange={e => setGenerationsLength(Number(e.target.value))}
+            >
+                {
+                    [4, 5, 6, 7, 8].map(el => <option
+                        key={`option-${el}`}
+                        value={el}
+                    >
+                        {el}
+                    </option>)
+                }
+            </select>
+        </label>
+
+        {/* Tree dog */}
+        <div
+            style={{ width: "100%", height: "90vh", position: "relative" }}
+            ref={containerRef}
+        >
+            <Tree
+                data={treeData} // dati albero
+                orientation="horizontal" // orientamento albero
+                pathFunc="step" // stile delle linee
+                nodeSize={{ x: 250, y: 45 }} // distanza nodi
+                zoomable={true} //abilitazione zoom
+                draggable={true} // abilitazione trascinamento
+                separation={{ siblings: 4, nonSiblings: 3 }}
+                translate={translate}
+                renderCustomNodeElement={(rd3tProps) =>
+                    <NodeTreeLabel
+                        dog={rd3tProps.nodeDatum}
+                        resetCard={resetCard}
+                    />
+                }
+            />
         </div>
 
-        {/* Parents */}
-        <div className="parents generation-row">
-          {/* Sire */}
-          <div className="dog-cell parent">
-            {sire ? (
-              createTable(sire, processedIds, depth + 1)
-            ) : (
-              <div className="placeholder">
-                <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
-              </div>
-            )}
-          </div>
 
-          {/* Dam */}
-          <div className="dog-cell parent">
-            {dam ? (
-              createTable(dam, processedIds, depth + 1)
-            ) : (
-              <div className="placeholder">
-                <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  };
 
-  return <div className="pedigree-tree">Ancestor tree: {createTable(dog)}</div>;
+
+    </div>;
 };
 
 export default PedigreeTree;
-
-//da completare
-//non funziona

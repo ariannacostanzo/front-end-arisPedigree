@@ -13,6 +13,7 @@ const DogsProvider = ({ children }) => {
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [filterQuery, setFilterQuery] = useState(null);
+  const [currId, setCurrId] = useState(0);
 
   const fetchDogs = async () => {
     setLoading(true);
@@ -24,7 +25,7 @@ const DogsProvider = ({ children }) => {
       setMaleCount(response.data.maleCount);
       setFemaleCount(response.data.femaleCount);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -36,16 +37,14 @@ const DogsProvider = ({ children }) => {
       const response = await axios.get("http://localhost:8000/dogs/allDogs");
       setAllDogs(response.data.dogs);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   }; //questa dovrei poterla eliminare
 
-  
-  useEffect(() => {
-    console.log(filterQuery)
-  })
+
+
 
   useEffect(() => {
     fetchDogs();
@@ -70,7 +69,9 @@ const DogsProvider = ({ children }) => {
         femaleCount,
         setFemaleCount,
         filterQuery,
-        setFilterQuery
+        setFilterQuery,
+        currId,
+        setCurrId
       }}
     >
       {children}
