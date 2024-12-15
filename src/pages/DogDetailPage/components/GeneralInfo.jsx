@@ -47,8 +47,14 @@ const GeneralInfo = ({ dog, isLoading }) => {
             <div>
               <h2>{dog.name}</h2>
 
-              {/* Da stilizzare */}
-              <Link to={`/${dog.id}/update-dog`}>Update</Link>
+              {/* Pulsanti */}
+              {dog.userId == user.id
+                &&
+                <div className="buttons-container">
+                  <ManagingIcon message="Modify" icon={faPen} manager={() => navigate(`/${dog.id}/update-dog`)}></ManagingIcon>
+                  <ManagingIcon message="Delete" icon={faTrashCan} manager={() => deleteDog(dog.id)}></ManagingIcon>
+                </div>
+              }
             </div>
 
             <div className="md:flex gap-4">
