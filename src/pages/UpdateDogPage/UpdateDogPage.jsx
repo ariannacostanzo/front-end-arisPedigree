@@ -17,10 +17,10 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 //fixare upload imagini
 
-const AddDogPage = () => {
+const UpdateDogPage = () => {
 
 
-
+    const [imageSrc, setImageSrc] = useState(null);
 
 
     // variabili per riempire il form
@@ -93,6 +93,9 @@ const AddDogPage = () => {
         try {
             setIsLoading(true)
             const { data: dog } = await axios.get(`http://localhost:8000/dogs/${id}`);
+            if (dog.userId != user.id) {
+                navigate("/not-found")
+            }
 
             setFormData({
                 breedId: dog.breedId,
@@ -103,10 +106,12 @@ const AddDogPage = () => {
                 dam: dog.dam?.name || "",
                 damId: dog.damId || "",
                 sex: dog.sex,
-                size: dog.size || "",
-                weight: dog.weight || "",
-                dateOfBirth: dog.dateOfBirth || "",
-                dateOfDeath: dog.dateOfDeath || "",
+                size: dog?.size?.split(" ")[0] || "",
+                sizeUnit: dog?.size?.split(" ")[1] || "cm",
+                weight: dog?.weight?.split(" ")[0] || "",
+                weightUnit: dog?.weight?.split(" ")[1] || "kg",
+                dateOfBirth: dog?.dateOfBirth?.split("T")[0] || "",
+                dateOfDeath: dog?.dateOfDeath?.split("T")[0] || "",
                 color: dog.color || "",
                 countryId: dog.countryId,
                 breeder: dog.breeder || "",
@@ -119,6 +124,7 @@ const AddDogPage = () => {
             console.log(dog);
         } catch (error) {
             console.error("Errore nel recupero dei dati del cane:", error);
+            navigate("/not-found")
         } finally {
             setIsLoading(false)
         }
@@ -335,16 +341,14 @@ const AddDogPage = () => {
 
         try {
             setIsCreating(true)
-            const response = await axios.post("/dogs", formDataToSend, {
+            const response = await axios.put(`/dogs/${id}`, formDataToSend, {
                 headers: {
-                    // "Content-Type": "application/json",
-                    // "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
                 },
             });
 
             setErrorBags({});
-            navigate(`/dogDetail/${response.data.id}`);
+            navigate(`/dogDetail/${id}`);
             window.scrollTo(0, 0);
             window.location.reload();
         } catch (error) {
@@ -424,7 +428,7 @@ const AddDogPage = () => {
                                     {/* breed  */}
                                     <div className="form-col">
                                         <FormLabel forName="add-breed" label="Breed" isMandatory={true} />
-                                        <select
+                                        {/* <select
                                             name="breedId"
                                             id="add-breed"
                                             onChange={handleChange}
@@ -436,7 +440,8 @@ const AddDogPage = () => {
                                                     {breed.name}
                                                 </option>
                                             ))}
-                                        </select>
+                                        </select> */}
+                                        <div className="fake-select">{breeds.find(breed => breed.id === formData.breedId)?.name}</div>
                                         {errorBags.breed && (
                                             <p className="error-text">{errorBags.breed}</p>
                                         )}
@@ -496,14 +501,15 @@ const AddDogPage = () => {
                                         {!formData.breedId && (
                                             <p className="tip">Insert a breed to choose a Sire</p>
                                         )}
-                                        <input
+                                        {/* <input
                                             type="text"
                                             name="sire"
                                             id="add-sire"
                                             onChange={handleChange}
                                             value={formData.sire}
                                             disabled={!formData.breedId}
-                                        />
+                                        /> */}
+                                        <div className="fake-input-text">{formData.sire || "//"}</div>
                                         {/* i risultati della ricerca  */}
                                         {sires.length > 0 && (
                                             <div className="dogResults">
@@ -549,14 +555,15 @@ const AddDogPage = () => {
                                         {!formData.breedId && (
                                             <p className="tip">Insert a breed to choose a Dam</p>
                                         )}
-                                        <input
+                                        {/* <input
                                             type="text"
                                             name="dam"
                                             id="add-dam"
                                             onChange={handleChange}
                                             value={formData.dam}
                                             disabled={!formData.breedId}
-                                        />
+                                        /> */}
+                                        <div className="fake-input-text">{formData.dam || "//"}</div>
                                         {/* i risultati della ricerca  */}
                                         {dams.length > 0 && (
                                             <div className="dogResults">
@@ -587,7 +594,7 @@ const AddDogPage = () => {
                                     {/* sex  */}
                                     <div className="form-col">
                                         <FormLabel forName="add-sex" label="Sex" />
-                                        <select
+                                        {/* <select
                                             name="sex"
                                             id="add-sex"
                                             value={formData.sex}
@@ -597,7 +604,8 @@ const AddDogPage = () => {
                                                 Male
                                             </option>
                                             <option value="false">Female</option>
-                                        </select>
+                                        </select> */}
+                                        <div className="fake-select">{formData.sex ? "Male" : "Female"}</div>
                                     </div>
                                     {/* size  */}
                                     <div className="form-col">
@@ -776,7 +784,7 @@ const AddDogPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="form-row">
+                                <div className="form-row image-row">
                                     <div className="form-col">
                                         <FormLabel forName="add-image" label="Dog cover photo" />
                                         <input
@@ -786,6 +794,11 @@ const AddDogPage = () => {
                                             accept="image/*"
                                             onChange={(e) => {
                                                 const file = e.target.files[0];
+                                                const reader = new FileReader();
+                                                reader.onloadend = () => {
+                                                    setImageSrc(reader.result);
+                                                }
+                                                reader.readAsDataURL(file)
                                                 setFormData((prev) => ({
                                                     ...prev,
                                                     image: file,
@@ -793,11 +806,16 @@ const AddDogPage = () => {
                                             }}
                                         />
                                     </div>
+                                    <div className="form-col">
+                                        <figure className="preview-container">
+                                            <img className="dog-preview" src={imageSrc || formData.image} alt="" />
+                                        </figure>
+                                    </div>
                                 </div>
 
                                 <div className="form-row flex-col ">
                                     <address className=" self-start">Fields marked with <span className="text-red-400">*</span> are mandatory</address>
-                                    <button className="self-start" type="submit">Add dog</button>
+                                    <button className="self-start" type="submit">Update dog</button>
                                 </div>
                             </form>
                         )}
@@ -807,4 +825,4 @@ const AddDogPage = () => {
         </>
     );
 };
-export default AddDogPage;
+export default UpdateDogPage;
