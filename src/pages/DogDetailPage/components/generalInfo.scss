@@ -7,6 +7,11 @@
 
   p {
     padding: 10px 0;
+
+    >span {
+
+      word-break: break-all;
+    }
   }
 
   span {
@@ -14,6 +19,7 @@
 
     a {
       transition: var(--transition);
+
       &:hover {
         color: var(--primary);
         text-decoration: underline;
@@ -35,6 +41,12 @@
     background-color: #00ab45;
     height: 110px;
   }
+}
+
+.buttons-container {
+  display: flex;
+  gap: 24px;
+  margin: 20px 0;
 }
 
 // media query

@@ -1,25 +1,29 @@
-import { createContext, useContext, useEffect} from "react";
+import { createContext, useContext, useEffect } from "react";
 import useStorage from "../hooks/useStorage.jsx";
 import axios from '../utils/axiosClient.js';
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 
 const AuthProvider = ({ children }) => {
-  
+
   const [isLoggedIn, setIsLoggedIn] = useStorage(false, "isLoggedIn");
   const [token, setToken] = useStorage(null, "token");
   const [user, setUser] = useStorage(null, "user");
 
-  const login = async (payload) => {
+  const navigate = useNavigate();
+
+  const login = async (payload, redirectTo) => {
     try {
       const { data: response } = await axios.post("/auth/login", payload);
       setUser(response.data)
       setToken(response.token)
       setIsLoggedIn(true);
+      navigate(redirectTo || "/userDetail");
     } catch (error) {
       console.log(error)
-    } 
+    }
   };
   const logout = () => {
     setUser(null)
@@ -31,7 +35,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     // console.log(user)
   }, [user])
-   
+
 
   return (
     <AuthContext.Provider

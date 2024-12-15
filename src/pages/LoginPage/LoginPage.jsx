@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useAuth } from "../../providers/authProvider.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Heading from "../../assets/components/heading/Heading.jsx";
 import "./loginPage.scss";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+
+  const { state } = useLocation();
+  const { errorMessage } = state || {};
+  const { redirectTo } = state || {};
+
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     emailOrUsername: "",
@@ -27,8 +31,7 @@ const LoginPage = () => {
 
     try {
       const payload = { emailOrUsername, password };
-      await login(payload);
-      navigate("/userDetail");
+      await login(payload, redirectTo);
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +42,9 @@ const LoginPage = () => {
       <Heading heading="Login"></Heading>
       <div className="bg-white login-page">
         <div className="p-4 container mx-auto">
+          {errorMessage &&
+            <div>{errorMessage}</div>
+          }
           <form onSubmit={handleSubmit}>
             <div>
               <div className="my-2">

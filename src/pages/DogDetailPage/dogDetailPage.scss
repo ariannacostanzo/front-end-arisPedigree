@@ -21,8 +21,16 @@
     color: var(--primary);
     background-color: white;
     border: 1px solid black;
-    border-bottom: 0;
   }
+}
+
+@media screen and (min-width:709px) {
+  .dogPedigreeCardNav {
+    .active {
+      border-bottom: 0;
+    }
+  }
+
 }
 
 
@@ -30,18 +38,18 @@
   background-color: white;
   border: 1px solid black;
   padding: 5px;
-  
+
 
 }
 
 // media query 
 @media screen and (min-width: 1100px) {
-  .dogPedigreeCard h2  {
-        font-size: 61px;
-        
-    }
+  .dogPedigreeCard h2 {
+    font-size: 61px;
 
-    .dogPedigreeCard {
-      padding: 3rem;
-    }
+  }
+
+  .dogPedigreeCard {
+    padding: 3rem;
+  }
 }

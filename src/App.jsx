@@ -9,6 +9,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SearchDogPage from "./pages/SearchDogPage/SearchDogPage";
 import DogsListPage from "./pages/DogsListPage/DogsListPage";
 import AddDogPage from "./pages/AddDogPage/AddDogPage";
+import UpdateDogPage from "./pages/UpdateDogPage/UpdateDogPage.jsx";
 import DogDetailPage from "./pages/DogDetailPage/DogDetailPage";
 import NewsDetailPage from "./pages/NewsDetailPage/NewsDetailPage";
 import BreedsDetailPage from "./pages/BreedsDetailPage/BreedsDetailPage";
@@ -20,17 +21,18 @@ import UserPage from "./pages/UserPage/UserPage";
 import ProtectedRoute from "../src/assets/components/ProtectedRoute.jsx";
 import { DogsProvider } from "./providers/dogsProvider.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
+import UserAuth from "./middlewares/UserAuth.jsx";
 import { UtilsProvider } from "./providers/utilsProvider.jsx";
 
 function App() {
   return (
     <>
-      <UtilsProvider>
-        <DogsProvider>
-          <BreedProvider>
-            <CountryProvider>
-              <AuthProvider>
-                <BrowserRouter>
+      <BrowserRouter>
+        <UtilsProvider>
+          <DogsProvider>
+            <BreedProvider>
+              <CountryProvider>
+                <AuthProvider>
                   <Routes>
                     <Route path="/" element={<DefaultLayout />}>
                       <Route index element={<HomePage />} />
@@ -42,7 +44,10 @@ function App() {
                       <Route path="dogs-list" element={<DogsListPage />} />
                       <Route path="login" element={<LoginPage />} />
                       {/* rotta protetta  */}
-                      <Route path="add-new-dog" element={<AddDogPage />} />
+                      <Route element={<UserAuth />}>
+                        <Route path="add-new-dog" element={<AddDogPage />} />
+                        <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                      </Route>
                       <Route
                         path="userDetail"
                         element={
@@ -67,12 +72,12 @@ function App() {
                       <Route path="*" element={<NotFoundPage />} />
                     </Route>
                   </Routes>
-                </BrowserRouter>
-              </AuthProvider>
-            </CountryProvider>
-          </BreedProvider>
-        </DogsProvider>
-      </UtilsProvider>
+                </AuthProvider>
+              </CountryProvider>
+            </BreedProvider>
+          </DogsProvider>
+        </UtilsProvider>
+      </BrowserRouter>
     </>
   );
 }
