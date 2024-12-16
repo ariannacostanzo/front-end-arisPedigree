@@ -108,7 +108,12 @@ const Header = () => {
                     className="ml-2"
                   ></FontAwesomeIcon>
                   <ul className="header-underlist">
-                    <li onClick={logOutAndHome}>Logout</li>
+                    <li
+                      className="p-[10px]"
+                      onClick={logOutAndHome}
+                    >
+                      Logout
+                    </li>
                   </ul>
                 </li>
               ) : (

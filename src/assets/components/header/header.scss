@@ -74,7 +74,7 @@ header {
 
 .header-underlist {
   position: absolute;
-  background-color: white;
+  background-color: transparent;
   left: -20px;
   top: 60px;
   width: 180px;
@@ -84,7 +84,10 @@ header {
   z-index: 10;
 
   li {
-    padding: 10px;
+    // padding: 10px;
+    background-color: white;
+    margin-bottom: 2px;
+    border-radius: 20px;
     transition: var(--transition);
     color: var(--blue);
 
@@ -92,6 +95,13 @@ header {
       background-color: var(--primary);
       color: white;
       text-decoration: underline;
+    }
+
+    a {
+      display: inline-block;
+      padding: 10px;
+      height: 100%;
+      width: 100%;
     }
   }
 }
