@@ -113,7 +113,7 @@ const Footer = () => {
           </div> */}
         </div>
         <div className="social-footer">
-          <ul className="flex gap-4 justify-center text-2xl">
+          <ul className="flex gap-4 justify-center text-2xl flex-wrap">
             <li>
               <a
                 href="https://www.facebook.com/workingdogsintheworld/"
