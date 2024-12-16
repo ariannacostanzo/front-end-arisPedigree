@@ -784,6 +784,7 @@ const UpdateDogPage = () => {
                                     </div>
                                 </div>
 
+                                {/* Immagine */}
                                 <div className="form-row image-row">
                                     <div className="form-col">
                                         <FormLabel forName="add-image" label="Dog cover photo" />
