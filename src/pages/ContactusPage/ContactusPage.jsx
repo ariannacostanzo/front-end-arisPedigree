@@ -11,10 +11,12 @@ const ContactusPage = () => {
       <Heading heading="Contact us"></Heading>
 
       <div className="bg-white contact-us-container">
-        <div className="p-4 container mx-auto">
+        <div className="container mx-auto">
 
           {/* Email */}
-          <h4>
+          <h4
+            className=""
+          >
             <a
               className="email-sender"
               href="mailto:dogsintheworld2019@protonmail.com">
