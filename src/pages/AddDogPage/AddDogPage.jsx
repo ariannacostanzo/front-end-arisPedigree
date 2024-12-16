@@ -18,6 +18,10 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 //fixare upload imagini
 
 const AddDogPage = () => {
+
+  // per la preview dell'immagine
+  const [imageSrc, setImageSrc] = useState(null);
+
   // variabili per riempire il form
   const { breeds, loading } = useBreed();
   const { countries } = useCountry();
@@ -726,7 +730,8 @@ const AddDogPage = () => {
                   </div>
                 </div>
 
-                <div className="form-row">
+                {/* image */}
+                <div className="form-row image-row">
                   <div className="form-col">
                     <FormLabel forName="add-image" label="Dog cover photo" />
                     <input
@@ -736,12 +741,23 @@ const AddDogPage = () => {
                       accept="image/*"
                       onChange={(e) => {
                         const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setImageSrc(reader.result);
+                        }
+                        reader.readAsDataURL(file)
                         setFormData((prev) => ({
                           ...prev,
                           image: file,
                         }));
                       }}
                     />
+                  </div>
+                  {/* image preview */}
+                  <div className="form-col">
+                    <figure className="preview-container">
+                      <img className="dog-preview" src={imageSrc || placeholder} alt="" />
+                    </figure>
                   </div>
                 </div>
 
