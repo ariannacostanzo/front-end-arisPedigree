@@ -77,23 +77,27 @@ const Testmating = () => {
   );
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
+
     switch (name) {
+
       case "breedId":
         setBreedId(value);
-        if (!value) {
-          setSire("")
-          setDam("")
-        }
+        setSire("")
+        setDam("")
         break;
+
       case "sire":
         setSire(value);
         fetchSires(value);
         break;
+
       case "dam":
         setDam(value);
         fetchDams(value);
         break;
+
       default:
         break;
     }
