@@ -8,11 +8,15 @@ import placeholder from "../../assets/images/dog-silhouette.png"
 import xImage from "../../assets/images/x.png"
 import "./testmatingPage.scss";
 import { useUtils } from "../../providers/utilsProvider.jsx";
-
 import DogCard from "./components/dogCard/DogCard.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 
 const Testmating = () => {
+
+  const navigate = useNavigate();
 
   const { reduceStr } = useUtils();
 
@@ -25,6 +29,12 @@ const Testmating = () => {
 
   const [sires, setSires] = useState([]);
   const [dams, setDams] = useState([]);
+
+  const [isTypingSire, setIsTypingSire] = useState(false);
+  const [isTypingDam, setIsTypingDam] = useState(false);
+
+  const [noSires, setNoSires] = useState(false);
+  const [noDams, setNoDams] = useState(false);
 
   /**
    * Funzione che fetcha i cani maschi per razza
@@ -43,8 +53,13 @@ const Testmating = () => {
         const res = await axios.get(url);
         setSires(res.data);
       } catch (error) {
+        if (error.response?.data?.message === "No dogs found for this breed") {
+          setNoSires(true);
+        }
+        console.log(error.response.data.message)
         console.error(error);
       } finally {
+        setIsTypingSire(false);
       }
     }
   }, 2000),
@@ -55,6 +70,7 @@ const Testmating = () => {
    * Funzione che fetcha i cani femmine per razza
    */
   const fetchDams = useCallback(debounce(async (value) => {
+
 
     // Se value trimmato è infieriore a 3 caratteri blocco la funzione
     if (value.trim().length < 3) {
@@ -68,14 +84,25 @@ const Testmating = () => {
         const res = await axios.get(url);
         setDams(res.data);
       } catch (error) {
+
+        if (error.response?.data?.message === "No dogs found for this breed") {
+          setNoDams(true)
+        }
+
         console.error(error);
       } finally {
+        setIsTypingDam(false);
       }
     }
   }, 2000),
     [breedId]
   );
 
+
+  /**
+   * Funzione che gestisce la select e gli input
+   * @param {Event} e Evento scatenato dagli input
+   */
   const handleChange = (e) => {
 
     const { name, value } = e.target;
@@ -89,11 +116,19 @@ const Testmating = () => {
         break;
 
       case "sire":
+        setNoSires(false);
+        if (value.trim().length >= 3) {
+          setIsTypingSire(true)
+        }
         setSire(value);
         fetchSires(value);
         break;
 
       case "dam":
+        setNoDams(false);
+        if (value.trim().length >= 3) {
+          setIsTypingDam(true)
+        }
         setDam(value);
         fetchDams(value);
         break;
@@ -102,6 +137,16 @@ const Testmating = () => {
         break;
     }
 
+  }
+
+  /**
+   * Funzione che fa un redirect alla pagina AddDogPage inviando breedId, dam e sire nello state
+   * da recuperare con useLocation
+   */
+  const generateTestmating = () => {
+    if (!(typeof sire === "object" && typeof dam === "object")) return;
+
+    navigate("/add-new-dog", { state: { breedId, dam, sire } })
   }
 
   return (
@@ -136,7 +181,26 @@ const Testmating = () => {
 
             {/* Sire Input */}
             <div className="testmating-col flex basis-9/12 sm:basis-5/12 relative">
-              <FormLabel forName="input-sire" label="Sire" isMandatory />
+              <FormLabel forName="input-sire" label="Sire" isMandatory>
+
+                {/* Spinner caricamento */}
+                {isTypingSire && typeof sire === "string" && sire && (
+                  <FontAwesomeIcon
+                    icon={faSpinner}
+                    spin
+                  />
+                )}
+
+                {/* quello che appare dopo aver fatto la ricerca */}
+                {noSires && (
+                  <p className="tip">
+                    There is no male dog called &#34;
+                    <span>{sire}</span>
+                    &#34; in our database
+                  </p>
+                )}
+              </FormLabel>
+
               <input
                 type="text"
                 name="sire"
@@ -177,7 +241,25 @@ const Testmating = () => {
 
             {/* Dam Input */}
             <div className="testmating-col relative flex basis-9/12 sm:basis-5/12">
-              <FormLabel forName="input-dam" label="Dam" isMandatory />
+              <FormLabel forName="input-dam" label="Dam" isMandatory >
+
+                {/* Spinner caricamento */}
+                {isTypingDam && typeof dam === "string" && dam && (
+                  <FontAwesomeIcon
+                    icon={faSpinner}
+                    spin
+                  />
+                )}
+
+                {/* quello che appare dopo aver fatto la ricerca */}
+                {noDams && (
+                  <p className="tip">
+                    There is no female dog called &#34;
+                    <span>{dam}</span>
+                    &#34; in our database
+                  </p>
+                )}
+              </FormLabel>
               <input
                 type="text"
                 name="dam"
@@ -221,11 +303,21 @@ const Testmating = () => {
               <DogCard dog={sire} />
             </div>
 
-            {/* Immagine centrale */}
-            <div className="testmating-col basis-1/4 md:basis-1/3">
+            {/* Immagine centrale e Bottone Conferma */}
+            <div className="testmating-col flex justify-between items-center basis-1/4 md:basis-1/3">
               <figure>
                 <img src={xImage} alt="" />
               </figure>
+
+              <button
+                className={`testmating-btn ${typeof sire === "object" && typeof dam === "object" ? "" : "disabled"}`}
+                onClick={generateTestmating}
+              >
+                Generate
+                <FontAwesomeIcon
+                  icon={faCheck}
+                />
+              </button>
             </div>
 
             {/* Dog Card */}
