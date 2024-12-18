@@ -79,11 +79,6 @@ const UpdateDogPage = () => {
         image: null,
     });
 
-    useEffect(() => {
-        // console.log(formData)
-    }, [formData])
-
-
     // Dati del cane
     let { id } = useParams();
     id = parseInt(id);
@@ -121,7 +116,6 @@ const UpdateDogPage = () => {
                 image: dog.image || null,
 
             });
-            console.log(dog);
         } catch (error) {
             console.error("Errore nel recupero dei dati del cane:", error);
             navigate("/not-found")
@@ -154,7 +148,6 @@ const UpdateDogPage = () => {
             sire: name,
         });
         setSires([]);
-        console.log(id, name);
 
         setIsTypingSire(true);
         setIsSireSelected(true);
@@ -209,27 +202,27 @@ const UpdateDogPage = () => {
         }
     };
 
-    //per ritardare la chiamata dopo che si scrive
-    useEffect(() => {
-        if (!isSireSelected && formData.sire) {
-            setIsTypingSire(true);
-            const getData = setTimeout(() => {
-                searchforFather();
-            }, 2000);
+    // //per ritardare la chiamata dopo che si scrive
+    // useEffect(() => {
+    //     if (!isSireSelected && formData.sire) {
+    //         setIsTypingSire(true);
+    //         const getData = setTimeout(() => {
+    //             searchforFather();
+    //         }, 2000);
 
-            return () => clearTimeout(getData);
-        }
-    }, [formData.sire, isSireSelected]);
+    //         return () => clearTimeout(getData);
+    //     }
+    // }, [formData.sire, isSireSelected]);
 
-    useEffect(() => {
-        if (!isDamSelected && formData.dam) {
-            setIsTypingDam(true);
-            const getData = setTimeout(() => {
-                searchForMother();
-            }, 2000);
-            return () => clearTimeout(getData);
-        }
-    }, [formData.dam, isDamSelected]);
+    // useEffect(() => {
+    //     if (!isDamSelected && formData.dam) {
+    //         setIsTypingDam(true);
+    //         const getData = setTimeout(() => {
+    //             searchForMother();
+    //         }, 2000);
+    //         return () => clearTimeout(getData);
+    //     }
+    // }, [formData.dam, isDamSelected]);
 
     const slugify = (str) => {
         str = str.replace(/^\s+|\s+$/g, "");
@@ -303,8 +296,6 @@ const UpdateDogPage = () => {
             image,
         };
 
-        console.log(dataToSend);
-
         //appendo i dati modificati nel formData
         const formDataToSend = new FormData();
 
@@ -331,8 +322,6 @@ const UpdateDogPage = () => {
 
 
         formDataToSend.forEach((value, key) => {
-            console.log(`${key}: ${value}, Type: ${typeof value}`);
-
 
             if (value instanceof File) {
                 console.log(`File Name: ${value.name}, File Type: ${value.type}`);
@@ -490,13 +479,13 @@ const UpdateDogPage = () => {
                                             )}
                                         </div>
                                         {/* quello che appare dopo aver fatto la ricerca */}
-                                        {!isTypingSire && formData.sire && sires.length === 0 && (
+                                        {/* {!isTypingSire && formData.sire && sires.length === 0 && (
                                             <p className="tip">
                                                 There is no male dog called &#34;
                                                 <span>{formData.sire}</span>
                                                 &#34; in our database
                                             </p>
-                                        )}
+                                        )} */}
 
                                         {!formData.breedId && (
                                             <p className="tip">Insert a breed to choose a Sire</p>
@@ -545,13 +534,13 @@ const UpdateDogPage = () => {
                                                 ></FontAwesomeIcon>
                                             )}
                                         </div>
-                                        {!isTypingDam && formData.dam && dams.length === 0 && (
+                                        {/* {!isTypingDam && formData.dam && dams.length === 0 && (
                                             <p className="tip">
                                                 There is no female dog called &#34;
                                                 <span>{formData.dam}</span>
                                                 &#34; in our database
                                             </p>
-                                        )}
+                                        )} */}
                                         {!formData.breedId && (
                                             <p className="tip">Insert a breed to choose a Dam</p>
                                         )}
