@@ -1,5 +1,13 @@
 .form-label {
+
+  label {
     font-size: 18px;
     color: rgb(126, 126, 126);
     margin-bottom: 10px;
+    margin-right: 10px;
   }
+
+  svg {
+    color: black;
+  }
+}

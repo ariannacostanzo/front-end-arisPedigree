@@ -1,6 +1,6 @@
 import './formLabel.scss';
 
-const FormLabel = ({ forName, label, isMandatory = false }) => {
+const FormLabel = ({ forName, label, isMandatory = false, children }) => {
   return (
     <>
       <div className="form-label">
@@ -10,6 +10,7 @@ const FormLabel = ({ forName, label, isMandatory = false }) => {
           {isMandatory && <span className='text-red-400'>*</span>}
 
         </label>
+        {children}
       </div>
     </>
   );
