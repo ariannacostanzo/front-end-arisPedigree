@@ -157,7 +157,7 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                                             <img
                                                 className={`flag-img ${dog.attributes?.depth <= 2 ? 'mx-auto' : ''}`}
                                                 src={`https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
-                                                alt=""
+                                                alt={dog.attributes.country}
                                             />
                                         </li>
                                     )}
