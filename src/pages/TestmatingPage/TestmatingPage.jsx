@@ -154,7 +154,7 @@ const Testmating = () => {
       <Heading heading="Testmating"></Heading>
       <div className="bg-white">
 
-        <div className="p-4 container mx-auto">
+        <div className="px-3 py-14 container mx-auto">
 
           <div className="testmating-row justify-between">
 
