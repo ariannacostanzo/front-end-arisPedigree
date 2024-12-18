@@ -58,15 +58,14 @@ const Siblings = ({ dog }) => {
               <div className="relative-country flex items-center gap-2">
                 <img
                   src={`https://flagsapi.com/${sibling.country.code}/flat/32.png`}
-                  alt=""
+                  alt={sibling.country.code}
                 />
                 {sibling.country.name}
               </div>
             </div>
             <div
-              className={`colored-circle ${
-                sibling.sex ? "bg-male" : "bg-female"
-              }`}
+              className={`colored-circle ${sibling.sex ? "bg-male" : "bg-female"
+                }`}
             ></div>
           </div>
         ))}

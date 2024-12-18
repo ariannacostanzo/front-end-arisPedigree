@@ -1,0 +1,30 @@
+.tooltip-wrapper {
+
+    &:hover>.tooltip-label {
+        display: block;
+    }
+
+    >.tooltip-label {
+        position: absolute;
+        bottom: 130%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--primary);
+        color: white;
+        padding: 3px 7px;
+        border-radius: 10px;
+        display: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top: 10px solid var(--primary);
+            border-right: 6px solid transparent;
+            border-left: 6px solid transparent;
+        }
+
+    }
+}

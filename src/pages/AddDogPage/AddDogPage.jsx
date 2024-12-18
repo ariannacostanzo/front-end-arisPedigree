@@ -9,7 +9,7 @@ import Loader from "../../assets/components/loader/Loader.jsx";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../utils/axiosClient.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import placeholder from "../../../public/placehodler.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +18,11 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 //fixare upload imagini
 
 const AddDogPage = () => {
+
+  const { state } = useLocation();
+  const { breedId } = state || {};
+  const { dam } = state || {};
+  const { sire } = state || {};
 
   // per la preview dell'immagine
   const [imageSrc, setImageSrc] = useState(null);
@@ -55,13 +60,13 @@ const AddDogPage = () => {
   //dati da inviare al backend
 
   const [formData, setFormData] = useState({
-    breedId: "",
+    breedId: breedId || "",
     name: "",
     titles: "",
-    sireId: "",
-    sire: "",
-    dam: "",
-    damId: "",
+    sireId: sire?.id || "",
+    sire: sire?.name || "",
+    dam: dam?.name || "",
+    damId: dam?.id || "",
     sex: "true",
     size: "",
     sizeUnit: "cm",
@@ -159,6 +164,10 @@ const AddDogPage = () => {
 
   //per ritardare la chiamata dopo che si scrive
   useEffect(() => {
+
+    if (state?.sire) {
+      return;
+    };
     if (!isSireSelected && formData.sire) {
       setIsTypingSire(true);
       const getData = setTimeout(() => {
@@ -170,6 +179,11 @@ const AddDogPage = () => {
   }, [formData.sire, isSireSelected]);
 
   useEffect(() => {
+
+    if (state?.dam) {
+      return;
+    };
+
     if (!isDamSelected && formData.dam) {
       setIsTypingDam(true);
       const getData = setTimeout(() => {
@@ -378,19 +392,23 @@ const AddDogPage = () => {
                   {/* breed  */}
                   <div className="form-col">
                     <FormLabel forName="add-breed" label="Breed" isMandatory={true} />
-                    <select
-                      name="breedId"
-                      id="add-breed"
-                      onChange={handleChange}
-                      value={formData.breedId}
-                    >
-                      <option value="-1">Select Breed</option>
-                      {breeds.map((breed, i) => (
-                        <option key={`form-select-breed${i}`} value={breed.id}>
-                          {breed.name}
-                        </option>
-                      ))}
-                    </select>
+                    {!state?.breedId ?
+                      (<select
+                        name="breedId"
+                        id="add-breed"
+                        onChange={handleChange}
+                        value={formData.breedId}
+                      >
+                        <option value="-1">Select Breed</option>
+                        {breeds.map((breed, i) => (
+                          <option key={`form-select-breed${i}`} value={breed.id}>
+                            {breed.name}
+                          </option>
+                        ))}
+                      </select>)
+                      :
+                      <div className="fake-select">{breeds.find(breed => breed.id === parseInt(breedId))?.name}</div>
+                    }
                     {errorBags.breed && (
                       <p className="error-text">{errorBags.breed}</p>
                     )}
@@ -439,7 +457,7 @@ const AddDogPage = () => {
                       )}
                     </div>
                     {/* quello che appare dopo aver fatto la ricerca */}
-                    {!isTypingSire && formData.sire && sires.length === 0 && (
+                    {!state?.sire && !isTypingSire && formData.sire && sires.length === 0 && (
                       <p className="tip">
                         There is no male dog called &#34;
                         <span>{formData.sire}</span>
@@ -450,14 +468,18 @@ const AddDogPage = () => {
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Sire</p>
                     )}
-                    <input
-                      type="text"
-                      name="sire"
-                      id="add-sire"
-                      onChange={handleChange}
-                      value={formData.sire}
-                      disabled={!formData.breedId}
-                    />
+                    {!state?.sire ?
+                      (<input
+                        type="text"
+                        name="sire"
+                        id="add-sire"
+                        onChange={handleChange}
+                        value={formData.sire}
+                        disabled={!formData.breedId}
+                      />)
+                      :
+                      <div className="fake-input-text">{sire.name}</div>
+                    }
                     {/* i risultati della ricerca  */}
                     {sires.length > 0 && (
                       <div className="dogResults">
@@ -493,7 +515,7 @@ const AddDogPage = () => {
                         ></FontAwesomeIcon>
                       )}
                     </div>
-                    {!isTypingDam && formData.dam && dams.length === 0 && (
+                    {!state?.dam && !isTypingDam && formData.dam && dams.length === 0 && (
                       <p className="tip">
                         There is no female dog called &#34;
                         <span>{formData.dam}</span>
@@ -503,14 +525,18 @@ const AddDogPage = () => {
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Dam</p>
                     )}
-                    <input
-                      type="text"
-                      name="dam"
-                      id="add-dam"
-                      onChange={handleChange}
-                      value={formData.dam}
-                      disabled={!formData.breedId}
-                    />
+                    {!state?.dam ?
+                      (<input
+                        type="text"
+                        name="dam"
+                        id="add-dam"
+                        onChange={handleChange}
+                        value={formData.dam}
+                        disabled={!formData.breedId}
+                      />)
+                      :
+                      <div className="fake-input-text">{dam.name}</div>
+                    }
                     {/* i risultati della ricerca  */}
                     {dams.length > 0 && (
                       <div className="dogResults">

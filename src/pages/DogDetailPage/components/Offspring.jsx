@@ -47,15 +47,14 @@ const Offspring = ({ dog }) => {
               <div className="relative-country flex items-center gap-2">
                 <img
                   src={`https://flagsapi.com/${child.country.code}/flat/32.png`}
-                  alt=""
+                  alt={child.country.code}
                 />
                 {child.country.name}
               </div>
             </div>
             <div
-              className={`colored-circle ${
-                child.sex ? "bg-male" : "bg-female"
-              }`}
+              className={`colored-circle ${child.sex ? "bg-male" : "bg-female"
+                }`}
             ></div>
           </div>
         ))}
@@ -65,7 +64,7 @@ const Offspring = ({ dog }) => {
 
   return (
     <div>
-       {createTable(dog)}
+      {createTable(dog)}
     </div>
   );
 };

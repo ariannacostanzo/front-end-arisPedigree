@@ -122,7 +122,7 @@ const GeneralInfo = ({ dog, isLoading }) => {
                       <>
                         <img
                           src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
-                          alt=""
+                          alt={dog.country.code}
                         />
                         <span>{dog.country ? dog.country.name : "//"}</span>
                       </>
