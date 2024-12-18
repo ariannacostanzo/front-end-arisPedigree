@@ -1,11 +1,11 @@
 .jumbo {
-    background-image: url(/jumbo.png);
-    background-repeat: no-repeat;
-    height: 750px;
-    background-position: top right;
-    max-width: 90%;
-    margin: 0 auto;
-    padding-top: 6rem;
+  background-image: url(/dog_jumbo.png);
+  background-repeat: no-repeat;
+  height: 750px;
+  background-position: center right;
+  max-width: 90%;
+  margin: 0 auto;
+  padding-top: 6rem;
 
   h1 {
     font-family: var(--headingFont);
@@ -13,8 +13,8 @@
     font-size: 54px;
     font-weight: 500;
     text-shadow: var(--text-shadow);
-      
-      
+
+
   }
 
   p {
@@ -22,11 +22,11 @@
     line-height: 25.6px;
 
     a {
-        color: var(--primary);
+      color: var(--primary);
 
-        &:hover {
-            text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -43,10 +43,8 @@
     font-size: 18px;
 
     &:hover {
-        background-color: var(--primary);
-        text-decoration: underline;
+      background-color: var(--primary);
+      text-decoration: underline;
     }
+  }
 }
-}
-
-
