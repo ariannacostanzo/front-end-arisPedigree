@@ -116,6 +116,7 @@ const Testmating = () => {
         break;
 
       case "sire":
+        setSires([]);
         setNoSires(false);
         if (value.trim().length >= 3) {
           setIsTypingSire(true)
@@ -125,6 +126,7 @@ const Testmating = () => {
         break;
 
       case "dam":
+        setDams([]);
         setNoDams(false);
         if (value.trim().length >= 3) {
           setIsTypingDam(true)
