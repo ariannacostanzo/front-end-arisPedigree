@@ -36,7 +36,6 @@ function App() {
                   <Routes>
                     <Route path="/" element={<DefaultLayout />}>
                       <Route index element={<HomePage />} />
-                      <Route path="test-mating" element={<Testmating />} />
                       <Route path="latest-news" element={<NewsPage />} />
                       <Route path="contact-us" element={<ContactusPage />} />
                       <Route path="register" element={<RegisterPage />} />
@@ -47,6 +46,7 @@ function App() {
                       <Route element={<UserAuth />}>
                         <Route path="add-new-dog" element={<AddDogPage />} />
                         <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                        <Route path="test-mating" element={<Testmating />} />
                       </Route>
                       <Route
                         path="userDetail"
