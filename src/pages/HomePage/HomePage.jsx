@@ -8,7 +8,7 @@ import NewsAndDogs from "./components/newsAndDogs/NewsAndDogs.jsx";
 const Home = () => {
   return (
     <>
-      <div className="p-4 container mx-auto">
+      <div className="p-4 container mx-auto lg:min-h-[860px] xl:min-h-[1050px]">
         <Jumbo></Jumbo>
       </div>
       <ExamplePedigree></ExamplePedigree>
@@ -18,7 +18,7 @@ const Home = () => {
       <div className="p-4 container mx-auto">
         <BreedsList></BreedsList>
       </div>
-        <CountryList></CountryList>
+      <CountryList></CountryList>
       <div className="p-4 container mx-auto">
         {/* <DogList></DogList> */}
       </div>
