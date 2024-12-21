@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../components/listOfRelative.scss";
+import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 
 const Offspring = ({ dog }) => {
   const createTable = (dog, processedIds = new Set()) => {
@@ -44,9 +45,10 @@ const Offspring = ({ dog }) => {
                   </p>
                 )}
               </div>
-              <div className="relative-country flex items-center gap-2">
+              <div className="relative-country flex items-center gap-2 mt-1">
                 <img
-                  src={`https://flagsapi.com/${child.country.code}/flat/32.png`}
+                  className="flag-img"
+                  src={child.country.code === "XK" ? kosovoFlag : `https://flagsapi.com/${child.country.code}/flat/32.png`}
                   alt={child.country.code}
                 />
                 {child.country.name}

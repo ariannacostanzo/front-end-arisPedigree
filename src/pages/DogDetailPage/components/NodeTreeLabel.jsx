@@ -4,6 +4,7 @@ import "./nodeTreeLabel.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
+import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 import { useDogs } from "../../../providers/dogsProvider";
 import { useUtils } from "../../../providers/utilsProvider";
 
@@ -156,7 +157,7 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
                                         <li>
                                             <img
                                                 className={`flag-img ${dog.attributes?.depth <= 2 ? 'mx-auto' : ''}`}
-                                                src={`https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
+                                                src={dog.attributes.country === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
                                                 alt={dog.attributes.country}
                                             />
                                         </li>

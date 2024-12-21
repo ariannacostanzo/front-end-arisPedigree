@@ -9,6 +9,7 @@ import ManagingIcon from "../../../assets/components/deleteIcon/ManagingIcon.jsx
 import axios from '../../../utils/axiosClient.js'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 
 const GeneralInfo = ({ dog, isLoading }) => {
 
@@ -121,7 +122,8 @@ const GeneralInfo = ({ dog, isLoading }) => {
                     {dog.country && (
                       <>
                         <img
-                          src={`https://flagsapi.com/${dog.country.code}/flat/32.png`}
+                          className="flag-img"
+                          src={dog.country?.code === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.country.code}/flat/32.png`}
                           alt={dog.country.code}
                         />
                         <span>{dog.country ? dog.country.name : "//"}</span>
