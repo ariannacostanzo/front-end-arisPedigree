@@ -6,22 +6,23 @@
 
     >.tooltip-label {
         position: absolute;
-        bottom: 130%;
+        top: -190%;
         left: 50%;
         transform: translateX(-50%);
-        background-color: var(--primary);
+        background-color: grey;
         color: white;
-        padding: 3px 7px;
+        padding: 5px 10px;
         border-radius: 10px;
         display: none;
+        z-index: 2;
 
         &::after {
             content: "";
             position: absolute;
-            top: 100%;
+            top: 99%;
             left: 50%;
             transform: translateX(-50%);
-            border-top: 10px solid var(--primary);
+            border-top: 10px solid grey;
             border-right: 6px solid transparent;
             border-left: 6px solid transparent;
         }

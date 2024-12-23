@@ -7,6 +7,8 @@ import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
 import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 import { useDogs } from "../../../providers/dogsProvider";
 import { useUtils } from "../../../providers/utilsProvider";
+import Tooltip from "../../../assets/components/tooltip/Tooltip.jsx";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const NodeTreeLabel = ({ dog, resetCard }) => {
 
@@ -64,110 +66,232 @@ const NodeTreeLabel = ({ dog, resetCard }) => {
 
             {dog.name !== "Parents" && <foreignObject
                 {...foreignObjectProps}
+                style={{ overflow: "visible" }}
             >
                 {dog.name === null ?
                     <div className="placeholder">
                         <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
                     </div>
                     :
-                    <div
-                        onMouseEnter={() => setCurrId(dog.attributes?.id)}
-                        onMouseLeave={() => setCurrId(0)}
-                        className={`${currId === dog.attributes?.id ? "marked-label" : ""} ${dog.attributes?.depth <= 2 ? "flex-col justify-between" : "  gap-1"} flex items-center ${dog.attributes?.sex ? 'male' : 'female'} tree-label`}
-                        style={{
-                            height: treeLabelHeight,
-                            border: "1px solid black",
-                            transform: "translateY(10px)"
-                        }}
-                    >
-                        {dog.attributes?.isRepeated && (
-                            <div
-                                style={{ backgroundColor: dog.attributes?.circleColor || 'red' }}
-                                className="repeated-circle"
-                            ></div>
-                        )}
-
-
-                        {/* Immagine */}
-                        {dog.attributes?.depth < 5 && (
-                            <figure>
-                                <button onClick={resetCard}>
-                                    <Link
-                                        to={`/dogDetail/${dog.attributes?.id}`}
-                                    >
+                    dog.attributes?.depth >= 5 ? // Dalla 5a generazione in poi aggiungo il tooltip
+                        <Tooltip
+                            label={
+                                <>
+                                    <figure style={{ backgroundColor: "white", height: 60, width: 60, overflow: "hidden", borderRadius: 5, margin: "0 auto" }}>
                                         <img
                                             className="dog-img"
                                             src={dog.attributes?.image || dogPlaceholder}
                                             alt={dog.name}
                                         />
-                                    </Link>
-                                </button>
-                            </figure>
+                                    </figure>
+                                    <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded px-1">
+                                        {reduceStr(dog.attributes?.titles || "             ", dog.attributes?.depth <= 2 ? 17 : 15)}
+                                    </p>
+                                </>
+                            }
+                        >
 
-                        )
-                        }
+                            <div
+                                onMouseEnter={() => setCurrId(dog.attributes?.id)}
+                                onMouseLeave={() => setCurrId(0)}
+                                className={`${currId === dog.attributes?.id ? "marked-label" : ""} ${dog.attributes?.depth <= 2 ? "flex-col justify-between" : "  gap-1"} flex items-center ${dog.attributes?.sex ? 'male' : 'female'} tree-label`}
+                                style={{
+                                    height: treeLabelHeight,
+                                    border: "1px solid black",
+                                    transform: "translateY(10px)"
+                                }}
+                            >
+                                {dog.attributes?.isRepeated && (
+                                    <div
+                                        style={{ backgroundColor: dog.attributes?.circleColor || 'red' }}
+                                        className="repeated-circle"
+                                    ></div>
+                                )}
 
-                        <div className={`${dog.attributes?.depth <= 2 ? 'text-center' : 'ml-1'} ${dog.attributes?.depth >= 5 ? "flex grow justify-between items-center gap-2" : ""}`}>
 
-                            {/* Nome cane */}
-                            <button onClick={resetCard}>
-                                <h3
-                                    className=" text-[14px] font-bold"
-                                >
-                                    <Link
-                                        to={`/dogDetail/${dog.attributes?.id}`}
-                                        onClick={() => window.scrollTo(0, 0)}
+                                {/* Immagine */}
+                                {dog.attributes?.depth < 5 && (
+                                    <figure>
+                                        <button onClick={resetCard}>
+                                            <Link
+                                                to={`/dogDetail/${dog.attributes?.id}`}
+                                            >
+                                                <img
+                                                    className="dog-img"
+                                                    src={dog.attributes?.image || dogPlaceholder}
+                                                    alt={dog.name}
+                                                />
+                                            </Link>
+                                        </button>
+                                    </figure>
+
+                                )
+                                }
+
+                                <div className={`${dog.attributes?.depth <= 2 ? 'text-center' : 'ml-1'} ${dog.attributes?.depth >= 5 ? "flex grow justify-between items-center gap-2" : ""}`}>
+
+                                    {/* Nome cane */}
+                                    <button onClick={resetCard}>
+                                        <h3
+                                            className=" text-[14px] font-bold"
+                                        >
+                                            <Link
+                                                to={`/dogDetail/${dog.attributes?.id}`}
+                                                onClick={() => window.scrollTo(0, 0)}
+                                            >
+                                                {reduceStr(dog.name, dog.attributes?.depth <= 2 ? 17 : 10)}
+                                            </Link>
+                                        </h3>
+                                    </button>
+
+                                    {/* Attributi cane */}
+                                    {dog.attributes && (
+                                        <ul
+                                            style={{
+                                                padding: 0,
+                                                listStyleType: "none",
+                                                margin: "5px 0 0 0"
+                                            }}
+                                        >
+
+
+                                            {/* Titles */}
+                                            {dog.attributes?.depth < 5 && (dog.attributes?.titles ? (
+                                                <li>
+                                                    <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded px-1">
+                                                        {reduceStr(dog.attributes?.titles, dog.attributes?.depth <= 2 ? 17 : 15)}
+                                                    </p>
+                                                </li>
+                                            )
+                                                :
+                                                (
+                                                    <li>
+                                                        <p className=" font-bold inline-block text-[14px] rounded">
+
+                                                        </p>
+                                                    </li>
+                                                ))
+                                            }
+
+                                            {/* Country */}
+                                            {dog.attributes?.country && (
+                                                <li>
+                                                    <img
+                                                        className={`flag-img ${dog.attributes?.depth <= 2 ? 'mx-auto' : ''}`}
+                                                        src={dog.attributes.country === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
+                                                        alt={dog.attributes.country}
+                                                    />
+                                                </li>
+                                            )}
+
+                                        </ul>
+                                    )}
+                                </div>
+
+                            </div>
+                        </Tooltip>
+
+                        :
+
+                        <div
+                            onMouseEnter={() => setCurrId(dog.attributes?.id)}
+                            onMouseLeave={() => setCurrId(0)}
+                            className={`${currId === dog.attributes?.id ? "marked-label" : ""} ${dog.attributes?.depth <= 2 ? "flex-col justify-between" : "  gap-1"} flex items-center ${dog.attributes?.sex ? 'male' : 'female'} tree-label`}
+                            style={{
+                                height: treeLabelHeight,
+                                border: "1px solid black",
+                                transform: "translateY(10px)"
+                            }}
+                        >
+                            {dog.attributes?.isRepeated && (
+                                <div
+                                    style={{ backgroundColor: dog.attributes?.circleColor || 'red' }}
+                                    className="repeated-circle"
+                                ></div>
+                            )}
+
+
+                            {/* Immagine */}
+                            {dog.attributes?.depth < 5 && (
+                                <figure>
+                                    <button onClick={resetCard}>
+                                        <Link
+                                            to={`/dogDetail/${dog.attributes?.id}`}
+                                        >
+                                            <img
+                                                className="dog-img"
+                                                src={dog.attributes?.image || dogPlaceholder}
+                                                alt={dog.name}
+                                            />
+                                        </Link>
+                                    </button>
+                                </figure>
+
+                            )
+                            }
+
+                            <div className={`${dog.attributes?.depth <= 2 ? 'text-center' : 'ml-1'} ${dog.attributes?.depth >= 5 ? "flex grow justify-between items-center gap-2" : ""}`}>
+
+                                {/* Nome cane */}
+                                <button onClick={resetCard}>
+                                    <h3
+                                        className=" text-[14px] font-bold"
                                     >
-                                        {reduceStr(dog.name, dog.attributes?.depth <= 2 ? 17 : 10)}
-                                    </Link>
-                                </h3>
-                            </button>
+                                        <Link
+                                            to={`/dogDetail/${dog.attributes?.id}`}
+                                            onClick={() => window.scrollTo(0, 0)}
+                                        >
+                                            {reduceStr(dog.name, dog.attributes?.depth <= 2 ? 17 : 10)}
+                                        </Link>
+                                    </h3>
+                                </button>
 
-                            {/* Attributi cane */}
-                            {dog.attributes && (
-                                <ul
-                                    style={{
-                                        padding: 0,
-                                        listStyleType: "none",
-                                        margin: "5px 0 0 0"
-                                    }}
-                                >
+                                {/* Attributi cane */}
+                                {dog.attributes && (
+                                    <ul
+                                        style={{
+                                            padding: 0,
+                                            listStyleType: "none",
+                                            margin: "5px 0 0 0"
+                                        }}
+                                    >
 
 
-                                    {/* Titles */}
-                                    {dog.attributes?.depth < 5 && (dog.attributes?.titles ? (
-                                        <li>
-                                            <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded">
-                                                {reduceStr(dog.attributes?.titles, dog.attributes?.depth <= 2 ? 17 : 15)}
-                                            </p>
-                                        </li>
-                                    )
-                                        :
-                                        (
+                                        {/* Titles */}
+                                        {dog.attributes?.depth < 5 && (dog.attributes?.titles ? (
                                             <li>
-                                                <p className=" font-bold inline-block text-[14px] rounded">
-
+                                                <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded px-1">
+                                                    {reduceStr(dog.attributes?.titles, dog.attributes?.depth <= 2 ? 17 : 15)}
                                                 </p>
                                             </li>
-                                        ))
-                                    }
+                                        )
+                                            :
+                                            (
+                                                <li>
+                                                    <p className=" font-bold inline-block text-[14px] rounded">
 
-                                    {/* Country */}
-                                    {dog.attributes?.country && (
-                                        <li>
-                                            <img
-                                                className={`flag-img ${dog.attributes?.depth <= 2 ? 'mx-auto' : ''}`}
-                                                src={dog.attributes.country === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
-                                                alt={dog.attributes.country}
-                                            />
-                                        </li>
-                                    )}
+                                                    </p>
+                                                </li>
+                                            ))
+                                        }
 
-                                </ul>
-                            )}
+                                        {/* Country */}
+                                        {dog.attributes?.country && (
+                                            <li>
+                                                <img
+                                                    className={`flag-img ${dog.attributes?.depth <= 2 ? 'mx-auto' : ''}`}
+                                                    src={dog.attributes.country === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.attributes.country}/flat/32.png`}
+                                                    alt={dog.attributes.country}
+                                                />
+                                            </li>
+                                        )}
+
+                                    </ul>
+                                )}
+                            </div>
+
                         </div>
-
-                    </div>}
+                }
             </foreignObject>}
         </g>
     )

@@ -1,9 +1,11 @@
 import "./tooltip.scss";
 
-const Tooltip = ({ children, label }) => {
+const Tooltip = ({ children, label, bgColor = "black", color }) => {
     return (
         <div className="tooltip-wrapper relative">
-            <div className="tooltip-label">
+            <div
+                className="tooltip-label"
+            >
                 {label}
             </div>
             {children}
