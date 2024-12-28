@@ -15,7 +15,7 @@ const DogsListPage = () => {
           {loading ? (
             <Loader></Loader>
           ) : (
-            <div className="p-4 container mx-auto flex flex-wrap justify-center">
+            <div className="p-4 container mx-auto flex-wrap justify-center">
               <DogListComponent dogs={dogs}></DogListComponent>
             </div>
           )}

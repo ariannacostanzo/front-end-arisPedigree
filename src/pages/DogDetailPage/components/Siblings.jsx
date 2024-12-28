@@ -36,7 +36,7 @@ const Siblings = ({ dog }) => {
         {filteredSiblings.length === 0 ? (
           <div className="p-4">{dog.name} has no siblings</div>
         ) : (
-          <div > Siblings of {dog.name}: </div>
+          <div> Siblings of {dog.name}: </div>
         )}
         {filteredSiblings.map((sibling, i) => (
           <div key={`sibling${i}`} className={`list-of-relative-card`}>
@@ -56,18 +56,25 @@ const Siblings = ({ dog }) => {
                   </p>
                 )}
               </div>
-              <div className="relative-country flex items-center gap-2">
-                <img
-                  className="flag-img"
-                  src={sibling.country.code === "XK" ? kosovoFlag : `https://flagsapi.com/${sibling.country.code}/flat/32.png`}
-                  alt={sibling.country.code}
-                />
-                {sibling.country.name}
-              </div>
+              {sibling.country && (
+                <div className="relative-country flex items-center gap-2">
+                  <img
+                    className="flag-img"
+                    src={
+                      sibling.country.code === "XK"
+                        ? kosovoFlag
+                        : `https://flagsapi.com/${sibling.country.code}/flat/32.png`
+                    }
+                    alt={sibling.country.code}
+                  />
+                  {sibling.country.name}
+                </div>
+              )}
             </div>
             <div
-              className={`colored-circle ${sibling.sex ? "bg-male" : "bg-female"
-                }`}
+              className={`colored-circle ${
+                sibling.sex ? "bg-male" : "bg-female"
+              }`}
             ></div>
           </div>
         ))}
@@ -75,14 +82,9 @@ const Siblings = ({ dog }) => {
     );
   };
 
-  return (
-    <div>
-      {createTable(dog)}
-    </div>
-  );
+  return <div>{createTable(dog)}</div>;
 };
 export default Siblings;
-
 
 //farlo sia in verticale che in orizzontale
 //in caso fare una tabella che puo fare overflow x
