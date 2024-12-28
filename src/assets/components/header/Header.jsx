@@ -1,46 +1,41 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
-import { faBars, faCaretDown, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faCaretDown,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../providers/authProvider";
-
+import SearchBar from "../searchbar/Searchbar";
 const Header = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { isLoggedIn, logout, user } = useAuth();
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(false);
-  const [showDogUnderlist, setShowDogUnderlist] = useState(false)
-  const [showAuthUnderlist, setShowAuthUnderlist] = useState(false)
+  const [showDogUnderlist, setShowDogUnderlist] = useState(false);
+  const [showAuthUnderlist, setShowAuthUnderlist] = useState(false);
 
   const logOutAndHome = () => {
-    logout()
-    navigate('/')
+    logout();
+    navigate("/");
     window.location.reload();
-  }
-
-
+  };
 
   const relocateAndCloseMenu = () => {
     window.scrollTo(0, 0);
-    setIsHamburgerVisible(false)
-    setShowDogUnderlist(false)
-    setShowAuthUnderlist(false)
-  }
-
-
-
+    setIsHamburgerVisible(false);
+    setShowDogUnderlist(false);
+    setShowAuthUnderlist(false);
+  };
 
   return (
     <>
       <div className="relative">
         <header className="py-4 px-4 sm:px-0 container mx-auto flex items-center justify-between ">
-
           <div className="header-nav flex flex-wrap sm:flex-nowrap items-center gap-x-7 gap-y-2">
             <div className="grow shrink-0 xl:grow-0">
-              <Link
-                to="/" onClick={() => window.scrollTo(0, 0)}
-              >
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <img src="/logoaris.png" alt="logo" className="w-[300px]" />
               </Link>
             </div>
@@ -108,10 +103,7 @@ const Header = () => {
                     className="ml-2"
                   ></FontAwesomeIcon>
                   <ul className="header-underlist">
-                    <li
-                      className="p-[10px]"
-                      onClick={logOutAndHome}
-                    >
+                    <li className="p-[10px]" onClick={logOutAndHome}>
                       Logout
                     </li>
                   </ul>
@@ -151,16 +143,8 @@ const Header = () => {
               </li>
             </ul>
 
-            {/* SearchBar */}
-            <div
-              className="header-search-bar order-last sm:order-1 basis-full sm:basis-[250px] lg:basis-[160px] 2xl:basis-[300px]"
-            >
-              <FontAwesomeIcon
-                icon={faSearch}
-                className="text-[#E89F41] absolute left-2 top-1/2 translate-y-[-50%]"
-              ></FontAwesomeIcon>
-              <input type="text" placeholder="Search..." />
-            </div>
+            {/* Searchbar  */}
+            <SearchBar></SearchBar>
 
             {/* hamburger button  */}
             <div
@@ -182,8 +166,9 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li
-                    className={`fix-padding ${showDogUnderlist ? "h-under-border" : ""
-                      }`}
+                    className={`fix-padding ${
+                      showDogUnderlist ? "h-under-border" : ""
+                    }`}
                     onClick={() => setShowDogUnderlist(!showDogUnderlist)}
                   >
                     Dogs
@@ -232,8 +217,9 @@ const Header = () => {
                   </li>
                   {isLoggedIn ? (
                     <li
-                      className={`fix-padding ${showAuthUnderlist ? "h-under-border" : ""
-                        }`}
+                      className={`fix-padding ${
+                        showAuthUnderlist ? "h-under-border" : ""
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         setShowAuthUnderlist(!showAuthUnderlist);
@@ -247,8 +233,9 @@ const Header = () => {
                       {showAuthUnderlist && (
                         <ul className="hamburger-underlist">
                           <li
-                            className={`fix-padding ${showAuthUnderlist ? "h-under-border" : ""
-                              }`}
+                            className={`fix-padding ${
+                              showAuthUnderlist ? "h-under-border" : ""
+                            }`}
                             onClick={logOutAndHome}
                           >
                             Logout
@@ -258,8 +245,9 @@ const Header = () => {
                     </li>
                   ) : (
                     <li
-                      className={`fix-padding ${showAuthUnderlist ? "h-under-border" : ""
-                        }`}
+                      className={`fix-padding ${
+                        showAuthUnderlist ? "h-under-border" : ""
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         setShowAuthUnderlist(!showAuthUnderlist);
