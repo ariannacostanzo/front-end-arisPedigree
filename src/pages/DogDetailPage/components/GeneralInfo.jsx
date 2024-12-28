@@ -1,18 +1,23 @@
 import placeholder from "/placehodler.jpg";
 import "./generalInfo.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMars, faPen, faSpinner, faTrashCan, faVenus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMars,
+  faPen,
+  faSpinner,
+  faTrashCan,
+  faVenus,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Loader from "../../../assets/components/loader/Loader.jsx";
 import { useAuth } from "../../../providers/authProvider.jsx";
 import ManagingIcon from "../../../assets/components/deleteIcon/ManagingIcon.jsx";
-import axios from '../../../utils/axiosClient.js'
+import axios from "../../../utils/axiosClient.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 
 const GeneralInfo = ({ dog, isLoading }) => {
-
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -35,7 +40,6 @@ const GeneralInfo = ({ dog, isLoading }) => {
       console.log(error);
     } finally {
       setIsDeleting(false);
-
     }
   };
 
@@ -49,13 +53,20 @@ const GeneralInfo = ({ dog, isLoading }) => {
               <h2>{dog.name}</h2>
 
               {/* Pulsanti */}
-              {dog.userId == user.id
-                &&
+              {(dog.userId == user.id || user?.isAdmin) && (
                 <div className="buttons-container">
-                  <ManagingIcon message="Modify" icon={faPen} manager={() => navigate(`/${dog.id}/update-dog`)}></ManagingIcon>
-                  <ManagingIcon message="Delete" icon={faTrashCan} manager={() => deleteDog(dog.id)}></ManagingIcon>
+                  <ManagingIcon
+                    message="Modify"
+                    icon={faPen}
+                    manager={() => navigate(`/${dog.id}/update-dog`)}
+                  ></ManagingIcon>
+                  <ManagingIcon
+                    message="Delete"
+                    icon={faTrashCan}
+                    manager={() => deleteDog(dog.id)}
+                  ></ManagingIcon>
                 </div>
-              }
+              )}
             </div>
 
             <div className="md:flex gap-4">
@@ -79,8 +90,9 @@ const GeneralInfo = ({ dog, isLoading }) => {
                   <p>
                     Title:{" "}
                     <span
-                      className={`${dog.titles ? "bg-[#73e567] p-1 text-[#095b00]" : ""
-                        }`}
+                      className={`${
+                        dog.titles ? "bg-[#73e567] p-1 text-[#095b00]" : ""
+                      }`}
                     >
                       {dog.titles ? dog.titles : "//"}
                     </span>
@@ -123,7 +135,11 @@ const GeneralInfo = ({ dog, isLoading }) => {
                       <>
                         <img
                           className="flag-img"
-                          src={dog.country?.code === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.country.code}/flat/32.png`}
+                          src={
+                            dog.country?.code === "XK"
+                              ? kosovoFlag
+                              : `https://flagsapi.com/${dog.country.code}/flat/32.png`
+                          }
                           alt={dog.country.code}
                         />
                         <span>{dog.country ? dog.country.name : "//"}</span>
@@ -205,16 +221,6 @@ const GeneralInfo = ({ dog, isLoading }) => {
               </div>
             </div>
             {isDeleting && <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>}
-            {user?.isAdmin && (
-              <div className="text-end managing-icons-container justify-end">
-                <ManagingIcon message="Modify" icon={faPen}></ManagingIcon>
-                <ManagingIcon
-                  message="Delete"
-                  icon={faTrashCan}
-                  manager={() => deleteDog(dog.id)}
-                ></ManagingIcon>
-              </div>
-            )}
           </>
         )}
       </div>
