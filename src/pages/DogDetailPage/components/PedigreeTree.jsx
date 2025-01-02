@@ -1,13 +1,19 @@
-import { useState } from "react";
-import Tree from 'react-d3-tree';
-import NodeTreeLabel from "./NodeTreeLabel";
-import { useCenteredTree } from "../utils/helpers";
-
+import { useEffect, useState } from "react";
+import "./pedigreeTree.scss";
 const PedigreeTree = ({ dog, resetCard }) => {
 
     const [generationsLength, setGenerationsLength] = useState(4);
+    // const [generationTree, setGenerationTree] = useState([
+    //     [],
+    //     [],
+    //     [],
+    //     [],
+    //     [],
+    //     [],
+    //     [],
+    //     []
+    // ])
 
-    const [translate, containerRef] = useCenteredTree();
 
     // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
     const dogFrequency = new Map();
@@ -75,19 +81,18 @@ const PedigreeTree = ({ dog, resetCard }) => {
         const isRepeated = dogFrequency.get(dog.id).count > 1;
 
         return {
+            id: dog.id,
+            isRepeated,
+            image: dog.image,
             name: dog.name,
-            attributes: {
-                id: dog.id,
-                isRepeated,
-                image: dog.image,
-                name: dog.name,
-                titles: dog.titles,
-                country: dog.country.code,
-                sex: dog.sex,
-                depth,
-                circleColor: dogFrequency.get(dog.id).color
-            },
-            children: [convertToTreeData(dog.dam, depth), convertToTreeData(dog.sire, depth)]
+            titles: dog.titles,
+            country: dog.country.code,
+            sex: dog.sex,
+            depth,
+            circleColor: dogFrequency.get(dog.id).color,
+            dam: convertToTreeData(dog.dam, depth),
+            sire: convertToTreeData(dog.sire, depth),
+            parents: [convertToTreeData(dog.dam, depth), convertToTreeData(dog.sire, depth)]
         }
     };
 
@@ -102,12 +107,24 @@ const PedigreeTree = ({ dog, resetCard }) => {
         // Parte direttamente dai genitori
         return {
             name: "Parents",
-            children: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
+            parents: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
         }
     }
 
     // Creo i dati per l'albero
     const treeData = createTree(dog);
+    console.log(treeData);
+    const generationsTree = {
+        firstGen: [],
+        secondGen: [],
+        thirdGen: [],
+        fourthGen: [],
+        fifthGen: [],
+        sixthGen: [],
+        seventhGen: [],
+        eighthGen: [],
+    }
+
 
 
     return <div className="pedigree-tree">
@@ -130,26 +147,256 @@ const PedigreeTree = ({ dog, resetCard }) => {
         </label>
 
         {/* Tree dog */}
-        <div
-            style={{ width: "100%", height: "90vh", position: "relative" }}
-            ref={containerRef}
-        >
-            <Tree
-                data={treeData} // dati albero
-                orientation="horizontal" // orientamento albero
-                pathFunc="step" // stile delle linee
-                nodeSize={{ x: 250, y: 45 }} // distanza nodi
-                zoomable={true} //abilitazione zoom
-                draggable={true} // abilitazione trascinamento
-                separation={{ siblings: 4, nonSiblings: 3 }}
-                translate={translate}
-                renderCustomNodeElement={(rd3tProps) =>
-                    <NodeTreeLabel
-                        dog={rd3tProps.nodeDatum}
-                        resetCard={resetCard}
-                    />
-                }
-            />
+        <div className="App">
+            <div className="generation1">
+                <div className="generation1-male">
+                    padre *1
+                    <div className="generation2">
+                        <div className="generation2-male">
+                            padre *2
+                            <div className="generation3">
+                                <div className="generation3-male">
+                                    padre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="generation3-female">
+                                    madre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="generation2-female">
+                            madre *2
+                            <div className="generation3">
+                                <div className="generation3-male">
+                                    padre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="generation3-female">
+                                    madre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="generation1-female">
+                    madre *1
+                    <div className="generation2">
+                        <div className="generation2-male">
+                            padre *2
+                            <div className="generation3">
+                                <div className="generation3-male">
+                                    padre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="generation3-female">
+                                    madre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="generation2-female">
+                            madre *2
+                            <div className="generation3">
+                                <div className="generation3-male">
+                                    padre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="generation3-female">
+                                    madre *3
+                                    <div className="generation4">
+                                        <div className="generation4-male">
+                                            padre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="generation4-female">
+                                            madre *4
+                                            <div className="generation5">
+                                                <div className="generation5-male">
+                                                    padre *5
+                                                </div>
+                                                <div className="generation5-female">
+                                                    madre *5
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
