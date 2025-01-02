@@ -3,16 +3,7 @@ import "./pedigreeTree.scss";
 const PedigreeTree = ({ dog, resetCard }) => {
 
     const [generationsLength, setGenerationsLength] = useState(4);
-    // const [generationTree, setGenerationTree] = useState([
-    //     [],
-    //     [],
-    //     [],
-    //     [],
-    //     [],
-    //     [],
-    //     [],
-    //     []
-    // ])
+    const [generationTree, setGenerationTree] = useState({});
 
 
     // Traccia quante volte ogni cane appare, per ogni cane avro una coppia chiave valore dove: chiave= id, valore= occorrenze-cane
@@ -107,6 +98,8 @@ const PedigreeTree = ({ dog, resetCard }) => {
         // Parte direttamente dai genitori
         return {
             name: "Parents",
+            sire: convertToTreeData(dog.sire),
+            dam: convertToTreeData(dog.dam),
             parents: [convertToTreeData(dog.dam), convertToTreeData(dog.sire)].filter(Boolean)
         }
     }
@@ -114,16 +107,9 @@ const PedigreeTree = ({ dog, resetCard }) => {
     // Creo i dati per l'albero
     const treeData = createTree(dog);
     console.log(treeData);
-    const generationsTree = {
-        firstGen: [],
-        secondGen: [],
-        thirdGen: [],
-        fourthGen: [],
-        fifthGen: [],
-        sixthGen: [],
-        seventhGen: [],
-        eighthGen: [],
-    }
+    useEffect(() => {
+        setGenerationTree(createTree(dog))
+    }, [generationsLength])
 
 
 
@@ -149,61 +135,189 @@ const PedigreeTree = ({ dog, resetCard }) => {
         {/* Tree dog */}
         <div className="App">
             <div className="generation1">
+                {/* Maschio Gen 1 */}
                 <div className="generation1-male">
-                    padre *1
+                    {generationTree.sire?.name || "..."}
+
                     <div className="generation2">
+                        {/* Maschio Gen 2 */}
                         <div className="generation2-male">
-                            padre *2
+                            {generationTree.sire?.sire?.name || "..."}
+
                             <div className="generation3">
+                                {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    padre *3
+                                    {generationTree.sire?.sire?.sire?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.sire?.sire?.sire?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.sire?.sire?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.sire?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.sire?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.sire?.sire?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.sire?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.sire?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.sire?.sire?.sire?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.sire?.sire?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.sire?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.sire?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.sire?.sire?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.sire?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.sire?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    madre *3
+                                    {generationTree.sire?.sire?.dam?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.sire?.sire?.dam?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.sire?.dam?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.dam?.sire?.sire?.sire?.name || "..."}
+
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.dam?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.sire?.dam?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.dam?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.dam?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.sire?.sire?.dam?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.sire?.dam?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.dam?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.dam?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.sire?.dam?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.sire?.dam?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.sire?.dam?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -211,58 +325,183 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Femmina Gen 2 */}
                         <div className="generation2-female">
-                            madre *2
+                            {generationTree.sire?.dam?.name || "..."}
+
                             <div className="generation3">
+                                {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    padre *3
+                                    {generationTree.sire?.dam?.sire?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.sire?.dam?.sire?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.dam?.sire?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.sire?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.sire?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.dam?.sire?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.sire?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.sire?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.sire?.dam?.sire?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.dam?.sire?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.sire?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.sire?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.dam?.sire?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.sire?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.sire?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    madre *3
+                                    {generationTree.sire?.dam?.dam?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.sire?.dam?.dam?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.dam?.dam?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.dam?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.dam?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.dam?.dam?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.dam?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.dam?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.sire?.dam?.dam?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.sire?.dam?.dam?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.dam?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.dam?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.sire?.dam?.dam?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.sire?.dam?.dam?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.sire?.dam?.dam?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -273,61 +512,194 @@ const PedigreeTree = ({ dog, resetCard }) => {
                     </div>
                 </div>
 
+                {/* Femmina Gen 1 */}
                 <div className="generation1-female">
-                    madre *1
+                    {generationTree.dam?.name || "..."}
+
                     <div className="generation2">
+                        {/*Maschio Gen 2  */}
                         <div className="generation2-male">
-                            padre *2
+                            {generationTree.dam?.sire?.name || "..."}
+
                             <div className="generation3">
+                                {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    padre *3
+                                    {generationTree.dam?.sire?.sire?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.dam?.sire?.sire?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.sire?.sire?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.sire?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.sire?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.sire?.sire?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.sire?.sire?.dam?.sire?.name || "..."}
+
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.sire?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.dam?.sire?.sire?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.sire?.sire?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.sire?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.sire?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.sire?.sire?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.sire?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.sire?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    madre *3
+                                    {generationTree.dam?.sire?.dam?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.dam?.sire?.dam?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.sire?.dam?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.dam?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.dam?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.sire?.dam?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.dam?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.dam?.sire?.dam?.dam?.name || "..."}
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.dam?.sire?.dam?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.sire?.dam?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Genn 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.dam?.dam?.sire?.sire?.name || "..."}
+
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.dam?.dam?.sire?.dam?.name || "..."}
+
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.sire?.dam?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.sire?.dam?.dam?.dam?.sire?.name || "..."}
+
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.sire?.dam?.dam?.dam?.dam?.name || "..."}
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,58 +707,183 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Femmina Gen 2 */}
                         <div className="generation2-female">
-                            madre *2
+                            {generationTree.dam?.dam?.name || "..."}
+
                             <div className="generation3">
+                                {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    padre *3
+                                    {generationTree.dam?.dam?.sire?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.dam?.dam?.sire?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.dam?.sire?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.sire?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.sire?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.dam?.sire?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.sire?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.sire?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.dam?.dam?.sire?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.dam?.sire?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.sire?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.sire?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.dam?.sire?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.sire?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.sire?.dam?.dam?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    madre *3
+                                    {generationTree.dam?.dam?.dam?.name || "..."}
+
                                     <div className="generation4">
+                                        {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            padre *4
+                                            {generationTree.dam?.dam?.dam?.sire?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.dam?.dam?.sire?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.dam?.sire?.sire?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.dam?.sire?.sire?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.dam?.dam?.sire?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.dam?.sire?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.dam?.sire?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            madre *4
+                                            {generationTree.dam?.dam?.dam?.dam?.name || "..."}
+
                                             <div className="generation5">
+                                                {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    padre *5
+                                                    {generationTree.dam?.dam?.dam?.dam?.sire?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.dam?.dam?.sire?.sire?.name || "..."}
+                                                        </div>
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.dam?.dam?.sire?.dam?.name || "..."}
+
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    madre *5
+                                                    {generationTree.dam?.dam?.dam?.dam?.dam?.name || "..."}
+
+                                                    <div className="generation6">
+                                                        {/* Maschio Gen 6 */}
+                                                        <div className="generation6-male">
+                                                            {generationTree.dam?.dam?.dam?.dam?.dam?.sire?.name || "..."}
+                                                        </div>
+
+                                                        {/* Femmina Gen 6 */}
+                                                        <div className="generation6-female">
+                                                            {generationTree.dam?.dam?.dam?.dam?.dam?.dam?.name || "..."}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

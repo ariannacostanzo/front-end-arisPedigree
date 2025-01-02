@@ -8,14 +8,14 @@
 .generation1-male {
   background-color: yellow;
   flex-basis: 50%;
-  height: 50%;
+  min-height: 50vh;
+
 }
 
 .generation1-female {
   background-color: gold;
-
   flex-basis: 50%;
-  height: 50%;
+  min-height: 50vh;
 }
 
 .generation2 {
@@ -25,12 +25,12 @@
 }
 
 .generation2-male {
-  height: 250px;
+  min-height: 25vh;
   background-color: greenyellow;
 }
 
 .generation2-female {
-  height: 250px;
+  min-height: 25vh;
   background-color: aqua;
 }
 
@@ -51,37 +51,57 @@
 [class^="generation"]:not([class$="male"]):not([class*="tion1"]) {
   margin-left: 100px;
   margin-top: -24px;
-  height: 100%;
+  min-height: 100%;
 }
 
 [class$="male"] {
-  height: 50%;
+  min-height: 50%;
 }
 
 [class$="3-male"] {
   background-color: beige;
+  min-height: 12.5vh;
 }
 
 [class$="3-female"] {
+  min-height: 12.5vh;
   background-color: silver;
+
 }
 
 [class$="4-male"] {
   background-color: orange;
+  min-height: 6.25vh;
 }
 
 [class$="4-female"] {
   background-color: orchid;
+  min-height: 6.25vh;
 }
 
 [class$="5-male"] {
   background-color: skyblue;
+  min-height: 3.125vh;
 }
 
 [class$="5-female"] {
   background-color: slateblue;
+  min-height: 3.125vh;
 }
 
+
+.generation6-male,
+.generation6-female {
+  min-height: 40px;
+}
+
+.generation6-male {
+  background-color: chocolate;
+}
+
+.generation6-female {
+  background-color: darkkhaki;
+}
 
 .generation5-male,
 .generation5-female,
@@ -96,6 +116,5 @@
 
 .App {
   display: flex;
-  height: 100vh;
   justify-content: center;
 }
