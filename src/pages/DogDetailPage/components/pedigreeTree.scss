@@ -1,27 +1,24 @@
 .generation1 {
   width: 100vw;
   height: 100%;
-  flex-basis: 100%;
-  height: 100%;
+  // flex-basis: 100%;
 }
 
 .generation1-male {
   background-color: yellow;
-  flex-basis: 50%;
+  // flex-basis: 50%;
   min-height: 50vh;
 
 }
 
 .generation1-female {
   background-color: gold;
-  flex-basis: 50%;
+  // flex-basis: 50%;
   min-height: 50vh;
 }
 
 .generation2 {
   background-color: red;
-  margin-left: 100px;
-  margin-top: -18px;
 }
 
 .generation2-male {
@@ -34,24 +31,15 @@
   background-color: aqua;
 }
 
-.generation3 {
-  margin-left: 100px;
-  margin-top: -18px;
-}
-
-.generation4 {
-  margin-left: 100px;
-  margin-top: -18px;
-}
-
-
-
-
-
 [class^="generation"]:not([class$="male"]):not([class*="tion1"]) {
-  margin-left: 100px;
-  margin-top: -24px;
+  // margin-left: 100px;
+  // margin-top: -24px;
   min-height: 100%;
+}
+
+[class^="generation"][class$="male"] {
+  display: flex;
+  align-items: center;
 }
 
 [class$="male"] {
@@ -116,5 +104,4 @@
 
 .App {
   display: flex;
-  justify-content: center;
 }

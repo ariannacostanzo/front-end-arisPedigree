@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./pedigreeTree.scss";
+import TreeNode from "./TreeNode";
 const PedigreeTree = ({ dog, resetCard }) => {
 
     const [generationsLength, setGenerationsLength] = useState(4);
@@ -137,97 +138,104 @@ const PedigreeTree = ({ dog, resetCard }) => {
             <div className="generation1">
                 {/* Maschio Gen 1 */}
                 <div className="generation1-male">
-                    {generationTree.sire?.name || "..."}
+                    <TreeNode dog={generationTree.sire || null} />
 
                     <div className="generation2">
                         {/* Maschio Gen 2 */}
                         <div className="generation2-male">
-                            {generationTree.sire?.sire?.name || "..."}
+                            <TreeNode dog={generationTree.sire?.sire || null} />
 
                             <div className="generation3">
                                 {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    {generationTree.sire?.sire?.sire?.name || "..."}
+                                    <TreeNode dog={generationTree.sire?.sire?.sire || null} />
+
 
                                     <div className="generation4">
                                         {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            {generationTree.sire?.sire?.sire?.sire?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.sire?.sire?.sire || null} />
+
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.sire?.sire?.sire?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.sire || null} />
 
-                                                    <div className="generation6">
+
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.sire?.sire?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.sire?.sire || null} />
+
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.sire?.sire?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.sire?.dam || null} />
+
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.sire?.sire?.sire?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.dam || null} />
 
-                                                    <div className="generation6">
+
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.sire?.sire?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.dam?.sire || null} />
+
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.sire?.sire?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.sire?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
 
                                         {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            {generationTree.sire?.sire?.sire?.dam?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.sire?.sire?.dam || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.sire?.sire?.dam?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.sire?.dam?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.sire?.dam?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.sire?.sire?.dam?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.sire?.dam?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.sire?.dam?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.sire?.dam?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -236,88 +244,88 @@ const PedigreeTree = ({ dog, resetCard }) => {
 
                                 {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    {generationTree.sire?.sire?.dam?.name || "..."}
+                                    <TreeNode dog={generationTree.sire?.sire?.dam || null} />
 
                                     <div className="generation4">
                                         {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            {generationTree.sire?.sire?.dam?.sire?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.sire?.dam?.sire || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.sire?.dam?.sire?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.dam?.sire?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.sire?.sire || null} />
 
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.dam?.sire?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.sire?.dam?.sire?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.dam?.sire?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.dam?.sire?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.sire?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
 
                                         {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            {generationTree.sire?.sire?.dam?.dam?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.sire?.dam?.dam || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.sire?.dam?.dam?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.dam?.dam?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.dam?.dam?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.sire?.dam?.dam?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.sire?.dam?.dam?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.sire?.dam?.dam?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.sire?.dam?.dam?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -328,92 +336,92 @@ const PedigreeTree = ({ dog, resetCard }) => {
 
                         {/* Femmina Gen 2 */}
                         <div className="generation2-female">
-                            {generationTree.sire?.dam?.name || "..."}
+                            <TreeNode dog={generationTree.sire?.dam || null} />
 
                             <div className="generation3">
                                 {/* Maschio Gen 3 */}
                                 <div className="generation3-male">
-                                    {generationTree.sire?.dam?.sire?.name || "..."}
+                                    <TreeNode dog={generationTree.sire?.dam?.sire || null} />
 
                                     <div className="generation4">
                                         {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            {generationTree.sire?.dam?.sire?.sire?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.dam?.sire?.sire || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.dam?.sire?.sire?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.sire?.sire?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.sire?.sire?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.dam?.sire?.sire?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.sire?.sire?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.sire?.sire?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.sire?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
 
                                         {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            {generationTree.sire?.dam?.sire?.dam?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.dam?.sire?.dam || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.dam?.sire?.dam?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.sire?.dam?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.sire?.dam?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.dam?.sire?.dam?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.sire?.dam?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.sire?.dam?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.sire?.dam?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -421,87 +429,87 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                 </div>
                                 {/* Femmina Gen 3 */}
                                 <div className="generation3-female">
-                                    {generationTree.sire?.dam?.dam?.name || "..."}
+                                    <TreeNode dog={generationTree.sire?.dam?.dam || null} />
 
                                     <div className="generation4">
                                         {/* Maschio Gen 4 */}
                                         <div className="generation4-male">
-                                            {generationTree.sire?.dam?.dam?.sire?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.dam?.dam?.sire || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.dam?.dam?.sire?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.dam?.sire?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.dam?.sire?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.dam?.dam?.sire?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.dam?.sire?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.dam?.sire?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.sire?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
 
                                         {/* Femmina Gen 4 */}
                                         <div className="generation4-female">
-                                            {generationTree.sire?.dam?.dam?.dam?.name || "..."}
+                                            <TreeNode dog={generationTree.sire?.dam?.dam?.dam || null} />
 
                                             {generationsLength >= 5 && <div className="generation5">
                                                 {/* Maschio Gen 5 */}
                                                 <div className="generation5-male">
-                                                    {generationTree.sire?.dam?.dam?.dam?.sire?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.sire || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.dam?.dam?.sire?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.sire?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.dam?.dam?.sire?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.sire?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
-                                                    {generationTree.sire?.dam?.dam?.dam?.dam?.name || "..."}
+                                                    <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.dam || null} />
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
-                                                            {generationTree.sire?.dam?.dam?.dam?.dam?.sire?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.dam?.sire || null} />
                                                         </div>
 
                                                         {/* Femmina Gen 6 */}
                                                         <div className="generation6-female">
-                                                            {generationTree.sire?.dam?.dam?.dam?.dam?.dam?.name || "..."}
+                                                            <TreeNode dog={generationTree.sire?.dam?.dam?.dam?.dam?.dam || null} />
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -536,7 +544,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.sire?.sire?.sire?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.sire?.sire?.sire?.sire?.name || "..."}
@@ -546,14 +554,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.sire?.sire?.sire?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.sire?.sire?.sire?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.sire?.sire?.dam?.sire?.name || "..."}
@@ -564,7 +572,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.sire?.sire?.sire?.dam?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -578,7 +586,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.sire?.sire?.dam?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.sire?.dam?.sire?.sire?.name || "..."}
@@ -588,14 +596,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.sire?.sire?.dam?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.sire?.sire?.dam?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.sire?.dam?.dam?.sire?.name || "..."}
@@ -605,7 +613,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.sire?.sire?.dam?.dam?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -626,7 +634,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.sire?.dam?.sire?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.dam?.sire?.sire?.sire?.name || "..."}
@@ -636,14 +644,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.sire?.dam?.sire?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.sire?.dam?.sire?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.dam?.sire?.dam?.sire?.name || "..."}
@@ -654,7 +662,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                             {generationTree.dam?.sire?.dam?.sire?.dam?.dam?.name || "..."}
 
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -668,7 +676,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.sire?.dam?.dam?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Genn 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.dam?.dam?.sire?.sire?.name || "..."}
@@ -680,14 +688,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                             {generationTree.dam?.sire?.dam?.dam?.sire?.dam?.name || "..."}
 
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.sire?.dam?.dam?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.sire?.dam?.dam?.dam?.sire?.name || "..."}
@@ -699,7 +707,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                             {generationTree.dam?.sire?.dam?.dam?.dam?.dam?.name || "..."}
 
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -727,7 +735,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.dam?.sire?.sire?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.sire?.sire?.sire?.sire?.name || "..."}
@@ -737,14 +745,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.sire?.sire?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.dam?.sire?.sire?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.sire?.sire?.dam?.sire?.name || "..."}
@@ -754,7 +762,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.sire?.sire?.dam?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -768,7 +776,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.dam?.sire?.dam?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.sire?.dam?.sire?.sire?.name || "..."}
@@ -778,14 +786,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.sire?.dam?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.dam?.sire?.dam?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.sire?.dam?.dam?.sire?.name || "..."}
@@ -795,7 +803,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.sire?.dam?.dam?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -816,7 +824,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.dam?.dam?.sire?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.dam?.sire?.sire?.sire?.name || "..."}
@@ -826,14 +834,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.dam?.sire?.sire?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.dam?.dam?.sire?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.dam?.sire?.dam?.sire?.name || "..."}
@@ -843,7 +851,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.dam?.sire?.dam?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
@@ -857,7 +865,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                 <div className="generation5-male">
                                                     {generationTree.dam?.dam?.dam?.dam?.sire?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.dam?.dam?.sire?.sire?.name || "..."}
@@ -866,14 +874,14 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                             {generationTree.dam?.dam?.dam?.dam?.sire?.dam?.name || "..."}
 
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
 
                                                 {/* Femmina Gen 5 */}
                                                 <div className="generation5-female">
                                                     {generationTree.dam?.dam?.dam?.dam?.dam?.name || "..."}
 
-                                                    <div className="generation6">
+                                                    {generationsLength >= 6 && <div className="generation6">
                                                         {/* Maschio Gen 6 */}
                                                         <div className="generation6-male">
                                                             {generationTree.dam?.dam?.dam?.dam?.dam?.sire?.name || "..."}
@@ -883,7 +891,7 @@ const PedigreeTree = ({ dog, resetCard }) => {
                                                         <div className="generation6-female">
                                                             {generationTree.dam?.dam?.dam?.dam?.dam?.dam?.name || "..."}
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             </div>}
                                         </div>
