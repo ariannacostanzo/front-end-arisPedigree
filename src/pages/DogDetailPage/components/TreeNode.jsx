@@ -8,7 +8,7 @@ import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 
 
 
-const TreeNode = ({ dog }) => {
+const TreeNode = ({ dog, generationsLength }) => {
 
     // Funzione per abbreviare le stringhe
     const { reduceStr } = useUtils();
@@ -19,8 +19,8 @@ const TreeNode = ({ dog }) => {
             case 1: return "200px";
             case 2: return "160px";
             case 3: return "100px";
-            case 4: return "90px";
-            default: return "70px";
+            case 4: return "40px";
+            default: return "40px";
         }
     })();
 
@@ -56,7 +56,9 @@ const TreeNode = ({ dog }) => {
 
                     {/* Immagine */}
                     {dog.depth < 5 &&
-                        <figure>
+                        <figure
+                            className={`${dog.depth >= 3 ? "hidden" : ""}`}
+                        >
                             <button>
                                 <Link
                                     to={`/dogDetail/${dog.id}`}
@@ -73,7 +75,7 @@ const TreeNode = ({ dog }) => {
 
                     <div className={`flex items-center ${dog.depth >= 5 ? "flex-row" : "flex-col"}`}>
                         {/* Nome */}
-                        <h4 className="text-center text-[14px] font-bold">
+                        <h4 className="text-center text-[12px] font-bold">
                             <Link
                                 to={`/dogDetail/${dog.id}`}
                                 onClick={() => window.scrollTo(0, 0)}
@@ -84,13 +86,13 @@ const TreeNode = ({ dog }) => {
 
                         {/* Titles */}
                         {dog.depth < 5 && (dog.titles ? (
-                            <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded px-1">
+                            <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[10px] rounded px-1">
                                 {reduceStr(dog.titles, dog.depth <= 2 ? 17 : 15)}
                             </p>
                         )
                             :
                             (
-                                <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[14px] rounded px-1">
+                                <p className="bg-[#73e567] text-[#095b00] font-bold inline-block text-[10px] rounded px-1">
                                 //
                                 </p>
                             ))
@@ -99,7 +101,7 @@ const TreeNode = ({ dog }) => {
                         {/* Country */}
                         {dog.country && (
                             <img
-                                className={`flag-img ${dog.depth <= 2 ? 'mx-auto' : ''}`}
+                                className={`flag-img ${dog.depth <= 2 ? 'mx-auto' : ''} ${dog.country === "XK" ? "mt-1" : ""}`}
                                 src={dog.country === "XK" ? kosovoFlag : `https://flagsapi.com/${dog.country}/flat/32.png`}
                                 alt={dog.country}
                             />

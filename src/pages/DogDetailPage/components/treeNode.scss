@@ -2,7 +2,7 @@
 
     .card-placeholder,
     .card-dog {
-        width: 220px;
+        width: 20vw;
     }
 
     // Colori card
@@ -43,5 +43,11 @@
             border-radius: 5px;
             object-fit: cover;
         }
+    }
+
+    .flag-img {
+        max-height: 25px;
+        max-width: 25px;
+
     }
 }
