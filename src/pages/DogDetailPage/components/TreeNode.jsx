@@ -57,7 +57,6 @@ const TreeNode = ({ dog, generationsLength }) => {
                     {/* Immagine */}
                     {dog.depth < 5 &&
                         <figure
-                            className={`${dog.depth >= 3 ? "hidden" : ""}`}
                         >
                             <button>
                                 <Link
