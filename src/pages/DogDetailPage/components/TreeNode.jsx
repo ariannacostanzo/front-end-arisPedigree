@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import "./treeNode.scss";
 import { useUtils } from "../../../providers/utilsProvider";
 import kosovoFlag from "../../../assets/images/kosovo-flag.png";
-import { useEffect } from "react";
 
-const TreeNode = ({ dog, generationsLength }) => {
+const TreeNode = ({ dog }) => {
   // Funzione per abbreviare le stringhe
   const { reduceStr } = useUtils();
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./pedigreeTree.scss";
 import TreeNode from "./TreeNode";
-const PedigreeTree = ({ dog, resetCard }) => {
+const PedigreeTree = ({ dog }) => {
   const [generationsLength, setGenerationsLength] = useState(4);
   const [generationTree, setGenerationTree] = useState({});
 
