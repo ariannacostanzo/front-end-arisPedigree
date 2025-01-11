@@ -1,14 +1,13 @@
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './Loader.scss'
+import loaderImg from "../../images/loader.png";
+import "./Loader.scss";
 
 const Loader = () => {
-     return (
-     <>
-     <div className="loader">
-       <FontAwesomeIcon icon={faPaw}></FontAwesomeIcon>
-     </div>
-     </>
-     )
-}
+  return (
+    <>
+      <div className="loader">
+        <img src={loaderImg} alt="loader" />
+      </div>
+    </>
+  );
+};
 export default Loader;

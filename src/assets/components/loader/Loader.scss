@@ -1,7 +1,25 @@
 .loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  padding: 4rem 0;
+
+  img {
+    width: 100px;
+    filter: grayscale(100%);
+    position: relative;
+    animation: revealColor 0.4s linear forwards;
+  }
+
+  @keyframes revealColor {
+    0% {
+      filter: grayscale(100%);
+      clip-path: inset(0 0 100% 0);
+    }
+    100% {
+      filter: grayscale(0%);
+      clip-path: inset(0 0 0 0);
+    }
+  }
 }
