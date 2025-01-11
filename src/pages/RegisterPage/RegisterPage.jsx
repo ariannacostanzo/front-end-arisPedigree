@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../../utils/axiosClient.js";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import Heading from "../../assets/components/heading/Heading.jsx";
-import './registerPage.scss'
+import "./registerPage.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { setIsLoggedIn, setToken, setUser } = useAuth();
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     name: "",
     password: "",
     confirmPassword: "",
+    acceptedPolicy: "",
   });
+
+  const [errors, setErrors] = useState({
+    passwordError: false,
+    policyError: false,
+  });
+
+  useEffect(() => {
+    //
+  }, [errors]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,14 +35,33 @@ const RegisterPage = () => {
       [name]: value,
     });
   };
+  const handleChangeCheck = (e, inside = false) => {
+    setFormData((prev) => ({
+      ...prev,
+      acceptedPolicy: e.target.checked ? "true" : "",
+    }));
+    if (inside === true) {
+      setShowModal(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, name, password, confirmPassword } = formData;
+    const { email, name, password, confirmPassword, acceptedPolicy } = formData;
 
     if (password !== confirmPassword) {
-      throw new Error("Passwords do not match");
+      setErrors((prev) => ({ ...prev, passwordError: true }));
+      return;
+    } else {
+      setErrors((prev) => ({ ...prev, passwordError: false }));
+    }
+
+    if (!acceptedPolicy) {
+      setErrors((prev) => ({ ...prev, policyError: true }));
+      return;
+    } else {
+      setErrors((prev) => ({ ...prev, policyError: "" }));
     }
 
     try {
@@ -47,8 +79,8 @@ const RegisterPage = () => {
         }
       );
 
-      setToken(response.data.token)
-      setUser(response.data.data)
+      setToken(response.data.token);
+      setUser(response.data.data);
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {
@@ -59,14 +91,219 @@ const RegisterPage = () => {
     <>
       <Heading heading="Register"></Heading>
       <div className="bg-white register-page ">
-        <div className="p-4 container mx-auto ">
+        <div className="p-4 container mx-auto relative">
+          {/* policy modal */}
+          {showModal && (
+            <div className="policy-modal">
+              <div className="close-btn" onClick={() => setShowModal(false)}>
+                <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+              </div>
+              <h2>Regulations and Management of Online Content</h2>
+              <p>
+                <h3>1. Terms and Conditions (T&C)</h3>
+                &quot;This website provides a platform that allows users to
+                upload, publish, and share content. However,
+                [arispedigreeonline.com] is not responsible for the content
+                posted by users. Each user is solely responsible for the content
+                they upload and publish. [arispedigreeonline.com] does not
+                control or approve the content, and disclaims any responsibility
+                for any damages, legal disputes, or claims arising from the use
+                of content posted by users. Users are required to comply with
+                applicable laws, including but not limited to intellectual
+                property rights, defamation, and privacy.&quot;
+              </p>
+              <p>
+                <h3>2. Privacy Policy</h3>
+                &quot;In accordance with EU Regulation 2016/679 (GDPR), this
+                Privacy Policy outlines how we collect, use, and protect the
+                personal data of users of our website. We collect only the data
+                necessary for the proper functioning of the site and to respond
+                to user requests. Data will not be shared with third parties,
+                unless required by law. Users have the right to access, modify,
+                or request the deletion of their personal data at any
+                time.&quot;
+              </p>
+              <p>
+                <h3>
+                  3. Notification and Removal of Illegal Content (DMCA or
+                  Similar)
+                </h3>{" "}
+                &quot;If you believe that content posted on our site violates
+                your copyright or other applicable laws, we encourage you to
+                report it using the reporting form available in our contact
+                section. [arispedigreeonline.com] will promptly remove any
+                content found to violate intellectual property laws or other
+                applicable regulations, following verification of the
+                claim.&quot;
+              </p>
+              <p>
+                <h3>4. Disclaimer</h3>
+                &quot;This website is provided &apos;as is&apos;, without any
+                express or implied warranties regarding its functionality, the
+                accuracy of its content, or its suitability for specific
+                purposes. [aripedigreeonline.com] is not responsible for any
+                direct, indirect, incidental, or consequential damages arising
+                from the use of the site or the content posted by users.&quot;
+              </p>
+              <p>
+                <h3> 5. Content Moderation</h3>
+                &quot;[arispedigreeonline.com] reserves the right to monitor,
+                moderate, and, if necessary, remove content posted by users that
+                violates our Terms and Conditions or is inappropriate or
+                offensive. However, we cannot guarantee immediate moderation of
+                all content, and we cannot be held responsible for content until
+                it is reported.&quot;{" "}
+              </p>
+              <p>
+                <h3>6. User Contracts</h3>
+                &quot;Any user wishing to upload content to our site must
+                explicitly agree to our Terms and Conditions and agree to be
+                responsible for the legality, authenticity, and intellectual
+                property rights related to the uploaded content. Users must
+                ensure that the content they post does not violate third-party
+                rights, privacy laws, or decency standards. In case of
+                violations, [arispedigreeonline.com] reserves the right to
+                remove the content and, if necessary, suspend or terminate
+                access to the site.&quot; Prohibited Content Users of the site
+                must not upload, publish, distribute, or otherwise make
+                available content that: Violates applicable laws and
+                regulations, including but not limited to defamatory,
+                slanderous, threatening, harassing content, or content that
+                incites hatred; Infringes on third-party intellectual property
+                rights, including copyright, registered trademarks, or patents;
+                Contains viruses, malware, or other harmful elements designed to
+                compromise the integrity or functionality of the site or other
+                users&apos; systems; Is pornographic, obscene, or in any way
+                offensive; Contains false or misleading information. Disclaimer
+                The website owner is not responsible for content uploaded or
+                posted by users. Users are fully responsible for the content
+                they upload, share, or distribute through the site. The website
+                owner reserves the right to remove or block access to content
+                that violates these terms but is not obligated to constantly
+                monitor or control user-uploaded material.{" "}
+              </p>
+              <p>
+                <h3>7. Copyright and Intellectual Property Disclaimer</h3>
+                &quot;[arispedigreeonline.com] acts as a hosting platform for
+                content uploaded by users and is not responsible for copyright
+                violations or other intellectual property infringements. Users
+                uploading content to the site guarantee that they own the
+                necessary rights or have permission to publish such content.
+                [Website Name] does not control or verify the legitimacy of
+                uploaded content, and therefore cannot be held responsible for
+                copyright or intellectual property violations arising from the
+                use of such content. In the event of copyright claims,
+                [arispedigreeonline.com] commits to promptly removing the
+                disputed content upon receiving a valid request from the rights
+                holder or their representative.&quot; Notification and Removal
+                of Illegal Content (DMCA or Similar) &quot;If you believe that
+                content posted on our site infringes your copyright or other
+                intellectual property rights, we encourage you to report it
+                through the reporting form available on our site or via email.
+                [arispedigreeonline.com] will promptly remove any content found
+                to violate intellectual property laws or other applicable
+                regulations, following verification of the claim. The report
+                must contain sufficient information to identify the content in
+                question, a description of the violated rights, and a statement
+                that the content was uploaded without authorization.&quot;
+              </p>
+              <p>
+                <h3>8 Third-Party Content and External Links</h3> Our website
+                may contain links to third-party websites that are not under our
+                control. We are not responsible for the content, availability,
+                or privacy practices of these external sites. The inclusion of
+                such links does not imply endorsement of the third-party
+                content, and users visit these external sites at their own risk.
+                Under no circumstances are we liable for any damages arising
+                from the use of these external sites.
+              </p>
+              <p>
+                <h3> 9.Indemnification</h3>
+                The user agrees to indemnify, defend, and hold harmless
+                [arispedigreeonline.com] from any claims, damages, losses,
+                liabilities, costs, or expenses, including legal fees, arising
+                from or in connection with the use of the website, violation of
+                these Terms and Conditions, infringement of third-party
+                intellectual property rights, or any unlawful behavior by the
+                user. This indemnification obligation extends to any content
+                uploaded or shared by the user on our site that violates the
+                law, third-party rights, or our Terms and Conditions.
+              </p>
+              <h2>User-Generated Content Disclaimer</h2>
+              <p>
+                The user agrees and acknowledges that any content (including but
+                not limited to text, images, videos, comments, reviews, posts,
+                and messages) posted on our website is the sole responsibility
+                of the user. The user guarantees that they are the original
+                author of the content and that the content does not infringe any
+                intellectual property rights, privacy rights, or other
+                applicable laws.
+              </p>
+              <p>
+                We reserve the right to monitor, modify, or remove any content
+                that we deem inappropriate, offensive, defamatory, illegal, or
+                that violates local or international regulations. However, we do
+                not assume any responsibility for user-generated content or for
+                any damages arising from the use or visibility of such content.
+                The user is required not to post content that may violate laws
+                or regulations, content that is offensive, defamatory,
+                misleading, or otherwise harmful to other users or third
+                parties.{" "}
+              </p>
+              <h2>Cookie Consent Clause</h2>
+              <p>
+                To enhance your browsing experience, our website uses both
+                first-party and third-party cookies. Third-party cookies may be
+                used for purposes such as traffic analysis, personalized
+                advertising, or social media integration. The user is informed
+                that by browsing the site, they consent to the use of these
+                cookies, as described in our Cookie Policy. If the user wishes
+                to refuse the use of non-essential cookies, they can do so by
+                modifying their browser settings or through the options provided
+                in the cookie consent banner. However, certain features of the
+                website may not be available without the necessary cookies.
+                Note: As with the Italian version, this is a general template
+                and may need to be adapted to your specific legal needs,
+                jurisdiction, and third-party services you use. It is
+                recommended to consult with a lawyer to ensure that your Terms
+                of Service are complete and comply with local regulations, such
+                as GDPR if applicable.
+              </p>
+              <h2>Disclaimer for Third-Party Content </h2>
+              <p>
+                {" "}
+                The website [arispedigreeonline.com] may contain links and
+                references to content published on external social media
+                platforms (such as Facebook, Instagram, Twitter, etc.). Such
+                content is owned by the respective authors or copyright holders
+                and is shared through social media platforms in accordance with
+                their policies and terms of use. [arispedigreeonline.com] is not
+                responsible for any copyright violations or misuse of such
+                content by third parties. Users are encouraged to verify the
+                terms of use directly with the relevant social media platforms.
+              </p>
+              <div className="my-10">
+                <input
+                  type="checkbox"
+                  id="privacy-policy-inside"
+                  className="mr-2"
+                  onChange={(e) => handleChangeCheck(e, true)}
+                />
+                <label htmlFor="privacy-policy-inside">
+                  I accept the Terms of Service and the Privacy Policy.
+                </label>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="w-[100%] md:w-[70%] mx-auto">
-            <div >
+            {/* Email  */}
+            <div>
               <div className="my-2">
                 <label htmlFor="email">Email</label>
               </div>
               <input
-              className="w-full md:w-[500px]"
+                className="w-full md:w-[500px]"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -75,12 +312,13 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            {/* Username  */}
             <div className="">
               <div className="my-2">
                 <label htmlFor="name">Username</label>
               </div>
               <input
-              className="w-full md:w-[500px]"
+                className="w-full md:w-[500px]"
                 type="text"
                 name="name"
                 value={formData.name}
@@ -89,12 +327,13 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            {/* Password  */}
             <div className="">
               <div className="my-2">
                 <label htmlFor="password">Password</label>
               </div>
               <input
-              className="w-full md:w-[500px]"
+                className="w-full md:w-[500px]"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -103,12 +342,13 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            {/* Confirm password  */}
             <div className="">
               <div className="my-2">
                 <label htmlFor="confirmPassword">Confirm Password</label>
               </div>
               <input
-              className="w-full md:w-[500px]"
+                className="w-full md:w-[500px]"
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -116,6 +356,40 @@ const RegisterPage = () => {
                 autoComplete="confirmPassword"
                 required
               />
+              {errors.passwordError && (
+                <div className="error-register">Password does not match</div>
+              )}
+            </div>
+            {/* Terms of condition  */}
+            <div className="my-4">
+              <input
+                type="checkbox"
+                id="privacy-policy"
+                className="mr-2"
+                onChange={handleChangeCheck}
+              />
+              <label htmlFor="privacy-policy">
+                By registering, I declare that I have read and accepted the
+                <span
+                  className="contract-link"
+                  onClick={() => setShowModal(true)}
+                >
+                  Terms of Service
+                </span>{" "}
+                and the{" "}
+                <span
+                  className="contract-link"
+                  onClick={() => setShowModal(true)}
+                >
+                  Privacy Policy
+                </span>
+                .
+              </label>
+              {errors.policyError && (
+                <div className="error-register">
+                  You must accept the terms of condition to register
+                </div>
+              )}
             </div>
             <button className="custom-btn my-10" type="submit">
               Register
