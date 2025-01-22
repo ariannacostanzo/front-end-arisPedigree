@@ -22,6 +22,8 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({
     passwordError: false,
     policyError: false,
+    emailError: false,
+    userNameError: false,
   });
 
   useEffect(() => {
@@ -36,6 +38,7 @@ const RegisterPage = () => {
     });
   };
   const handleChangeCheck = (e, inside = false) => {
+    console.log(inside === true ? "sono dentro" : "sono fuori");
     setFormData((prev) => ({
       ...prev,
       acceptedPolicy: e.target.checked ? "true" : "",
@@ -44,6 +47,10 @@ const RegisterPage = () => {
       setShowModal(false);
     }
   };
+
+  useEffect(() => {
+    console.log(formData.acceptedPolicy);
+  }, [formData.acceptedPolicy]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +91,18 @@ const RegisterPage = () => {
       setIsLoggedIn(true);
       navigate("/userDetail");
     } catch (error) {
-      console.log(error);
+      let emailMsg = "";
+      let nameMsg = "";
+      error.response.data.errors.forEach((error) => {
+        if (error.path === "email") {
+          emailMsg = error.msg;
+        }
+        if (error.path === "name") {
+          nameMsg = error.msg;
+        }
+      });
+      setErrors((prev) => ({ ...prev, emailError: emailMsg }));
+      setErrors((prev) => ({ ...prev, userNameError: nameMsg }));
     }
   };
   return (
@@ -99,7 +117,7 @@ const RegisterPage = () => {
                 <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
               </div>
               <h2>Regulations and Management of Online Content</h2>
-              <p>
+              <div className="paragraph">
                 <h3>1. Terms and Conditions (T&C)</h3>
                 &quot;This website provides a platform that allows users to
                 upload, publish, and share content. However,
@@ -111,8 +129,8 @@ const RegisterPage = () => {
                 of content posted by users. Users are required to comply with
                 applicable laws, including but not limited to intellectual
                 property rights, defamation, and privacy.&quot;
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>2. Privacy Policy</h3>
                 &quot;In accordance with EU Regulation 2016/679 (GDPR), this
                 Privacy Policy outlines how we collect, use, and protect the
@@ -122,8 +140,8 @@ const RegisterPage = () => {
                 unless required by law. Users have the right to access, modify,
                 or request the deletion of their personal data at any
                 time.&quot;
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>
                   3. Notification and Removal of Illegal Content (DMCA or
                   Similar)
@@ -135,8 +153,8 @@ const RegisterPage = () => {
                 content found to violate intellectual property laws or other
                 applicable regulations, following verification of the
                 claim.&quot;
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>4. Disclaimer</h3>
                 &quot;This website is provided &apos;as is&apos;, without any
                 express or implied warranties regarding its functionality, the
@@ -144,8 +162,8 @@ const RegisterPage = () => {
                 purposes. [aripedigreeonline.com] is not responsible for any
                 direct, indirect, incidental, or consequential damages arising
                 from the use of the site or the content posted by users.&quot;
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3> 5. Content Moderation</h3>
                 &quot;[arispedigreeonline.com] reserves the right to monitor,
                 moderate, and, if necessary, remove content posted by users that
@@ -153,8 +171,8 @@ const RegisterPage = () => {
                 offensive. However, we cannot guarantee immediate moderation of
                 all content, and we cannot be held responsible for content until
                 it is reported.&quot;{" "}
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>6. User Contracts</h3>
                 &quot;Any user wishing to upload content to our site must
                 explicitly agree to our Terms and Conditions and agree to be
@@ -181,8 +199,8 @@ const RegisterPage = () => {
                 owner reserves the right to remove or block access to content
                 that violates these terms but is not obligated to constantly
                 monitor or control user-uploaded material.{" "}
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>7. Copyright and Intellectual Property Disclaimer</h3>
                 &quot;[arispedigreeonline.com] acts as a hosting platform for
                 content uploaded by users and is not responsible for copyright
@@ -206,8 +224,8 @@ const RegisterPage = () => {
                 must contain sufficient information to identify the content in
                 question, a description of the violated rights, and a statement
                 that the content was uploaded without authorization.&quot;
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3>8 Third-Party Content and External Links</h3> Our website
                 may contain links to third-party websites that are not under our
                 control. We are not responsible for the content, availability,
@@ -216,8 +234,8 @@ const RegisterPage = () => {
                 content, and users visit these external sites at their own risk.
                 Under no circumstances are we liable for any damages arising
                 from the use of these external sites.
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 <h3> 9.Indemnification</h3>
                 The user agrees to indemnify, defend, and hold harmless
                 [arispedigreeonline.com] from any claims, damages, losses,
@@ -228,9 +246,9 @@ const RegisterPage = () => {
                 user. This indemnification obligation extends to any content
                 uploaded or shared by the user on our site that violates the
                 law, third-party rights, or our Terms and Conditions.
-              </p>
+              </div>
               <h2>User-Generated Content Disclaimer</h2>
-              <p>
+              <div className="paragraph">
                 The user agrees and acknowledges that any content (including but
                 not limited to text, images, videos, comments, reviews, posts,
                 and messages) posted on our website is the sole responsibility
@@ -238,8 +256,8 @@ const RegisterPage = () => {
                 author of the content and that the content does not infringe any
                 intellectual property rights, privacy rights, or other
                 applicable laws.
-              </p>
-              <p>
+              </div>
+              <div className="paragraph">
                 We reserve the right to monitor, modify, or remove any content
                 that we deem inappropriate, offensive, defamatory, illegal, or
                 that violates local or international regulations. However, we do
@@ -249,9 +267,9 @@ const RegisterPage = () => {
                 or regulations, content that is offensive, defamatory,
                 misleading, or otherwise harmful to other users or third
                 parties.{" "}
-              </p>
+              </div>
               <h2>Cookie Consent Clause</h2>
-              <p>
+              <div className="paragraph">
                 To enhance your browsing experience, our website uses both
                 first-party and third-party cookies. Third-party cookies may be
                 used for purposes such as traffic analysis, personalized
@@ -268,9 +286,9 @@ const RegisterPage = () => {
                 recommended to consult with a lawyer to ensure that your Terms
                 of Service are complete and comply with local regulations, such
                 as GDPR if applicable.
-              </p>
+              </div>
               <h2>Disclaimer for Third-Party Content </h2>
-              <p>
+              <div className="paragraph">
                 {" "}
                 The website [arispedigreeonline.com] may contain links and
                 references to content published on external social media
@@ -281,13 +299,14 @@ const RegisterPage = () => {
                 responsible for any copyright violations or misuse of such
                 content by third parties. Users are encouraged to verify the
                 terms of use directly with the relevant social media platforms.
-              </p>
+              </div>
               <div className="my-10">
                 <input
                   type="checkbox"
                   id="privacy-policy-inside"
                   className="mr-2"
                   onChange={(e) => handleChangeCheck(e, true)}
+                  checked={formData.acceptedPolicy === "true"}
                 />
                 <label htmlFor="privacy-policy-inside">
                   I accept the Terms of Service and the Privacy Policy.
@@ -312,6 +331,9 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            {errors.emailError && (
+              <div className="error-register">{errors.emailError}</div>
+            )}
             {/* Username  */}
             <div className="">
               <div className="my-2">
@@ -327,6 +349,9 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            {errors.userNameError && (
+              <div className="error-register">{errors.userNameError}</div>
+            )}
             {/* Password  */}
             <div className="">
               <div className="my-2">
@@ -367,19 +392,27 @@ const RegisterPage = () => {
                 id="privacy-policy"
                 className="mr-2"
                 onChange={handleChangeCheck}
+                checked={formData.acceptedPolicy === "true"}
               />
-              <label htmlFor="privacy-policy">
+              <label>
                 By registering, I declare that I have read and accepted the
                 <span
                   className="contract-link"
-                  onClick={() => setShowModal(true)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowModal(true);
+                  }}
                 >
+                  {" "}
                   Terms of Service
                 </span>{" "}
                 and the{" "}
                 <span
                   className="contract-link"
-                  onClick={() => setShowModal(true)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowModal(true);
+                  }}
                 >
                   Privacy Policy
                 </span>
