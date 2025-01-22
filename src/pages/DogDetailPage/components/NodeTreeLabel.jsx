@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "./nodeTreeLabel.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
+import dogPlaceholder from "../../../assets/images/no-image.png";
 import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 import { useDogs } from "../../../providers/dogsProvider";
 import { useUtils } from "../../../providers/utilsProvider";
 import Tooltip from "../../../assets/components/tooltip/Tooltip.jsx";
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
+// import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const NodeTreeLabel = ({ dog, resetCard }) => {
 

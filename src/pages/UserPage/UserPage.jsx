@@ -50,7 +50,7 @@ const UserPage = () => {
 
   useEffect(() => {
     fetchUser();
-    console.log(userDogs)
+    // console.log(userDogs)
   }, []);
 
 

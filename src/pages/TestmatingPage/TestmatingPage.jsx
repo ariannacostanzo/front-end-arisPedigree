@@ -4,7 +4,7 @@ import { useBreed } from "../../providers/breedsProvider";
 import FormLabel from "../AddDogPage/components/formLabel/FormLabel";
 import axios from "../../utils/axiosClient.js";
 import { debounce } from "lodash";
-import placeholder from "../../assets/images/dog-silhouette.png";
+import placeholder from "../../assets/images/no-image.png";
 import xImage from "../../assets/images/testmating.png";
 import "./testmatingPage.scss";
 import { useUtils } from "../../providers/utilsProvider.jsx";
@@ -12,6 +12,7 @@ import DogCard from "./components/dogCard/DogCard.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+// import noImage from "../../assets/images/no-image.png";
 
 const Testmating = () => {
   const navigate = useNavigate();

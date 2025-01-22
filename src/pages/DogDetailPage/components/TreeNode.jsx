@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import dogPlaceholder from "../../../assets/images/dog-silhouette.png";
+import dogPlaceholder from "../../../assets/images/no-image.png";
 import { Link } from "react-router-dom";
 import "./treeNode.scss";
 import { useUtils } from "../../../providers/utilsProvider";
