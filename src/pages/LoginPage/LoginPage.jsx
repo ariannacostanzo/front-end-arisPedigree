@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../../providers/authProvider.jsx";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Heading from "../../assets/components/heading/Heading.jsx";
 import "./loginPage.scss";
 
 const LoginPage = () => {
-
   const { state } = useLocation();
   const { errorMessage } = state || {};
   const { redirectTo } = state || {};
@@ -42,9 +41,7 @@ const LoginPage = () => {
       <Heading heading="Login"></Heading>
       <div className="bg-white login-page">
         <div className="p-4 container mx-auto">
-          {errorMessage &&
-            <div>{errorMessage}</div>
-          }
+          {errorMessage && <div>{errorMessage}</div>}
           <form onSubmit={handleSubmit}>
             <div>
               <div className="my-2">
@@ -86,4 +83,3 @@ const LoginPage = () => {
   );
 };
 export default LoginPage;
-

@@ -1,0 +1,16 @@
+.signature-btn {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: bold;
+    background-color: var(--lightBlue);
+    color: white;
+
+    &:hover {
+        background-color: var(--primary);
+        
+    }
+}

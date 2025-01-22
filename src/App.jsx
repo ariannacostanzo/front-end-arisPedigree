@@ -23,6 +23,8 @@ import { DogsProvider } from "./providers/dogsProvider.jsx";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 import UserAuth from "./middlewares/UserAuth.jsx";
 import { UtilsProvider } from "./providers/utilsProvider.jsx";
+import ComplaintPage from "./pages/ComplaintPage/ComplaintPage.jsx";
+import FeedBackPage from "./pages/FeedBackPage/FeedBackPage.jsx";
 
 function App() {
   return (
@@ -42,10 +44,15 @@ function App() {
                       <Route path="search-a-dog" element={<SearchDogPage />} />
                       <Route path="dogs-list" element={<DogsListPage />} />
                       <Route path="login" element={<LoginPage />} />
+                      <Route path="complaint" element={<ComplaintPage />} />
+                      <Route path="feedback" element={<FeedBackPage />} />
                       {/* rotta protetta  */}
                       <Route element={<UserAuth />}>
                         <Route path="add-new-dog" element={<AddDogPage />} />
-                        <Route path=":id/update-dog" element={<UpdateDogPage />} />
+                        <Route
+                          path=":id/update-dog"
+                          element={<UpdateDogPage />}
+                        />
                         <Route path="test-mating" element={<Testmating />} />
                       </Route>
                       <Route
@@ -57,8 +64,10 @@ function App() {
                         }
                       />
                       <Route path="dogDetail/:id" element={<DogDetailPage />} />
-                      <Route path="newsDetail/:id" element={<NewsDetailPage />} />
-                      {/* da sistemare con l'id ^ */}
+                      <Route
+                        path="newsDetail/:id"
+                        element={<NewsDetailPage />}
+                      />
                       <Route
                         path="breedsDetail/:breedSlug"
                         element={<BreedsDetailPage />}
