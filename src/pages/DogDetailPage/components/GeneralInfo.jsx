@@ -1,4 +1,4 @@
-import placeholder from "/placehodler.jpg";
+import placeholder from "../../../assets/images/no-image.png";
 import "./generalInfo.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import kosovoFlag from "../../../assets/images/kosovo-flag.png";
 
 const GeneralInfo = ({ dog, isLoading }) => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
 
   const renderDate = (date) => {
@@ -32,7 +32,11 @@ const GeneralInfo = ({ dog, isLoading }) => {
   const deleteDog = async (id) => {
     try {
       setIsDeleting(true);
-      const res = await axios.delete(`dogs/${id}`);
+      const res = await axios.delete(`dogs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(res);
       navigate("/dogs-list");
       window.location.reload();
@@ -53,7 +57,7 @@ const GeneralInfo = ({ dog, isLoading }) => {
               <h2>{dog.name}</h2>
 
               {/* Pulsanti */}
-              {(dog.userId == user.id || user?.isAdmin) && (
+              {(dog.userId == user?.id || user?.isAdmin) && (
                 <div className="buttons-container">
                   <ManagingIcon
                     message="Modify"

@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../providers/authProvider";
-import SearchBar from "../searchbar/Searchbar";
+// import SearchBar from "../searchbar/Searchbar";
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout, user } = useAuth();
@@ -33,7 +33,8 @@ const Header = () => {
     <>
       <div className="relative">
         <header className="py-4 px-4 sm:px-0 container mx-auto flex items-center justify-between ">
-          <div className="header-nav flex flex-wrap sm:flex-nowrap items-center gap-x-7 gap-y-2">
+          {/* da togliere  il justify between per rimettere la searchbar */}
+          <div className="header-nav flex flex-wrap sm:flex-nowrap items-center gap-x-7 gap-y-2 justify-between">
             <div className="grow shrink-0 xl:grow-0">
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <img src="/logoaris.png" alt="logo" className="w-[300px]" />
@@ -141,10 +142,20 @@ const Header = () => {
                   Contact Us
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/privacy" onClick={() => window.scrollTo(0, 0)}>
+                  Privacy Policy
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/complaint" onClick={() => window.scrollTo(0, 0)}>
+                  Violation Report
+                </NavLink>
+              </li>
             </ul>
 
             {/* Searchbar  */}
-            <SearchBar></SearchBar>
+            {/* <SearchBar></SearchBar> */}
 
             {/* hamburger button  */}
             <div
@@ -281,6 +292,22 @@ const Header = () => {
                   <li>
                     <NavLink to="/contact-us" onClick={relocateAndCloseMenu}>
                       Contact Us
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/privacy"
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      Privacy Policy
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/complaint"
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      Violation Report
                     </NavLink>
                   </li>
                 </ul>

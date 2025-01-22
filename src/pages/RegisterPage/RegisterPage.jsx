@@ -38,7 +38,6 @@ const RegisterPage = () => {
     });
   };
   const handleChangeCheck = (e, inside = false) => {
-    console.log(inside === true ? "sono dentro" : "sono fuori");
     setFormData((prev) => ({
       ...prev,
       acceptedPolicy: e.target.checked ? "true" : "",

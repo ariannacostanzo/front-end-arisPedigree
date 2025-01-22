@@ -83,7 +83,7 @@ const ComplaintPage = () => {
 
   return (
     <>
-      <Heading heading="Complaint"></Heading>
+      <Heading heading="Violation Report"></Heading>
       <div className="bg-white complaint-page">
         <div className="p-4 container mx-auto">
           <h2 className="text-center font-bold text-2xl my-6">

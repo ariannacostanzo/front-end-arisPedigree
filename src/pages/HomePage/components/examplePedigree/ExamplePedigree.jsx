@@ -3,6 +3,7 @@ import "./examplePedigree.scss";
 import { useEffect, useState } from "react";
 import axios from '../../../../utils/axiosClient.js'
 import Loader from "../../../../assets/components/loader/Loader.jsx";
+import noImage from '../../../../assets/images/no-image.png'
 
 const ExamplePedigree = () => {
 
@@ -14,6 +15,7 @@ const ExamplePedigree = () => {
       setIsLoading(true)
       const res = await axios.get("/dogs?order=asc&limit=3");
       setThreeDogs(res.data.data)
+      console.log(threeDogs)
     } catch (error) {
       console.log(error)
     } finally {
@@ -36,7 +38,7 @@ const ExamplePedigree = () => {
             {threeDogs && threeDogs.map((dog, i) => (
               <div key={`example-dog${i}`} className="pedigree-example-card">
                 <Link to={`dogDetail/${dog.id}`} onClick={() => window.scrollTo(0, 0)}>
-                  <img src={`/examplePedigree/example-${i+1}.jpg`} alt={`pedigree-example${i+1}`} />
+                  <img src={dog.image? dog.image : noImage} alt={`pedigree-example${i+1}`} />
                   <div className="example-pedigree-title">
                     <h5>{dog.name}</h5>
                     <p>{dog.breed.name}</p>

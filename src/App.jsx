@@ -25,6 +25,7 @@ import UserAuth from "./middlewares/UserAuth.jsx";
 import { UtilsProvider } from "./providers/utilsProvider.jsx";
 import ComplaintPage from "./pages/ComplaintPage/ComplaintPage.jsx";
 import FeedBackPage from "./pages/FeedBackPage/FeedBackPage.jsx";
+import PrivacyPage from "./pages/PrivacyPage/PrivacyPage.jsx";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                       <Route path="login" element={<LoginPage />} />
                       <Route path="complaint" element={<ComplaintPage />} />
                       <Route path="feedback" element={<FeedBackPage />} />
+                      <Route path="privacy" element={<PrivacyPage />} />
                       {/* rotta protetta  */}
                       <Route element={<UserAuth />}>
                         <Route path="add-new-dog" element={<AddDogPage />} />

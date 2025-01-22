@@ -14,7 +14,6 @@ import {
   faTiktok,
   faThreads,
 } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
 
 const ContactusPage = () => {
   return (
@@ -172,19 +171,6 @@ const ContactusPage = () => {
               </a>
             </li>
           </ul>
-
-          <div className="my-8 text-2xl">
-            <div className="custom-btn cursor-pointer">
-              {" "}
-              <Link
-                to="/complaint"
-                className="crumb-home"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                File a complaint report
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </>
