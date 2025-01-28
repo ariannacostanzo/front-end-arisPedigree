@@ -45,10 +45,9 @@ header {
 .header-nav>.desktop-nav>li {
   transition: var(--transition);
   position: relative;
-  padding: 13px 15px;
+  padding: 13px 7px;
   color: var(--blue);
   cursor: pointer;
-  z-index: 1;
 
   &:hover {
     transform: translateY(-4px);
@@ -72,7 +71,7 @@ header {
     // padding: 10px;
     background-color: white;
     margin-bottom: 2px;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: var(--transition);
     color: var(--blue);
 
@@ -155,4 +154,12 @@ header {
 .h-under-border {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+
+@media screen and (min-width: 1400px) {
+ .header-nav>.desktop-nav>li {
+  padding: 13px 15px;
+  
+}
 }

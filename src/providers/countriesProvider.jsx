@@ -3,30 +3,27 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-
 const CountryContext = createContext();
 
 const CountryProvider = ({ children }) => {
+  const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const [countries, setCountries] = useState([]);
-const [loading, setLoading] = useState(true);
-
-    
-const fetchCountries = async () => {
+  const fetchCountries = async () => {
     setLoading(true);
     try {
-        const response = await axios.get("http://localhost:8000/countries");
-        setCountries(response.data)
+      const response = await axios.get("http://localhost:8000/countries");
+      setCountries(response.data);
     } catch (error) {
-        console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
-}
+  };
 
-useEffect(() => {
+  useEffect(() => {
     fetchCountries();
-}, [])
+  }, []);
 
   return (
     <CountryContext.Provider

@@ -12,15 +12,26 @@ import axios from "axios";
 
 const SearchDogPage = () => {
   const { breeds } = useBreed();
-  const { maleCount, setMaleCount, femaleCount, setFemaleCount, dogs, loading, setLoading, setPage, setTotalPages, setFilterQuery } = useDogs();
+  const {
+    maleCount,
+    setMaleCount,
+    femaleCount,
+    setFemaleCount,
+    dogs,
+    loading,
+    setLoading,
+    setPage,
+    setTotalPages,
+    setFilterQuery,
+  } = useDogs();
   const [filteredDogs, setFilteredDogs] = useState(dogs);
   const [filters, setFilters] = useState({
     sex: null,
-    breed: null
-  })
+    breed: null,
+  });
 
   const filterDogs = async (breed = null, sex = null) => {
-    setFilterQuery(null)
+    setFilterQuery(null);
     setLoading(true);
     let query = "http://localhost:8000/dogs";
 
@@ -48,9 +59,9 @@ const SearchDogPage = () => {
 
     try {
       const response = await axios.get(query);
-      setFilteredDogs(response.data.data)
-      setMaleCount(response.data.maleCount)
-      setFemaleCount(response.data.femaleCount)
+      setFilteredDogs(response.data.data);
+      setMaleCount(response.data.maleCount);
+      setFemaleCount(response.data.femaleCount);
       setPage(response.data.page);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -63,28 +74,26 @@ const SearchDogPage = () => {
   const handleSexChange = (sexValue) => {
     setFilters((prev) => ({
       ...prev,
-      sex: prev.sex === sexValue ? null : sexValue
-    }))
-  }
+      sex: prev.sex === sexValue ? null : sexValue,
+    }));
+  };
 
   const handleBreedChange = (breedValue) => {
     setFilters((prev) => ({
       ...prev,
-      breed: breedValue === "none" ? null : breedValue
+      breed: breedValue === "none" ? null : breedValue,
     }));
-  }
+  };
 
-   useEffect(() => {
-     if (dogs) {
-       setFilteredDogs(dogs);
-     }
-   }, [dogs]);
+  useEffect(() => {
+    if (dogs) {
+      setFilteredDogs(dogs);
+    }
+  }, [dogs]);
 
-   useEffect(() => {
-    filterDogs(filters.breed, filters.sex)
-   },  [filters.breed, filters.sex])
-
-  
+  useEffect(() => {
+    filterDogs(filters.breed, filters.sex);
+  }, [filters.breed, filters.sex]);
 
   return (
     <>
@@ -93,8 +102,8 @@ const SearchDogPage = () => {
         <div className="p-4 container mx-auto">
           {/* filtri  */}
           <h3>Filter & find</h3>
-          <div className="flex gap-10 items-end">
-            <div>
+          <div className="lg:flex gap-10 items-end">
+            <div className="my-4">
               <label htmlFor="breeds">Breed:</label>
               <div>
                 <select
@@ -111,7 +120,7 @@ const SearchDogPage = () => {
                 </select>
               </div>
             </div>
-            <div className="flex gap-10">
+            <div className="flex gap-10 my-4">
               <label htmlFor="sex">Sex:</label>
               <div className="flex gap-2">
                 <>
@@ -156,7 +165,7 @@ const SearchDogPage = () => {
             {loading ? (
               <Loader></Loader>
             ) : (
-              <DogListComponent  dogs={filteredDogs}></DogListComponent>
+              <DogListComponent dogs={filteredDogs}></DogListComponent>
             )}
           </div>
         </div>

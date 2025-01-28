@@ -17,7 +17,7 @@ const CountryDetailPage = () => {
     try {
       setIsLoading(true);
       const res = await axios.get(url);
-      console.log(res);
+      //console.log(res);
       setCountry(res.data);
     } catch (error) {
       console.log(error);

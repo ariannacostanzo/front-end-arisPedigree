@@ -57,7 +57,7 @@ const Testmating = () => {
           ) {
             setNoSires(true);
           }
-          console.log(error.response.data.message);
+          //console.log(error.response.data.message);
           console.error(error);
         } finally {
           setIsTypingSire(false);

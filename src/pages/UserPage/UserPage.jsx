@@ -2,7 +2,13 @@ import Heading from "../../assets/components/heading/Heading";
 import "./userPage.scss";
 import { useAuth } from "../../providers/authProvider.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faPen, faSpinner, faTrashCan, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  // faGear,
+  faPen,
+  faSpinner,
+  faTrashCan,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "../../utils/axiosClient.js";
 import { useEffect, useState } from "react";
 import Loader from "../../assets/components/loader/Loader.jsx";
@@ -35,8 +41,8 @@ const UserPage = () => {
       setIsDeleting(true);
       const res = await axios.delete(`dogs/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       console.log(res);
       setDeleteMessage(res.data[1]);
@@ -53,7 +59,6 @@ const UserPage = () => {
     // console.log(userDogs)
   }, []);
 
-
   return (
     <>
       <Heading heading="My profile"></Heading>
@@ -68,9 +73,9 @@ const UserPage = () => {
           <div className="flex items-center justify-between userName-container">
             <h3>{user.name}</h3>
             {/* da fare  */}
-            <span>
+            {/* <span>
               <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
-            </span>
+            </span> */}
           </div>
           {isLoading ? (
             <Loader />
@@ -97,8 +102,16 @@ const UserPage = () => {
                     {dog.image && <img src={dog.image} alt="" />}
                   </div>
                   <div className="managing-icons-container">
-                    <ManagingIcon message="Modify" icon={faPen} manager={() => navigate(`/${dog.id}/update-dog`)}></ManagingIcon>
-                    <ManagingIcon message="Delete" icon={faTrashCan} manager={() => deleteDog(dog.id)}></ManagingIcon>
+                    <ManagingIcon
+                      message="Modify"
+                      icon={faPen}
+                      manager={() => navigate(`/${dog.id}/update-dog`)}
+                    ></ManagingIcon>
+                    <ManagingIcon
+                      message="Delete"
+                      icon={faTrashCan}
+                      manager={() => deleteDog(dog.id)}
+                    ></ManagingIcon>
                   </div>
                 </div>
               ))}

@@ -8,12 +8,12 @@ import { useAuth } from "../../providers/authProvider";
 import Sidebar from "../../assets/components/sidebar/Sidebar";
 
 const NewsDetailPage = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const { id } = useParams();
 
   return (
     <>
-      <Heading heading={news[id].title}></Heading>
+      <Heading></Heading>
       <div className="bg-white">
         <div className="container p-4 mx-auto news-detail-container lg:flex justify-between items-start">
           <div className="news-container">
@@ -36,11 +36,10 @@ const NewsDetailPage = () => {
             <p
               className="text-[#525252]"
               dangerouslySetInnerHTML={{ __html: news[id].description }}
-            >
-            </p>
+            ></p>
             <div className="comment-container">
               <h5>Leave a Reply</h5>
-              {user.name && (
+              {user?.name && (
                 <p className="text-[#525252]">Logged in as {user.name}. </p>
               )}
               <textarea name="" id="" placeholder="Your comment"></textarea>
@@ -48,8 +47,6 @@ const NewsDetailPage = () => {
             </div>
           </div>
           <Sidebar></Sidebar>
-
-
         </div>
       </div>
     </>

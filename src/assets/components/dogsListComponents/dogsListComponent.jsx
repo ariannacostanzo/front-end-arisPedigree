@@ -1,5 +1,5 @@
 import './dogsListComponent.scss';
-import placeholder from '../../../../public/placehodler.jpg';
+import placeholder from '../../../assets/images/no-image.png';
 import { Link } from "react-router-dom";
 import Pagination from '../pagination/Pagination';
 import { useUtils } from '../../../providers/utilsProvider';

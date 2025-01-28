@@ -1,6 +1,15 @@
 import footerImages from "../../../database/footer-img";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faThreads, faPinterest, faTiktok, faLinkedin, faTwitter, faVk, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faInstagram,
+  faThreads,
+  faPinterest,
+  faTiktok,
+  faTwitter,
+  faVk,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 import "./footer.scss";
 import { faEnvelope, faPhone, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -23,7 +32,10 @@ const Footer = () => {
         </div>
         <div className="flex items-center justify-center">
           <div className="blue-button">
-            <a href="https://www.instagram.com/working_dogs_in_the_world/" target="_blank" >
+            <a
+              href="https://www.instagram.com/working_dogs_in_the_world/"
+              target="_blank"
+            >
               <FontAwesomeIcon
                 className="mr-2"
                 icon={faInstagram}
@@ -71,7 +83,6 @@ const Footer = () => {
             <ul>
               <li>
                 <a href="mailto:dogsintheworld2019@protonmail.com">
-
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     className="mr-2 text-[#E89F41]"
@@ -118,7 +129,8 @@ const Footer = () => {
               <a
                 href="https://www.facebook.com/workingdogsintheworld/"
                 target="_blank"
-                className="bg-[#0867ff]">
+                className="bg-[#0867ff]"
+              >
                 <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
               </a>
             </li>
@@ -126,20 +138,17 @@ const Footer = () => {
               <a
                 href="https://x.com/WDogsInTheWorld?t=vRaMbQo-DK7EZ0_8S3vGZg&s=09"
                 target="_blank"
-                className="bg-[#2298ef]">
+                className="bg-[#2298ef]"
+              >
                 <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="bg-[#0174b5]">
-                <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
               </a>
             </li>
             <li>
               <a
                 href="https://wa.me/393713030412"
                 target="_blank"
-                className="bg-[#0eab04]">
+                className="bg-[#0eab04]"
+              >
                 <FontAwesomeIcon icon={faWhatsapp}></FontAwesomeIcon>
               </a>
             </li>
@@ -147,7 +156,8 @@ const Footer = () => {
               <a
                 href="https://www.tiktok.com/@dogsintheworld?_t=8rgxLHJGBZW&_r=1"
                 target="_blank"
-                className="tiktok bg-[#000]">
+                className="tiktok bg-[#000]"
+              >
                 <FontAwesomeIcon icon={faTiktok}></FontAwesomeIcon>
               </a>
             </li>
@@ -155,7 +165,8 @@ const Footer = () => {
               <a
                 href="https://www.threads.net/@working_dogs_in_the_world"
                 target="_blank"
-                className=" bg-[#000]">
+                className=" bg-[#000]"
+              >
                 <FontAwesomeIcon icon={faThreads}></FontAwesomeIcon>
               </a>
             </li>
@@ -163,7 +174,8 @@ const Footer = () => {
               <a
                 href="https://it.pinterest.com/workingdogsintheworld/"
                 target="_blank"
-                className="bg-[#ce3226]">
+                className="bg-[#ce3226]"
+              >
                 <FontAwesomeIcon icon={faPinterest}></FontAwesomeIcon>
               </a>
             </li>
@@ -171,7 +183,8 @@ const Footer = () => {
               <a
                 href="https://vk.com/id536674510"
                 target="_blank"
-                className="bg-[#567ca0]">
+                className="bg-[#567ca0]"
+              >
                 <FontAwesomeIcon icon={faVk}></FontAwesomeIcon>
               </a>
             </li>
@@ -179,7 +192,8 @@ const Footer = () => {
               <a
                 href="https://ok.ru/group/54439009386639"
                 target="_blank"
-                className="bg-[#e98019]">
+                className="bg-[#e98019]"
+              >
                 <FontAwesomeIcon icon={faPaw}></FontAwesomeIcon>
               </a>
             </li>

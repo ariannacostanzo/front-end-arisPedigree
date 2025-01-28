@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
 import news from "../../../database/news";
 import "./Sidebar.scss";
-import SearchBar from "../searchbar/Searchbar";
 
 const Sidebar = () => {
   return (
     <>
       <div className="side-container">
-        <h4>Search</h4>
+        {/* <h4>Search</h4>
         <div className="p-2 my-4">
-          {/* Searchbar  */}
           <SearchBar></SearchBar>
-        </div>
+        </div> */}
         <h4>Recent posts</h4>
         <div className="p-2 my-4">
           {news.map((n, i) => (

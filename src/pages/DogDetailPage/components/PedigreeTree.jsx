@@ -109,8 +109,8 @@ const PedigreeTree = ({ dog }) => {
   };
 
   // Creo i dati per l'albero
-  const treeData = createTree(dog);
-  console.log(treeData);
+  // const treeData = createTree(dog);
+  // //console.log(treeData);
   useEffect(() => {
     setGenerationTree(createTree(dog));
   }, [generationsLength]);

@@ -87,12 +87,12 @@ const PedigreeTree = ({ dog }) => {
       });
     }
 
-    console.log(grandgrandparents, "bisnonni");
-    console.log(grandparents, "nonni");
-    console.log(parents, "genitori");
-    console.log(filteredSiblings, "fratelli");
-    console.log(children, "figli");
-    console.log(grandChildren, "nipoti");
+    //console.log(grandgrandparents, "bisnonni");
+    //console.log(grandparents, "nonni");
+    //console.log(parents, "genitori");
+    //console.log(filteredSiblings, "fratelli");
+    //console.log(children, "figli");
+    //console.log(grandChildren, "nipoti");
 
     return (
       <React.Fragment key={dog.id}>
@@ -215,4 +215,3 @@ const PedigreeTree = ({ dog }) => {
   );
 };
 export default PedigreeTree;
-

@@ -22,7 +22,7 @@ const Pagination = () => {
     filterQuery,
   } = useDogs();
 
-  const [filter, setFilter] = useState(filterQuery)
+  const [filter, setFilter] = useState(filterQuery);
 
   const changePage = (direction) => {
     let url = "/dogs";
@@ -38,7 +38,7 @@ const Pagination = () => {
     } else {
       url += `?page=${direction}`;
     }
-    console.log(filter)
+    //console.log(filter);
     if (filter) {
       if (url.includes("?")) {
         url += `&${filter.substring(1)}`;
@@ -46,7 +46,7 @@ const Pagination = () => {
         url += filter;
       }
     }
-    console.log(url)
+    //console.log(url);
 
     fetchNewDogs(url);
   };
@@ -66,12 +66,8 @@ const Pagination = () => {
   };
 
   useEffect(() => {
-    console.log(filter);
-    
+    // //console.log(filter);
   }, [filter]);
-
-
-  
 
   return (
     <>
@@ -120,5 +116,3 @@ const Pagination = () => {
   );
 };
 export default Pagination;
-
-//da sistemare il filtro rimane pure nelle altre pagine

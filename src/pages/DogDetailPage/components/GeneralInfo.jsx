@@ -32,12 +32,12 @@ const GeneralInfo = ({ dog, isLoading }) => {
   const deleteDog = async (id) => {
     try {
       setIsDeleting(true);
-      const res = await axios.delete(`dogs/${id}`, {
+      await axios.delete(`dogs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
+      //console.log(res);
       navigate("/dogs-list");
       window.location.reload();
     } catch (error) {

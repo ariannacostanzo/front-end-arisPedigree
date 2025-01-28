@@ -68,11 +68,11 @@ const TreeNode = ({ dog }) => {
         // Card Dog
         <div
           style={{ height: cardHeight }}
-          className={`card-dog flex items-center ${
+          className={`card-dog flex items-center justify-center ${
             dog.depth <= 2
-              ? "flex-col justify-center"
-              : "items-center justify-evenly gap-2"
-          } gap-y-2 relative  ${dog.sex ? "male" : "female"}`}
+              ? "flex-col gap-y-2"
+              : "dog-card-orientation justify-evenly"
+          }  relative  ${dog.sex ? "male" : "female"}`}
         >
           {/* Pallino di ripetizione */}
           {dog.isRepeated && (
@@ -103,10 +103,15 @@ const TreeNode = ({ dog }) => {
             }`}
           >
             {/* Nome */}
+            {/* Nome deve ricaricare la pagina*/}
+
             <h4 className="text-center font-bold">
               <Link
                 to={`/dogDetail/${dog.id}`}
-                onClick={() => window.scrollTo(0, 0)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = `/dogDetail/${dog.id}`;
+                }}
               >
                 {reduceStr(dog.name, dog.depth <= 2 ? 17 : 10)}
               </Link>

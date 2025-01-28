@@ -14,11 +14,9 @@ import placeholder from "../../../public/placehodler.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-
 //fixare upload imagini
 
 const AddDogPage = () => {
-
   const { state } = useLocation();
   const { breedId } = state || {};
   const { dam } = state || {};
@@ -44,11 +42,7 @@ const AddDogPage = () => {
   const [isSireSelected, setIsSireSelected] = useState(false);
   const [isDamSelected, setIsDamSelected] = useState(false);
 
-  const [isCreating, setIsCreating] = useState(false)
-
-  //devo fare tanti div quanti i risultati delle chiamate search per mostrare i cani e poi
-  //selezionare e salvare l'id di sire e dam in formData ed inviarlo
-  //fare l'upload immagini
+  const [isCreating, setIsCreating] = useState(false);
 
   const [errorBags, setErrorBags] = useState({
     name: "",
@@ -84,8 +78,8 @@ const AddDogPage = () => {
   });
 
   useEffect(() => {
-    // console.log(formData)
-  }, [formData])
+    // //console.log(formData)
+  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,7 +101,7 @@ const AddDogPage = () => {
       sire: name,
     });
     setSires([]);
-    console.log(id, name);
+    //console.log(id, name);
 
     setIsTypingSire(true);
     setIsSireSelected(true);
@@ -123,8 +117,6 @@ const AddDogPage = () => {
     setIsTypingDam(true);
     setIsDamSelected(true);
   };
-
-
 
   const searchforFather = async () => {
     setSires([]);
@@ -164,10 +156,9 @@ const AddDogPage = () => {
 
   //per ritardare la chiamata dopo che si scrive
   useEffect(() => {
-
     if (state?.sire) {
       return;
-    };
+    }
     if (!isSireSelected && formData.sire) {
       setIsTypingSire(true);
       const getData = setTimeout(() => {
@@ -179,10 +170,9 @@ const AddDogPage = () => {
   }, [formData.sire, isSireSelected]);
 
   useEffect(() => {
-
     if (state?.dam) {
       return;
-    };
+    }
 
     if (!isDamSelected && formData.dam) {
       setIsTypingDam(true);
@@ -245,14 +235,8 @@ const AddDogPage = () => {
       sireId: sireId ? parseInt(sireId) : null,
       damId: damId ? parseInt(damId) : null,
       sex: sex === "true" ? true : false,
-      size:
-        size
-          ? size + (sizeUnit ? ` ${sizeUnit}` : "")
-          : null,
-      weight:
-        weight
-          ? weight + (weightUnit ? ` ${weightUnit}` : "")
-          : null,
+      size: size ? size + (sizeUnit ? ` ${sizeUnit}` : "") : null,
+      weight: weight ? weight + (weightUnit ? ` ${weightUnit}` : "") : null,
       dateOfBirth: dateOfBirth,
       dateOfDeath: dateOfDeath,
       color,
@@ -265,7 +249,7 @@ const AddDogPage = () => {
       image,
     };
 
-    console.log(dataToSend);
+    //console.log(dataToSend);
 
     //appendo i dati modificati nel formData
     const formDataToSend = new FormData();
@@ -290,19 +274,16 @@ const AddDogPage = () => {
     formDataToSend.append("userId", dataToSend.userId);
     formDataToSend.append("image", dataToSend.image);
 
+    // formDataToSend.forEach((value, key) => {
+    //   //console.log(`${key}: ${value}, Type: ${typeof value}`);
 
-
-    formDataToSend.forEach((value, key) => {
-      console.log(`${key}: ${value}, Type: ${typeof value}`);
-
-
-      if (value instanceof File) {
-        console.log(`File Name: ${value.name}, File Type: ${value.type}`);
-      }
-    });
+    //   if (value instanceof File) {
+    //     //console.log(`File Name: ${value.name}, File Type: ${value.type}`);
+    //   }
+    // });
 
     try {
-      setIsCreating(true)
+      setIsCreating(true);
       const response = await axios.post("/dogs", formDataToSend, {
         headers: {
           // "Content-Type": "application/json",
@@ -317,10 +298,9 @@ const AddDogPage = () => {
       window.location.reload();
     } catch (error) {
       const errors = error.response.data.errors || [];
-      console.log(error.response.data.errors);
       validation(errors);
     } finally {
-      setIsCreating(false)
+      setIsCreating(false);
     }
 
     //creare il cane, chiamata
@@ -332,13 +312,12 @@ const AddDogPage = () => {
 
       errors.forEach((error) => {
         if (error.path === "name") {
-          console.log(error.msg);
           // Aggiorna il campo 'name' con il messaggio di errore e così via
           newErrorBags.name = error.msg;
         } else if (error.path === "breedId") {
-          newErrorBags.breed = error.msg;
+          newErrorBags.breed = "Please insert the breed";
         } else if (error.path === "countryId") {
-          newErrorBags.country = error.msg;
+          newErrorBags.country = "Please insert the country";
         }
       });
 
@@ -391,9 +370,13 @@ const AddDogPage = () => {
                 <div className="form-row">
                   {/* breed  */}
                   <div className="form-col">
-                    <FormLabel forName="add-breed" label="Breed" isMandatory={true} />
-                    {!state?.breedId ?
-                      (<select
+                    <FormLabel
+                      forName="add-breed"
+                      label="Breed"
+                      isMandatory={true}
+                    />
+                    {!state?.breedId ? (
+                      <select
                         name="breedId"
                         id="add-breed"
                         onChange={handleChange}
@@ -401,14 +384,22 @@ const AddDogPage = () => {
                       >
                         <option value="-1">Select Breed</option>
                         {breeds.map((breed, i) => (
-                          <option key={`form-select-breed${i}`} value={breed.id}>
+                          <option
+                            key={`form-select-breed${i}`}
+                            value={breed.id}
+                          >
                             {breed.name}
                           </option>
                         ))}
-                      </select>)
-                      :
-                      <div className="fake-select">{breeds.find(breed => breed.id === parseInt(breedId))?.name}</div>
-                    }
+                      </select>
+                    ) : (
+                      <div className="fake-select">
+                        {
+                          breeds.find((breed) => breed.id === parseInt(breedId))
+                            ?.name
+                        }
+                      </div>
+                    )}
                     {errorBags.breed && (
                       <p className="error-text">{errorBags.breed}</p>
                     )}
@@ -418,7 +409,11 @@ const AddDogPage = () => {
                 <div className="form-row">
                   {/* name  */}
                   <div className="form-col">
-                    <FormLabel forName="add-name" label="Name" isMandatory={true} />
+                    <FormLabel
+                      forName="add-name"
+                      label="Name"
+                      isMandatory={true}
+                    />
                     {errorBags.name && (
                       <p className="error-text">{errorBags.name}</p>
                     )}
@@ -457,29 +452,32 @@ const AddDogPage = () => {
                       )}
                     </div>
                     {/* quello che appare dopo aver fatto la ricerca */}
-                    {!state?.sire && !isTypingSire && formData.sire && sires.length === 0 && (
-                      <p className="tip">
-                        There is no male dog called &#34;
-                        <span>{formData.sire}</span>
-                        &#34; in our database
-                      </p>
-                    )}
+                    {!state?.sire &&
+                      !isTypingSire &&
+                      formData.sire &&
+                      sires.length === 0 && (
+                        <p className="tip">
+                          There is no male dog called &#34;
+                          <span>{formData.sire}</span>
+                          &#34; in our database
+                        </p>
+                      )}
 
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Sire</p>
                     )}
-                    {!state?.sire ?
-                      (<input
+                    {!state?.sire ? (
+                      <input
                         type="text"
                         name="sire"
                         id="add-sire"
                         onChange={handleChange}
                         value={formData.sire}
                         disabled={!formData.breedId}
-                      />)
-                      :
+                      />
+                    ) : (
                       <div className="fake-input-text">{sire.name}</div>
-                    }
+                    )}
                     {/* i risultati della ricerca  */}
                     {sires.length > 0 && (
                       <div className="dogResults">
@@ -515,28 +513,31 @@ const AddDogPage = () => {
                         ></FontAwesomeIcon>
                       )}
                     </div>
-                    {!state?.dam && !isTypingDam && formData.dam && dams.length === 0 && (
-                      <p className="tip">
-                        There is no female dog called &#34;
-                        <span>{formData.dam}</span>
-                        &#34; in our database
-                      </p>
-                    )}
+                    {!state?.dam &&
+                      !isTypingDam &&
+                      formData.dam &&
+                      dams.length === 0 && (
+                        <p className="tip">
+                          There is no female dog called &#34;
+                          <span>{formData.dam}</span>
+                          &#34; in our database
+                        </p>
+                      )}
                     {!formData.breedId && (
                       <p className="tip">Insert a breed to choose a Dam</p>
                     )}
-                    {!state?.dam ?
-                      (<input
+                    {!state?.dam ? (
+                      <input
                         type="text"
                         name="dam"
                         id="add-dam"
                         onChange={handleChange}
                         value={formData.dam}
                         disabled={!formData.breedId}
-                      />)
-                      :
+                      />
+                    ) : (
                       <div className="fake-input-text">{dam.name}</div>
-                    }
+                    )}
                     {/* i risultati della ricerca  */}
                     {dams.length > 0 && (
                       <div className="dogResults">
@@ -770,8 +771,8 @@ const AddDogPage = () => {
                         const reader = new FileReader();
                         reader.onloadend = () => {
                           setImageSrc(reader.result);
-                        }
-                        reader.readAsDataURL(file)
+                        };
+                        reader.readAsDataURL(file);
                         setFormData((prev) => ({
                           ...prev,
                           image: file,
@@ -782,14 +783,23 @@ const AddDogPage = () => {
                   {/* image preview */}
                   <div className="form-col">
                     <figure className="preview-container">
-                      <img className="dog-preview" src={imageSrc || placeholder} alt="" />
+                      <img
+                        className="dog-preview"
+                        src={imageSrc || placeholder}
+                        alt=""
+                      />
                     </figure>
                   </div>
                 </div>
 
                 <div className="form-row flex-col ">
-                  <address className=" self-start">Fields marked with <span className="text-red-400">*</span> are mandatory</address>
-                  <button className="self-start" type="submit">Add dog</button>
+                  <address className=" self-start">
+                    Fields marked with <span className="text-red-400">*</span>{" "}
+                    are mandatory
+                  </address>
+                  <button className="self-start" type="submit">
+                    Add dog
+                  </button>
                 </div>
               </form>
             )}

@@ -3,6 +3,7 @@ import Heading from "../../assets/components/heading/Heading";
 import "./complaintPage.scss";
 import SignaturePad from "./SignaturePad";
 import { useNavigate } from "react-router-dom";
+import axios from "../../utils/axiosClient.js";
 
 const ComplaintPage = () => {
   const navigate = useNavigate();
@@ -75,10 +76,30 @@ const ComplaintPage = () => {
       setErrors(newErrors);
       return;
     }
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/sendEmail",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    navigate("/feedback", {
-      state: "Your complaint has been successfully sent!",
-    });
+      if (response.status === 200) {
+        navigate("/feedback", {
+          state: "Your complaint has been successfully sent!",
+        });
+      } else {
+        console.log(response);
+        navigate("/feedback", {
+          state: "Something went wrong, please try again later",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

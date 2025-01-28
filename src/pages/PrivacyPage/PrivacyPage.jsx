@@ -6,7 +6,7 @@ const PrivacyPage = () => {
     <>
       <Heading heading="Privacy Policy"></Heading>
       <div className="bg-white privacy-page py-6">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <h2>Regulations and Management of Online Content</h2>
           <div className="paragraph">
             <h3>1. Terms and Conditions (T&C)</h3>

@@ -309,7 +309,7 @@ const UpdateDogPage = () => {
 
     formDataToSend.forEach((value, key) => {
       if (value instanceof File) {
-        console.log(`File Name: ${value.name}, File Type: ${value.type}`);
+        //console.log(`File Name: ${value.name}, File Type: ${value.type}`);
       }
     });
 
@@ -327,7 +327,7 @@ const UpdateDogPage = () => {
       window.location.reload();
     } catch (error) {
       const errors = error.response.data.errors || [];
-      console.log(error.response.data.errors);
+      //console.log(error.response.data.errors);
       validation(errors);
     } finally {
       setIsCreating(false);
@@ -342,7 +342,7 @@ const UpdateDogPage = () => {
 
       errors.forEach((error) => {
         if (error.path === "name") {
-          console.log(error.msg);
+          //console.log(error.msg);
           // Aggiorna il campo 'name' con il messaggio di errore e così via
           newErrorBags.name = error.msg;
         } else if (error.path === "breedId") {

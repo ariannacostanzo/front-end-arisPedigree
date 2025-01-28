@@ -32,16 +32,20 @@ const Header = () => {
   return (
     <>
       <div className="relative">
-        <header className="py-4 px-4 sm:px-0 container mx-auto flex items-center justify-between ">
+        <header className="py-4 sm:px-0 container mx-auto flex items-center justify-between ">
           {/* da togliere  il justify between per rimettere la searchbar */}
           <div className="header-nav flex flex-wrap sm:flex-nowrap items-center gap-x-7 gap-y-2 justify-between">
             <div className="grow shrink-0 xl:grow-0">
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <img src="/logoaris.png" alt="logo" className="w-[300px]" />
+                <img
+                  src="/logoaris.png"
+                  alt="logo"
+                  className="w-[200px] sm:w-[300px]"
+                />
               </Link>
             </div>
             {/* navigazione in desktop */}
-            <ul className="hidden xl:flex flex-wrap items-center desktop-nav">
+            <ul className="hidden xl:flex items-center desktop-nav">
               <li>
                 <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
                   Home

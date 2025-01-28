@@ -9,5 +9,14 @@
   select {
     border: 1px solid rgb(184, 184, 184);
     padding: 5px 15px;
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .search-for-a-dog-container {
+    select {
+      width: 400px;
+    }
   }
 }

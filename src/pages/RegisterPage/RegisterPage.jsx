@@ -48,7 +48,7 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    console.log(formData.acceptedPolicy);
+    //console.log(formData.acceptedPolicy);
   }, [formData.acceptedPolicy]);
 
   const handleSubmit = async (e) => {
