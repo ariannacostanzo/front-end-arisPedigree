@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://back-end-arispedigree-aq4t.onrender.com",
   timeout: 10000,
 });
 

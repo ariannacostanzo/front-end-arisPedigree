@@ -11,7 +11,9 @@ const BreedProvider = ({ children }) => {
   const fetchBreeds = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/breeds");
+      const response = await axios.get(
+        "https://back-end-arispedigree-aq4t.onrender.com/breeds"
+      );
       setBreeds(response.data);
     } catch (error) {
       console.log(error);

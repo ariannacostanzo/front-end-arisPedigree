@@ -47,7 +47,7 @@ const Testmating = () => {
       }
 
       if (breedId) {
-        const url = `http://localhost:8000/dogs/findSire?breedId=${breedId}&name=${value}`;
+        const url = `https://back-end-arispedigree-aq4t.onrender.com/dogs/findSire?breedId=${breedId}&name=${value}`;
         try {
           const res = await axios.get(url);
           setSires(res.data);
@@ -79,7 +79,7 @@ const Testmating = () => {
       }
 
       if (breedId) {
-        const url = `http://localhost:8000/dogs/findDam?breedId=${breedId}&name=${value}`;
+        const url = `https://back-end-arispedigree-aq4t.onrender.com/dogs/findDam?breedId=${breedId}&name=${value}`;
         try {
           const res = await axios.get(url);
           setDams(res.data);

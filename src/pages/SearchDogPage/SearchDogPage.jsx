@@ -33,7 +33,7 @@ const SearchDogPage = () => {
   const filterDogs = async (breed = null, sex = null) => {
     setFilterQuery(null);
     setLoading(true);
-    let query = "http://localhost:8000/dogs";
+    let query = "https://back-end-arispedigree-aq4t.onrender.com/dogs";
 
     //se c'è un filtro aggiungo &
     if (breed || sex !== null) {
@@ -55,7 +55,9 @@ const SearchDogPage = () => {
       query += `sex=${sex}`;
     }
 
-    setFilterQuery(query.replace("http://localhost:8000/dogs", ""));
+    setFilterQuery(
+      query.replace("https://back-end-arispedigree-aq4t.onrender.com/dogs", "")
+    );
 
     try {
       const response = await axios.get(query);

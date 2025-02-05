@@ -22,7 +22,9 @@ const DogDetailPage = () => {
   const fetchDog = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:8000/dogs/${id}`);
+      const response = await axios.get(
+        `https://back-end-arispedigree-aq4t.onrender.com/dogs/${id}`
+      );
 
       setDog(response.data);
     } catch (error) {

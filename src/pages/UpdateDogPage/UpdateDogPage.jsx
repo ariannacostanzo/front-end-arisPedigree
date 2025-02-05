@@ -84,7 +84,9 @@ const UpdateDogPage = () => {
   const fetchDog = async () => {
     try {
       setIsLoading(true);
-      const { data: dog } = await axios.get(`http://localhost:8000/dogs/${id}`);
+      const { data: dog } = await axios.get(
+        `https://back-end-arispedigree-aq4t.onrender.com/dogs/${id}`
+      );
       if (dog.userId != user.id && !user.isAdmin) {
         navigate("/not-found");
       }
@@ -166,7 +168,7 @@ const UpdateDogPage = () => {
     const { sire } = formData;
 
     if (formData.breedId) {
-      const url = `http://localhost:8000/dogs/findSire?breedId=${formData.breedId}&name=${sire}`;
+      const url = `https://back-end-arispedigree-aq4t.onrender.com/dogs/findSire?breedId=${formData.breedId}&name=${sire}`;
       try {
         const res = await axios.get(url);
         setSires(res.data);
@@ -184,7 +186,7 @@ const UpdateDogPage = () => {
     const { dam } = formData;
 
     if (formData.breedId) {
-      const url = `http://localhost:8000/dogs/findDam?breedId=${formData.breedId}&name=${dam}`;
+      const url = `https://back-end-arispedigree-aq4t.onrender.com/dogs/findDam?breedId=${formData.breedId}&name=${dam}`;
       try {
         const res = await axios.get(url);
         setDams(res.data);

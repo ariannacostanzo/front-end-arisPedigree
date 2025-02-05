@@ -12,7 +12,9 @@ const CountryProvider = ({ children }) => {
   const fetchCountries = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/countries");
+      const response = await axios.get(
+        "https://back-end-arispedigree-aq4t.onrender.com/countries"
+      );
       setCountries(response.data);
     } catch (error) {
       console.log(error);

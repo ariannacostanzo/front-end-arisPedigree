@@ -78,7 +78,7 @@ const ComplaintPage = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8000/sendEmail",
+        "https://back-end-arispedigree-aq4t.onrender.com/sendEmail",
         formData,
         {
           headers: {

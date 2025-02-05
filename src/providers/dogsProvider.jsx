@@ -18,7 +18,9 @@ const DogsProvider = ({ children }) => {
   const fetchDogs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/dogs");
+      const response = await axios.get(
+        "https://back-end-arispedigree-aq4t.onrender.com/dogs"
+      );
       setDogs(response.data.data);
       setPage(response.data.page);
       setTotalPages(response.data.totalPages);
@@ -34,7 +36,9 @@ const DogsProvider = ({ children }) => {
   const fetchAllDogs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/dogs/allDogs");
+      const response = await axios.get(
+        "https://back-end-arispedigree-aq4t.onrender.com/dogs/allDogs"
+      );
       setAllDogs(response.data.dogs);
     } catch (error) {
       console.error(error);
@@ -42,9 +46,6 @@ const DogsProvider = ({ children }) => {
       setLoading(false);
     }
   }; //questa dovrei poterla eliminare
-
-
-
 
   useEffect(() => {
     fetchDogs();
@@ -71,7 +72,7 @@ const DogsProvider = ({ children }) => {
         filterQuery,
         setFilterQuery,
         currId,
-        setCurrId
+        setCurrId,
       }}
     >
       {children}
