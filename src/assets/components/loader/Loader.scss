@@ -9,7 +9,7 @@
     width: 100px;
     filter: grayscale(100%);
     position: relative;
-    animation: revealColor 0.4s linear forwards;
+    animation: revealColor 1s linear infinite;
   }
 
   @keyframes revealColor {
