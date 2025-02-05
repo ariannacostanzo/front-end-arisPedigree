@@ -4,10 +4,10 @@ import Heading from "../../assets/components/heading/Heading";
 import axios from "../../utils/axiosClient.js";
 import { useEffect, useState } from "react";
 import "./dogDetailPage.scss";
-import GeneralInfo from "./components/generalInfo.jsx";
 import PedigreeTree from "./components/PedigreeTree.jsx";
 import Offspring from "./components/Offspring.jsx";
 import Siblings from "./components/Siblings.jsx";
+import GeneralInfo from "./components/GeneralInfo.jsx";
 // import Videos from "./components/Videos.jsx";
 
 const DogDetailPage = () => {
@@ -17,18 +17,18 @@ const DogDetailPage = () => {
   const [showCard, setShowCard] = useState({
     shown: 0,
   });
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchDog = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await axios.get(`http://localhost:8000/dogs/${id}`);
 
       setDog(response.data);
     } catch (error) {
       console.error("Errore nel recupero dei dati del cane:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -94,7 +94,12 @@ const DogDetailPage = () => {
           {showCard.shown === 0 && (
             <GeneralInfo dog={dog} isLoading={isLoading}></GeneralInfo>
           )}
-          {showCard.shown === 1 && <PedigreeTree dog={dog} resetCard={() => setShowCard({ shown: 0 })}></PedigreeTree>}
+          {showCard.shown === 1 && (
+            <PedigreeTree
+              dog={dog}
+              resetCard={() => setShowCard({ shown: 0 })}
+            ></PedigreeTree>
+          )}
           {showCard.shown === 2 && <Offspring dog={dog}></Offspring>}
           {showCard.shown === 3 && <Siblings dog={dog}></Siblings>}
           {/* {showCard.shown === 4 && <Videos></Videos>} */}
@@ -104,4 +109,3 @@ const DogDetailPage = () => {
   );
 };
 export default DogDetailPage;
-
