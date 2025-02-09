@@ -4,11 +4,11 @@ import news from "../../database/news";
 import Heading from "../../assets/components/heading/Heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faPaw } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../../providers/authProvider";
+// import { useAuth } from "../../providers/authProvider";
 import Sidebar from "../../assets/components/sidebar/Sidebar";
 
 const NewsDetailPage = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { id } = useParams();
 
   return (
@@ -37,14 +37,14 @@ const NewsDetailPage = () => {
               className="text-[#525252]"
               dangerouslySetInnerHTML={{ __html: news[id].description }}
             ></p>
-            <div className="comment-container">
+            {/* <div className="comment-container">
               <h5>Leave a Reply</h5>
               {user?.name && (
                 <p className="text-[#525252]">Logged in as {user.name}. </p>
               )}
               <textarea name="" id="" placeholder="Your comment"></textarea>
               <button className="custom-btn">Post comment</button>
-            </div>
+            </div> */}
           </div>
           <Sidebar></Sidebar>
         </div>
